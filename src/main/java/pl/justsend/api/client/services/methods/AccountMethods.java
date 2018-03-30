@@ -21,7 +21,4 @@ public enum AccountMethods {
         return path;
     }
 
-    public void setPath(String path) {
-        this.path = path;
-    }
 }

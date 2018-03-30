@@ -4,9 +4,11 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.log4j.Logger;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import pl.justsend.api.client.http.utils.JSONSerializer;
 import pl.justsend.api.client.model.JSResponse;
@@ -15,6 +17,8 @@ import pl.justsend.api.client.services.exception.JustsendApiClientException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 
 /**
@@ -67,8 +71,22 @@ public class JustsendHttpClient {
 
     }
 
-    public JSResponse doPut() {
-        return null;
+    public JSResponse doPut(String url, String data) throws IOException, JustsendApiClientException {
+
+        HttpClient client = HttpClientBuilder.create().build();
+
+        HttpPut request = new HttpPut(url);
+        request.addHeader("User-Agent", USER_AGENT);
+        request.addHeader("Content-Type", CONTENT_TYPE);
+
+        StringEntity params = new StringEntity(data);
+        request.setEntity(params);
+
+        logger.info("Sending POST request to JUSTSEND_API_URL : " + url + " with content: \n" + data);
+        HttpResponse response = client.execute(request);
+
+        return processResponse(response);
+
     }
 
     private JSResponse processResponse(HttpResponse response) throws JustsendApiClientException, IOException {
@@ -105,6 +123,8 @@ public class JustsendHttpClient {
                     jsResponse.setAdditionalData(jsonObject.getString("data") + "");
                 } else if (o instanceof Long) {
                     jsResponse.setAdditionalData(jsonObject.getLong("data") + "");
+                } else if (o instanceof JSONArray) {
+                    jsResponse.setAdditionalData(jsonObject.getJSONArray("data") + "");
                 } else {
                     throw new JustsendApiClientException("Class " + o.getClass() + " not supported by response parser");
                 }

@@ -42,7 +42,11 @@ public abstract class BaseService {
 
     protected <T> T processResponse(JSResponse jsResponse, Type tClass) throws JustsendApiClientException {
         validateResponse(jsResponse);
-        return JSONSerializer.deserialize(jsResponse.getAdditionalData(), tClass);
+        if (tClass.equals(String.class))  {
+            return (T) jsResponse.getAdditionalData();
+        } else {
+            return JSONSerializer.deserialize(jsResponse.getAdditionalData(), tClass);
+        }
     }
 
     protected String createURL(String methodPath) {
