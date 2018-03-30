@@ -67,6 +67,24 @@ public class MessageServiceImpl extends BaseService implements MessageService {
 
     @Override
     public Long sendMessageECO(String to, String message) throws JustsendApiClientException {
-        return null;
+
+        try {
+            message = URLEncoder.encode(message, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new JustsendApiClientException("Conversion message to HTML failed: " + e.getMessage());
+        }
+
+        String url = createURL(MessageMethods.SEND_MESSAGE_ECO.getPath(), "to", to, "message", message);
+
+        try {
+
+            JSResponse jsResponse = justsendHttpClient.doGet(url);
+            return processResponse(jsResponse, Long.class);
+
+        } catch (IOException e) {
+            throw new JustsendApiClientException("connection failed: " + e.getMessage());
+        }
+
     }
+
 }

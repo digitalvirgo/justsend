@@ -1,3 +1,20 @@
 .idea/*
 */target/**
 target/*
+        try {
+            message = URLEncoder.encode(message, "UTF-8");
+            from = URLEncoder.encode(from, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new JustsendApiClientException("Conversion message to HTML failed: " + e.getMessage());
+        }
+
+        String url = createURL(MessageMethods.SEND_MESSAGE_GET.getPath(), "to", to, "from", from, "message", message, "bulkVariant", bulkVariant.toString());
+
+        try {
+
+            JSResponse jsResponse = justsendHttpClient.doGet(url);
+            return processResponse(jsResponse, Long.class);
+
+        } catch (IOException e) {
+            throw new JustsendApiClientException("connection failed: " + e.getMessage());
+        }

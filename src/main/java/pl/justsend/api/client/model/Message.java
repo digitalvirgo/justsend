@@ -18,6 +18,16 @@ public class Message {
 
     private BulkVariant bulkVariant;
 
+    public Message() {
+    }
+
+    public Message(String to, String from, String message, BulkVariant bulkVariant) {
+        this.to = to;
+        this.from = from;
+        this.message = message;
+        this.bulkVariant = bulkVariant;
+    }
+
     @Override
     public String toString() {
         return "Message{" + "to='" + to + '\'' + ", from='" + from + '\'' + ", message='" + message + '\'' + ", bulkVariant=" + bulkVariant + '}';
