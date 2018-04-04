@@ -20,6 +20,19 @@ public class SubAccountRaw {
 
     private Integer points;
 
+
+    public SubAccountRaw() {
+    }
+
+    public SubAccountRaw(String email, String password, String firstname, String surname, String description, Integer points) {
+        this.email = email;
+        this.password = password;
+        this.firstname = firstname;
+        this.surname = surname;
+        this.description = description;
+        this.points = points;
+    }
+
     @Override
     public String toString() {
         return "SubAccountRaw{" + "email='" + email + '\'' + ", password='" + password + '\'' + ", firstname='" + firstname + '\'' + ", surname='" + surname + '\'' + ", description='" + description + '\'' + ", points=" + points + '}';

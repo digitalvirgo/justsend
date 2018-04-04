@@ -12,6 +12,7 @@ import pl.justsend.api.client.services.methods.AccountMethods;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.List;
 
 /**
@@ -61,7 +62,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
     @Override
     public String deactivateAccount(String userAppKey) throws JustsendApiClientException {
 
-        String url = createURL(AccountMethods.DEACTIVATE_ACCOUNT.getPath(), "appKey", userAppKey);
+        String url = createURL(AccountMethods.DEACTIVATE_ACCOUNT.getPath(), "userAppKey", userAppKey);
 
         try {
 
@@ -81,7 +82,9 @@ public class AccountServiceImpl extends BaseService implements AccountService {
 
         try {
 
-            JSResponse jsResponse = justsendHttpClient.doGet(url);
+            password = URLEncoder.encode(password, "UTF-8");
+
+            JSResponse jsResponse = justsendHttpClient.doPost(url, "");
             return processResponse(jsResponse, SubAccount.class);
 
         } catch (IOException e) {

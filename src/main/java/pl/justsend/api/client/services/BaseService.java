@@ -65,7 +65,7 @@ public abstract class BaseService {
 
             for (int i = 0; i < param.length; i+=2) {
                 logger.info("param:" + i + ": " + param[i] + " " + param[i+1]);
-                url = url.replaceAll("\\{" + param[i] + "\\}", param[i+1]);
+                url = url.replaceAll("\\{" + param[i] + "\\}", param[i+1] == null ? "sima" : param[i+1]);
             }
 
         }
