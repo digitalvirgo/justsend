@@ -4,6 +4,7 @@ import com.sun.deploy.util.BlackList;
 import org.apache.log4j.Logger;
 import org.testng.annotations.DataProvider;
 import pl.justsend.api.client.model.enums.BulkVariant;
+import pl.justsend.api.client.services.AccountService;
 import pl.justsend.api.client.services.BlackListService;
 import pl.justsend.api.client.services.MessageService;
 
@@ -18,6 +19,7 @@ public abstract class BaseTest {
     protected static final Logger logger = Logger.getLogger(AccountServiceTest.class);
     protected static final String APP_KEY = "JDJhJDEyJDN2c1NWQ2o1ZHh1U3M1WHpmYXpFN3VhRGZQSUlub3hwT3hIRzU1bkJ4MWpjbVZPaFAxcEdP";
 
+    protected AccountService accountService;
     protected MessageService messageService;
     protected BlackListService blackListService;
 

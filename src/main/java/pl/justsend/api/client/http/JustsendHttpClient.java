@@ -61,8 +61,10 @@ public class JustsendHttpClient {
         request.addHeader("User-Agent", USER_AGENT);
         request.addHeader("Content-Type", CONTENT_TYPE);
 
-        StringEntity params = new StringEntity(data);
-        request.setEntity(params);
+        if (data != null) {
+            StringEntity params = new StringEntity(data);
+            request.setEntity(params);
+        }
 
         logger.info("Sending POST request to JUSTSEND_API_URL : " + url + " with content: \n" + data);
         HttpResponse response = client.execute(request);

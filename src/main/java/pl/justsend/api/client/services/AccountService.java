@@ -5,6 +5,8 @@ import pl.justsend.api.client.model.SubAccount;
 import pl.justsend.api.client.model.SubAccountRaw;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: posiadacz
@@ -16,5 +18,15 @@ public interface AccountService {
     Account retrieveAccount() throws JustsendApiClientException;
 
     SubAccount createSubAccount(SubAccountRaw subAccountRaw) throws JustsendApiClientException;
+
+    String deactivateAccount(String userAppKey) throws JustsendApiClientException;
+
+    SubAccount editSubAccount(String userAppKey, String firstName, String surname, String password, String description) throws JustsendApiClientException;
+
+    String resetSubAccount(String userAppKey) throws JustsendApiClientException;
+
+    SubAccount retrieveSubAccount(String userAppKey) throws JustsendApiClientException;
+
+    List<SubAccount> retrieveSubAccountsList() throws JustsendApiClientException;
 
 }

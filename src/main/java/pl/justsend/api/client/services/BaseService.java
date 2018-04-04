@@ -55,7 +55,7 @@ public abstract class BaseService {
 
     protected String createURL(String methodPath, String... param) throws JustsendApiClientException {
 
-        String url = createURL(methodPath);
+        String url = methodPath;
 
         if (param.length > 0) {
 
@@ -64,12 +64,13 @@ public abstract class BaseService {
             }
 
             for (int i = 0; i < param.length; i+=2) {
+                logger.info("param:" + i + ": " + param[i] + " " + param[i+1]);
                 url = url.replaceAll("\\{" + param[i] + "\\}", param[i+1]);
             }
 
         }
 
-        return url;
+        return createURL(url);
 
     }
 
