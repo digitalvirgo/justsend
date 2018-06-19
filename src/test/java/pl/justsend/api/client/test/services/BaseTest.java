@@ -4,9 +4,7 @@ import com.sun.deploy.util.BlackList;
 import org.apache.log4j.Logger;
 import org.testng.annotations.DataProvider;
 import pl.justsend.api.client.model.enums.BulkVariant;
-import pl.justsend.api.client.services.AccountService;
-import pl.justsend.api.client.services.BlackListService;
-import pl.justsend.api.client.services.MessageService;
+import pl.justsend.api.client.services.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,5 +20,7 @@ public abstract class BaseTest {
     protected AccountService accountService;
     protected MessageService messageService;
     protected BlackListService blackListService;
+    protected BulkService bulkService;
+    protected VoiceBulkService voiceBulkService;
 
 }
