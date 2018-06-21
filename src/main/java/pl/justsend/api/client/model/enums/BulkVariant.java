@@ -1,7 +1,7 @@
 package pl.justsend.api.client.model.enums;
 
 /**
- * Created with IntelliJ IDEA.
+
  * User: posiadacz
  * Date: 29.03.18
  * Time: 12:47

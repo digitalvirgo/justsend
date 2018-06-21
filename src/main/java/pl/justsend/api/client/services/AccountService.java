@@ -8,7 +8,7 @@ import pl.justsend.api.client.services.exception.JustsendApiClientException;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
+
  * User: posiadacz
  * Date: 21.03.18
  * Time: 15:43

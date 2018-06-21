@@ -9,7 +9,7 @@ import pl.justsend.api.client.services.exception.JustsendApiClientException;
 import pl.justsend.api.client.services.impl.MessageServiceImpl;
 
 /**
- * Created with IntelliJ IDEA.
+
  * User: posiadacz
  * Date: 29.03.18
  * Time: 13:42

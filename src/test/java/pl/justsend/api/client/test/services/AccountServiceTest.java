@@ -6,13 +6,12 @@ import org.testng.annotations.Test;
 import pl.justsend.api.client.model.Account;
 import pl.justsend.api.client.model.SubAccount;
 import pl.justsend.api.client.model.SubAccountRaw;
-import pl.justsend.api.client.model.enums.AccountType;
 import pl.justsend.api.client.services.AccountService;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
 import pl.justsend.api.client.services.impl.AccountServiceImpl;
 
 /**
- * Created with IntelliJ IDEA.
+
  * User: posiadacz
  * Date: 21.03.18
  * Time: 15:49

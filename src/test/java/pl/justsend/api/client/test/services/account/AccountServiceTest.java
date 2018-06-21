@@ -8,13 +8,12 @@ import pl.justsend.api.client.model.SubAccount;
 import pl.justsend.api.client.model.SubAccountRaw;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
 import pl.justsend.api.client.services.impl.AccountServiceImpl;
-import pl.justsend.api.client.services.impl.BlackListServiceImpl;
 
 import java.util.List;
 import java.util.UUID;
 
 /**
- * Created with IntelliJ IDEA.
+
  * User: posiadacz
  * Date: 03.04.18
  * Time: 14:36
@@ -32,7 +31,7 @@ public class AccountServiceTest extends AccountServiceTestDataProvider {
 
         /* retrieve account */
         Account account = accountService.retrieveAccount();
-        Assert.assertTrue(account != null);
+        Assert.assertNotNull(account);
 
         /* clear all */
         List<SubAccount> subAccountList = accountService.retrieveSubAccountsList();
@@ -59,7 +58,7 @@ public class AccountServiceTest extends AccountServiceTestDataProvider {
     @Test
     public void retrieveAccountTest() throws JustsendApiClientException {
         Account account = accountService.retrieveAccount();
-        Assert.assertTrue(account != null);
+        Assert.assertNotNull(account );
     }
 
     @Test
@@ -110,7 +109,7 @@ public class AccountServiceTest extends AccountServiceTestDataProvider {
     @Test
     public void retrieveSubAccountsListTest() throws JustsendApiClientException {
         List<SubAccount> subAccountList = accountService.retrieveSubAccountsList();
-        Assert.assertTrue(accountService != null);
+        Assert.assertNotNull(subAccountList);
     }
 
 }

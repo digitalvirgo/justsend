@@ -4,10 +4,8 @@ import pl.justsend.api.client.model.Message;
 import pl.justsend.api.client.model.enums.BulkVariant;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
 
-import java.io.UnsupportedEncodingException;
-
 /**
- * Created with IntelliJ IDEA.
+
  * User: posiadacz
  * Date: 29.03.18
  * Time: 12:33

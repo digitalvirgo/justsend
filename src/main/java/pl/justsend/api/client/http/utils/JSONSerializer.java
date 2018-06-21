@@ -6,7 +6,6 @@ import java.lang.reflect.Type;
 import java.util.Date;
 
 /**
- * Created with IntelliJ IDEA.
  * User: posiadacz
  * Date: 28.03.18
  * Time: 15:09

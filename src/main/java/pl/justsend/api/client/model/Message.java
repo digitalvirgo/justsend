@@ -3,7 +3,7 @@ package pl.justsend.api.client.model;
 import pl.justsend.api.client.model.enums.BulkVariant;
 
 /**
- * Created with IntelliJ IDEA.
+
  * User: posiadacz
  * Date: 29.03.18
  * Time: 12:46

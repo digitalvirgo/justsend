@@ -7,13 +7,12 @@ import pl.justsend.api.client.services.BaseService;
 import pl.justsend.api.client.services.BlackListService;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
 import pl.justsend.api.client.services.methods.BlackListMethods;
-import pl.justsend.api.client.services.methods.MessageMethods;
 
 import java.io.IOException;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
+
  * User: posiadacz
  * Date: 30.03.18
  * Time: 13:37

@@ -6,11 +6,10 @@ import org.testng.annotations.Test;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
 import pl.justsend.api.client.services.impl.BlackListServiceImpl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
+
  * User: posiadacz
  * Date: 30.03.18
  * Time: 13:17
@@ -40,7 +39,7 @@ public class BlackListServiceTest extends BlackListServiceTestDataProvider {
         List<String> beforeListNumbers = blackListService.retrieveNumbers();
         blackListService.addNumbersToBlackList(msisdnList);
         List<String> afterListNumbers = blackListService.retrieveNumbers();
-        Assert.assertTrue(beforeListNumbers.size() == afterListNumbers.size());
+        Assert.assertEquals(beforeListNumbers.size(), afterListNumbers.size());
     }
 
     @Test(dataProvider = "blackListFlowTestDataProvider")
