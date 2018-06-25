@@ -1,11 +1,14 @@
 package pl.justsend.api.client.services.impl;
 
+import org.assertj.core.api.Assertions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pl.justsend.api.client.model.Message;
 import pl.justsend.api.client.model.enums.BulkVariant;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
 
@@ -25,7 +28,7 @@ public class MessageServiceImplTest extends MessageSerivceTestDataProvider {
     public void sendMessageTestPOST(String to, String from, String text, BulkVariant bulkVariant) throws JustsendApiClientException {
         Message message = new Message(to, from, text, bulkVariant);
         Long messageId = messageService.sendMessage(message);
-        Assert.assertEquals(messageId.getClass(), Long.class);
+        assertThat(messageId).isPositive();
     }
 
     @Test(dataProvider = "sendMessageIncorrectMSISDNDataProvider", expectedExceptions = JustsendApiClientException.class)
@@ -45,7 +48,7 @@ public class MessageServiceImplTest extends MessageSerivceTestDataProvider {
     @Test(dataProvider = "sendMessageTestDataProvider")
     public void  sendMessageTestGET(String to, String from, String text, BulkVariant bulkVariant) throws JustsendApiClientException {
         Long messageId = messageService.sendMessage(to, from, text, bulkVariant);
-        Assert.assertEquals(messageId.getClass(), Long.class);
+        assertThat(messageId).isPositive();
     }
 
     @Test(dataProvider = "sendMessageIncorrectMSISDNDataProvider", expectedExceptions = JustsendApiClientException.class)
@@ -63,13 +66,13 @@ public class MessageServiceImplTest extends MessageSerivceTestDataProvider {
     @Test
     public void sendMessageECOTest() throws JustsendApiClientException {
         Long messageId = messageService.sendMessageECO("505948385", "Test ECO sendMessageAPI");
-        Assert.assertEquals(messageId.getClass(), Long.class);
+        assertThat(messageId).isPositive();
     }
 
     @Test(dataProvider = "sendMessageIncorrectMSISDNDataProvider", expectedExceptions = JustsendApiClientException.class)
     public void sendMessageIncorrectMSIDNECOTest(String to, String from, String text, BulkVariant bulkVariant) throws JustsendApiClientException {
         Long messageId = messageService.sendMessageECO(to, text);
-        Assert.assertEquals(messageId.getClass(), Long.class);
+        assertThat(messageId).isPositive();
     }
 
 }

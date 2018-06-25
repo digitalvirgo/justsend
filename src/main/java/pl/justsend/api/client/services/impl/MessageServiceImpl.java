@@ -88,7 +88,5 @@ public class MessageServiceImpl extends BaseService implements MessageService {
         } catch (IOException e) {
             throw new JustsendApiClientException("connection failed: " + e.getMessage());
         }
-
     }
-
 }
