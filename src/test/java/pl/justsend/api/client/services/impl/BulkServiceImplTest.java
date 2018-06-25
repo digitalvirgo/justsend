@@ -73,7 +73,7 @@ public class BulkServiceImplTest {
         LOGGER.info("=========   send Personalized Bulk  ===========");
         Long personalizedBulk = bulkService.sendPersonalizedBulk(
                 "testPersonalizedBulk", "damian", "2017-09-12T12:23:34+02:00", "ECO",
-                true, LanguageMessage.POLISH, new TestHelper().getFile("addressFile.txt"));
+                true, LanguageMessage.POLISH, new TestHelper().getFile("personalizedMessage.txt"));
         Assertions.assertThat(personalizedBulk).isGreaterThan(0L);
         LOGGER.info("personalizedBulk = " + personalizedBulk);
     }

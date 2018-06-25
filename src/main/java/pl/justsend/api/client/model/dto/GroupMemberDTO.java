@@ -21,11 +21,6 @@ public class GroupMemberDTO {
         this.msisdn = msisdn;
     }
 
-    public GroupMemberDTO(final String msisdn, final MsisdnValidationStatus validation) {
-        this.msisdn = msisdn;
-        this.validation = validation;
-    }
-
     public Long getId() {
         return id;
     }

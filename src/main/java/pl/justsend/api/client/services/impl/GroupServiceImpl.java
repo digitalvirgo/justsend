@@ -165,4 +165,6 @@ public class GroupServiceImpl extends BaseService implements GroupService {
             throw new JustsendApiClientException("connection failed: " + e.getMessage());
         }
     }
+
+
 }
