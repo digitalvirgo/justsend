@@ -1,6 +1,5 @@
 package pl.justsend.api.client.services.impl;
 
-import com.google.gson.reflect.TypeToken;
 import pl.justsend.api.client.model.JSResponse;
 import pl.justsend.api.client.model.UserPurseResponse;
 import pl.justsend.api.client.services.BaseService;
@@ -8,7 +7,6 @@ import pl.justsend.api.client.services.PaymentService;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
 
 import java.io.IOException;
-import java.util.List;
 
 import static java.lang.String.valueOf;
 
@@ -53,8 +51,7 @@ public class PaymentServiceImpl extends BaseService implements PaymentService {
         try {
 
             JSResponse jsResponse = justsendHttpClient.doPost(url, null);
-            return processResponse(jsResponse, new TypeToken<List<String>>() {
-            }.getType());
+            return processResponse(jsResponse, String.class);
 
         } catch (IOException e) {
             throw new JustsendApiClientException("connection failed: " + e.getMessage());

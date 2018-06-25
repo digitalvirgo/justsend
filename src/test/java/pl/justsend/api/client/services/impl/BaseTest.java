@@ -13,6 +13,8 @@ import pl.justsend.api.client.services.MessageService;
 public abstract class BaseTest {
 
     public static final String APP_KEY = "JDJhJDEyJDN2c1NWQ2o1ZHh1U3M1WHpmYXpFN3VhRGZQSUlub3hwT3hIRzU1bkJ4MWpjbVZPaFAxcEdP";
+    public static final String APP_KEY_ADMINISTRATOR = "123456";
+
 
     protected AccountService accountService;
     protected MessageService messageService;
