@@ -5,7 +5,7 @@ import pl.justsend.api.client.model.enums.BulkVariant;
 import pl.justsend.api.client.test.services.BaseTest;
 
 /**
- * Created with IntelliJ IDEA.
+
  * User: posiadacz
  * Date: 30.03.18
  * Time: 13:26

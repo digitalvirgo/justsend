@@ -1,7 +1,7 @@
 package pl.justsend.api.client.services.methods;
 
 /**
- * Created with IntelliJ IDEA.
+
  * User: posiadacz
  * Date: 30.03.18
  * Time: 13:05

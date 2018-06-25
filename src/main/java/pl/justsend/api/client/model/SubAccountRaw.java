@@ -1,7 +1,7 @@
 package pl.justsend.api.client.model;
 
 /**
- * Created with IntelliJ IDEA.
+
  * User: posiadacz
  * Date: 28.03.18
  * Time: 16:50

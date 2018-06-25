@@ -1,7 +1,6 @@
 package pl.justsend.api.client.services.impl;
 
 import pl.justsend.api.client.http.utils.JSONSerializer;
-import pl.justsend.api.client.model.Account;
 import pl.justsend.api.client.model.JSResponse;
 import pl.justsend.api.client.model.Message;
 import pl.justsend.api.client.model.enums.BulkVariant;
@@ -15,7 +14,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 /**
- * Created with IntelliJ IDEA.
  * User: posiadacz
  * Date: 29.03.18
  * Time: 13:21

@@ -8,7 +8,7 @@ import pl.justsend.api.client.model.enums.UserType;
 import java.util.Date;
 
 /**
- * Created with IntelliJ IDEA.
+
  * User: posiadacz
  * Date: 27.03.18
  * Time: 13:39

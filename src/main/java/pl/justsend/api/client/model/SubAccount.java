@@ -4,7 +4,7 @@ import pl.justsend.api.client.model.enums.AccountType;
 import pl.justsend.api.client.model.enums.UserStatus;
 
 /**
- * Created with IntelliJ IDEA.
+
  * User: posiadacz
  * Date: 28.03.18
  * Time: 16:25

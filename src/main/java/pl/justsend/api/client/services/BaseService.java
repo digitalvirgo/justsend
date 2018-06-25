@@ -10,7 +10,7 @@ import java.lang.reflect.Type;
 
 
 /**
- * Created with IntelliJ IDEA.
+
  * User: posiadacz
  * Date: 21.03.18
  * Time: 16:03
@@ -35,14 +35,14 @@ public abstract class BaseService {
 
         if (jsResponse.getErrorId() != 0) {
             logger.error("Wrong request: " + jsResponse);
-            throw new JustsendApiClientException(jsResponse.getResponseCode().toString() + " - " + jsResponse.getMessage());
+            throw new JustsendApiClientException(jsResponse.getResponseCode() + " - " + jsResponse.getMessage());
         }
 
     }
 
     protected <T> T processResponse(JSResponse jsResponse, Type tClass) throws JustsendApiClientException {
         validateResponse(jsResponse);
-        if (tClass.equals(String.class))  {
+        if (tClass.equals(String.class)) {
             return (T) jsResponse.getAdditionalData();
         } else {
             return JSONSerializer.deserialize(jsResponse.getAdditionalData(), tClass);
@@ -53,25 +53,43 @@ public abstract class BaseService {
         return JUSTSEND_API_URL + methodPath.replaceAll("\\{appKey\\}", appKey);
     }
 
-    protected String createURL(String methodPath, String... param) throws JustsendApiClientException {
+    protected String createURL(String methodPath, String... pathVar) throws JustsendApiClientException {
 
         String url = methodPath;
 
-        if (param.length > 0) {
+        if (pathVar.length > 0) {
 
-            if (param.length % 2 != 0) {
+            if (pathVar.length % 2 != 0) {
                 throw new JustsendApiClientException("Incorrect parameters count!");
             }
 
-            for (int i = 0; i < param.length; i+=2) {
-                logger.info("param:" + i + ": " + param[i] + " " + param[i+1]);
-                url = url.replaceAll("\\{" + param[i] + "\\}", param[i+1] == null ? "sima" : param[i+1]);
+            for (int i = 0; i < pathVar.length; i += 2) {
+                logger.info("pathVar:" + i / 2 + ": " + pathVar[i] + " = " + pathVar[i + 1]);
+                if (!url.contains(pathVar[i])) {
+                    throw new JustsendApiClientException("Parameter don't exist in path.");
+                }
+
+                url = url.replaceAll("\\{" + pathVar[i] + "\\}", pathVar[i + 1] == null ? "sima" : pathVar[i + 1]);
             }
 
         }
 
         return createURL(url);
-
     }
 
+    protected String addParameters(String url, String... param) throws JustsendApiClientException {
+        if (param.length % 2 != 0) {
+            throw new JustsendApiClientException("Incorrect parameters number, should be allways two multiplayer!");
+        }
+
+        StringBuilder parameters = new StringBuilder("?");
+        for (int i = 0; i < param.length; i += 2) {
+            logger.info("param:" + i / 2 + ": " + param[i] + " = " + param[i + 1]);
+            parameters.append(param[i]).append("=").append(param[i + 1]);
+            if (i != param.length) {
+                parameters.append("&");
+            }
+        }
+        return url.concat(parameters.toString());
+    }
 }
