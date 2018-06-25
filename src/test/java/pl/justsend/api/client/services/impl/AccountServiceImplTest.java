@@ -1,4 +1,4 @@
-package pl.justsend.api.client.test.services.account;
+package pl.justsend.api.client.services.impl;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -7,7 +7,6 @@ import pl.justsend.api.client.model.Account;
 import pl.justsend.api.client.model.SubAccount;
 import pl.justsend.api.client.model.SubAccountRaw;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
-import pl.justsend.api.client.services.impl.AccountServiceImpl;
 
 import java.util.List;
 import java.util.UUID;
@@ -18,8 +17,7 @@ import java.util.UUID;
  * Date: 03.04.18
  * Time: 14:36
  */
-public class AccountServiceTest extends AccountServiceTestDataProvider {
-
+public class AccountServiceImplTest extends AccountServiceTestDataProvider {
 
     @BeforeClass
     public void init() {

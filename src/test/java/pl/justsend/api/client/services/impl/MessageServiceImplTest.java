@@ -1,4 +1,4 @@
-package pl.justsend.api.client.test.services.message;
+package pl.justsend.api.client.services.impl;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 import pl.justsend.api.client.model.Message;
 import pl.justsend.api.client.model.enums.BulkVariant;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
-import pl.justsend.api.client.services.impl.MessageServiceImpl;
 
 /**
 
@@ -14,7 +13,7 @@ import pl.justsend.api.client.services.impl.MessageServiceImpl;
  * Date: 29.03.18
  * Time: 13:42
  */
-public class MessageServiceTest extends MessageSerivceTestDataProvider {
+public class MessageServiceImplTest extends MessageSerivceTestDataProvider {
 
     @BeforeClass
     public void init() {

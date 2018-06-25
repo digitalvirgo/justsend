@@ -1,4 +1,4 @@
-package pl.justsend.api.client.test.services;
+package pl.justsend.api.client.services.impl;
 
 import org.apache.log4j.Logger;
 import org.testng.annotations.BeforeClass;
@@ -8,7 +8,6 @@ import pl.justsend.api.client.model.SubAccount;
 import pl.justsend.api.client.model.SubAccountRaw;
 import pl.justsend.api.client.services.AccountService;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
-import pl.justsend.api.client.services.impl.AccountServiceImpl;
 
 /**
 

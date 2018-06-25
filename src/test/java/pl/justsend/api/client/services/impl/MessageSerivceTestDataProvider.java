@@ -1,8 +1,7 @@
-package pl.justsend.api.client.test.services.message;
+package pl.justsend.api.client.services.impl;
 
 import org.testng.annotations.DataProvider;
 import pl.justsend.api.client.model.enums.BulkVariant;
-import pl.justsend.api.client.test.services.BaseTest;
 
 /**
 

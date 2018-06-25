@@ -1,7 +1,6 @@
-package pl.justsend.api.client.test.services.blacklist;
+package pl.justsend.api.client.services.impl;
 
 import org.testng.annotations.DataProvider;
-import pl.justsend.api.client.test.services.BaseTest;
 
 import java.util.Arrays;
 import java.util.List;

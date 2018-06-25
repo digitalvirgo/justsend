@@ -2,7 +2,6 @@ package pl.justsend.api.client.services.impl;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.log4j.Logger;
-import org.assertj.core.api.Assertions;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pl.justsend.api.client.model.*;
@@ -17,7 +16,7 @@ import java.util.List;
 import static org.apache.commons.lang3.builder.ToStringStyle.SIMPLE_STYLE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static pl.justsend.api.client.services.impl.BulkServiceImplTest.sendBulk;
-import static pl.justsend.api.client.test.services.BaseTest.APP_KEY;
+import static pl.justsend.api.client.services.impl.BaseTest.APP_KEY;
 
 public class ReportServiceImplTest {
 

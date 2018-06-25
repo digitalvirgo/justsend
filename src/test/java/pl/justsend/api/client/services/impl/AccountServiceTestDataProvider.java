@@ -1,6 +1,4 @@
-package pl.justsend.api.client.test.services.account;
-
-import pl.justsend.api.client.test.services.BaseTest;
+package pl.justsend.api.client.services.impl;
 
 /**
 

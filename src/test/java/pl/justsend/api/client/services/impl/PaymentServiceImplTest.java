@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 import pl.justsend.api.client.model.UserPurseResponse;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
 
-import static pl.justsend.api.client.test.services.BaseTest.APP_KEY;
+import static pl.justsend.api.client.services.impl.BaseTest.APP_KEY;
 
 public class PaymentServiceImplTest {
 

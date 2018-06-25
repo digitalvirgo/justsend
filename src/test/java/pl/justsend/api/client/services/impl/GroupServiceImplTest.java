@@ -20,7 +20,7 @@ import java.util.List;
 import static java.lang.Long.valueOf;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static pl.justsend.api.client.test.services.BaseTest.APP_KEY;
+import static pl.justsend.api.client.services.impl.BaseTest.APP_KEY;
 
 public class GroupServiceImplTest {
 
@@ -121,7 +121,7 @@ public class GroupServiceImplTest {
         return groupUpdate;
     }
 
-    private GroupCreate groupCreate() {
+    public static GroupCreate groupCreate() {
         GroupCreate groupCreate = new GroupCreate();
         groupCreate.setName("name");
         groupCreate.setMembers(asList("Number1", "Number2"));
@@ -129,7 +129,7 @@ public class GroupServiceImplTest {
     }
 
 
-    private Long getGroupID(String group) {
+    public static Long getGroupID(String group) {
         String groupId = group.split(":")[1].trim().replace(",", "");
         return valueOf(groupId);
     }
