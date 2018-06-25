@@ -23,8 +23,7 @@ public class PostBackServiceImplTest {
     @Test
     public void testSendPostBack() throws JustsendApiClientException {
         String response = postBackService.sendPostBack(SHIPMENTS_STATUS, "StringJson");
-        Assertions.assertThat(response).isNotNull();
-        LOGGER.info("response = " + response);
+        Assertions.assertThat(response).isEqualTo("OK");
     }
 
 }

@@ -19,6 +19,10 @@ import java.util.List;
  */
 public class BlackListServiceImpl extends BaseService implements BlackListService {
 
+    /**
+     *
+     * @param appKey Klucz api
+     */
 
     public BlackListServiceImpl(String appKey) {
         super(appKey);

@@ -17,6 +17,11 @@ import static java.lang.String.valueOf;
 
 public class GroupServiceImpl extends BaseService implements GroupService {
 
+    /**
+     *
+     * @param appKey Klucz api
+     */
+
     public GroupServiceImpl(String appKey) {
         super(appKey);
     }

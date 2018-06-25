@@ -12,6 +12,11 @@ import static java.lang.String.valueOf;
 
 public class PaymentServiceImpl extends BaseService implements PaymentService {
 
+    /**
+     *
+     * @param appKey Klucz api
+     */
+
     public PaymentServiceImpl(String appKey) {
         super(appKey);
     }

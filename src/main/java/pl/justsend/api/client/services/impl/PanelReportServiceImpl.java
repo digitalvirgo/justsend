@@ -16,6 +16,11 @@ import static java.lang.String.valueOf;
 
 public class PanelReportServiceImpl extends BaseService implements PanelReportService {
 
+    /**
+     *
+     * @param appKey Klucz api
+     */
+
     public PanelReportServiceImpl(String appKey) {
         super(appKey);
     }

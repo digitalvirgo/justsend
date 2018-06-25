@@ -23,6 +23,11 @@ import java.util.List;
  */
 public class AccountServiceImpl extends BaseService implements AccountService {
 
+    /**
+     *
+     * @param appKey Klucz api
+     */
+
     public AccountServiceImpl(String appKey) {
         super(appKey);
     }
