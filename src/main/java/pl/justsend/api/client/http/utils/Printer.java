@@ -4,12 +4,10 @@ import static org.apache.http.util.TextUtils.isBlank;
 
 public class Printer {
 
-    public static String getNiceFormat(String text){
-        if (isBlank(text)){
+    public static String getNiceFormat(String text) {
+        if (isBlank(text)) {
             return text;
         }
-
-        String result = text.replace("{", "\n").replace("}", "\n");
-        return result;
+        return text.replace("{", "\n").replace("}", "\n");
     }
 }

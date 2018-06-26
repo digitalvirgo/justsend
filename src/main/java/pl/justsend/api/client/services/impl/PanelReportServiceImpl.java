@@ -2,11 +2,10 @@ package pl.justsend.api.client.services.impl;
 
 import com.google.gson.reflect.TypeToken;
 import pl.justsend.api.client.model.JSResponse;
+import pl.justsend.api.client.model.PanelReportResponseMessage;
 import pl.justsend.api.client.model.ReportResponse;
-import pl.justsend.api.client.model.dto.ResponseMessageDTO;
-import pl.justsend.api.client.model.dto.SingleBulkReportDTO;
-import pl.justsend.api.client.services.BaseService;
-import pl.justsend.api.client.services.OrderEnum;
+import pl.justsend.api.client.model.SingleBulkReport;
+import pl.justsend.api.client.model.enums.OrderEnum;
 import pl.justsend.api.client.services.PanelReportService;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
 
@@ -20,7 +19,6 @@ import static pl.justsend.api.client.http.utils.DateUtils.convertDate;
 public class PanelReportServiceImpl extends BaseService implements PanelReportService {
 
     /**
-     *
      * @param appKey Klucz api
      */
 
@@ -32,12 +30,13 @@ public class PanelReportServiceImpl extends BaseService implements PanelReportSe
     public List<ReportResponse> retrieveBulksDuringSend(
             final Integer rowFrom,
             final Integer rowSize) throws JustsendApiClientException {
-        String url = createURL("/wwwReport/bulksDuringSend/{appKey}/{rowFrom}/{rowSize}", "rowFrom", valueOf(rowFrom),"rowSize", valueOf(rowSize));
+        String url = createURL("/wwwReport/bulksDuringSend/{appKey}/{rowFrom}/{rowSize}", "rowFrom", valueOf(rowFrom), "rowSize", valueOf(rowSize));
 
         try {
 
             JSResponse jsResponse = justsendHttpClient.doGet(url);
-            return processResponse(jsResponse, new TypeToken<List<ReportResponse>>(){}.getType());
+            return processResponse(jsResponse, new TypeToken<List<ReportResponse>>() {
+            }.getType());
 
         } catch (IOException e) {
             throw new JustsendApiClientException("connection failed: " + e.getMessage());
@@ -50,9 +49,9 @@ public class PanelReportServiceImpl extends BaseService implements PanelReportSe
             final Integer rowFrom,
             final Integer rowSize,
             final String sort,
-            final Integer order) throws JustsendApiClientException {
-        String url = createURL("/wwwReport/bulksDuringSendPagin/{appKey}/{rowFrom}/{rowSize}", "rowFrom", valueOf(rowFrom),"rowSize", valueOf(rowSize));
-        url = addParameters(url, "sort", sort, "order", valueOf(order));
+            final OrderEnum order) throws JustsendApiClientException {
+        String url = createURL("/wwwReport/bulksDuringSendPagin/{appKey}/{rowFrom}/{rowSize}", "rowFrom", valueOf(rowFrom), "rowSize", valueOf(rowSize));
+        url = addParameters(url, "sort", sort, "order", order.getOrder());
 
         try {
 
@@ -101,7 +100,7 @@ public class PanelReportServiceImpl extends BaseService implements PanelReportSe
     }
 
     @Override
-    public List<ResponseMessageDTO> retrieveResponseMessages(
+    public List<PanelReportResponseMessage> retrieveResponseMessages(
             final Integer prefixId,
             final LocalDate from,
             final LocalDate to,
@@ -113,7 +112,7 @@ public class PanelReportServiceImpl extends BaseService implements PanelReportSe
         try {
 
             JSResponse jsResponse = justsendHttpClient.doGet(url);
-            return processResponse(jsResponse, new TypeToken<List<ResponseMessageDTO>>() {
+            return processResponse(jsResponse, new TypeToken<List<PanelReportResponseMessage>>() {
             }.getType());
 
         } catch (IOException e) {
@@ -122,8 +121,8 @@ public class PanelReportServiceImpl extends BaseService implements PanelReportSe
     }
 
     @Override
-    public List<ResponseMessageDTO> retrieveResponseMessagesPagin(final Integer pageNumber, final Integer countRow, final Integer prefixId,
-                                                                  final LocalDate from, final LocalDate to, final String sort, final OrderEnum order, final Long id, final String prefix) throws JustsendApiClientException {
+    public List<PanelReportResponseMessage> retrieveResponseMessagesPagin(final Integer pageNumber, final Integer countRow, final Integer prefixId,
+                                                                          final LocalDate from, final LocalDate to, final String sort, final OrderEnum order, final Long id, final String prefix) throws JustsendApiClientException {
         String url = createURL("/wwwReport/retrieveResponseMessagesPagin/{appKey}/{pageNumber}/{countRow}",
                 "pageNumber", valueOf(pageNumber), "countRow", valueOf(countRow));
         url = addParameters(url, "from", convertDate(from), "to", convertDate(to), "prefixId", valueOf(prefixId), "sort", sort, "order", order.getOrder(), "id", valueOf(id), "prefix", valueOf(prefix));
@@ -131,7 +130,7 @@ public class PanelReportServiceImpl extends BaseService implements PanelReportSe
         try {
 
             JSResponse jsResponse = justsendHttpClient.doGet(url);
-            return processResponse(jsResponse, new TypeToken<List<ResponseMessageDTO>>() {
+            return processResponse(jsResponse, new TypeToken<List<PanelReportResponseMessage>>() {
             }.getType());
 
         } catch (IOException e) {
@@ -166,7 +165,7 @@ public class PanelReportServiceImpl extends BaseService implements PanelReportSe
     }
 
     @Override
-    public List<SingleBulkReportDTO> retrieveSingleBulksByStartDate(
+    public List<SingleBulkReport> retrieveSingleBulksByStartDate(
             final LocalDate from,
             final LocalDate to,
             final Integer rowFrom,
@@ -182,7 +181,7 @@ public class PanelReportServiceImpl extends BaseService implements PanelReportSe
         try {
 
             JSResponse jsResponse = justsendHttpClient.doGet(url);
-            return processResponse(jsResponse, new TypeToken<List<SingleBulkReportDTO>>() {
+            return processResponse(jsResponse, new TypeToken<List<SingleBulkReport>>() {
             }.getType());
 
         } catch (IOException e) {

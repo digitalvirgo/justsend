@@ -7,7 +7,6 @@ import pl.justsend.api.client.model.JSResponse;
 import pl.justsend.api.client.model.SubAccount;
 import pl.justsend.api.client.model.SubAccountRaw;
 import pl.justsend.api.client.services.AccountService;
-import pl.justsend.api.client.services.BaseService;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
 import pl.justsend.api.client.services.methods.AccountMethods;
 
@@ -17,11 +16,6 @@ import java.util.List;
 
 import static java.lang.String.valueOf;
 
-/**
- * User: posiadacz
- * Date: 21.03.18
- * Time: 16:03
- */
 public class AccountServiceImpl extends BaseService implements AccountService {
 
     /**

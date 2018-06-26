@@ -2,20 +2,17 @@ package pl.justsend.api.client.services.impl;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import pl.justsend.api.client.model.LanguageMessage;
 import pl.justsend.api.client.model.Message;
+import pl.justsend.api.client.model.VoiceMessage;
 import pl.justsend.api.client.model.enums.BulkVariant;
 import pl.justsend.api.client.services.MessageService;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static pl.justsend.api.client.model.LanguageMessage.POLISH;
 import static pl.justsend.api.client.services.impl.TestHelper.APP_KEY;
 
-/**
-
- * User: posiadacz
- * Date: 29.03.18
- * Time: 13:42
- */
 public class MessageServiceImplTest extends MessageSerivceTestDataProvider {
 
     protected MessageService messageService;
@@ -46,20 +43,20 @@ public class MessageServiceImplTest extends MessageSerivceTestDataProvider {
     }
 
 
-   /* sendMesage - GET */
+    /* sendMesage - GET */
     @Test(dataProvider = "sendMessageTestDataProvider")
-    public void  sendMessageTestGET(String to, String from, String text, BulkVariant bulkVariant) throws JustsendApiClientException {
+    public void sendMessageTestGET(String to, String from, String text, BulkVariant bulkVariant) throws JustsendApiClientException {
         Long messageId = messageService.sendMessage(to, from, text, bulkVariant);
         assertThat(messageId).isPositive();
     }
 
     @Test(dataProvider = "sendMessageIncorrectMSISDNDataProvider", expectedExceptions = JustsendApiClientException.class)
-    public void  sendMessageIncorrectMsisdnTestGET(String to, String from, String text, BulkVariant bulkVariant) throws JustsendApiClientException {
+    public void sendMessageIncorrectMsisdnTestGET(String to, String from, String text, BulkVariant bulkVariant) throws JustsendApiClientException {
         messageService.sendMessage(to, from, text, bulkVariant);
     }
 
     @Test(dataProvider = "sendMessageIncorrectSenderDataProvider", expectedExceptions = JustsendApiClientException.class)
-    public void  sendMessageIncorrectSenderTestGET(String to, String from, String text, BulkVariant bulkVariant) throws JustsendApiClientException {
+    public void sendMessageIncorrectSenderTestGET(String to, String from, String text, BulkVariant bulkVariant) throws JustsendApiClientException {
         messageService.sendMessage(to, from, text, bulkVariant);
     }
 
@@ -77,4 +74,18 @@ public class MessageServiceImplTest extends MessageSerivceTestDataProvider {
         assertThat(messageId).isPositive();
     }
 
+    @Test
+    public void testSendVoiceMessage() throws JustsendApiClientException {
+        Long messageId = messageService.sendVoiceMessage(createVoiceMessageRequest());
+        assertThat(messageId).isPositive();
+    }
+
+    private VoiceMessage createVoiceMessageRequest() {
+        VoiceMessage voiceMessage = new VoiceMessage();
+        voiceMessage.setMessage("Wiadomość testowa.");
+        voiceMessage.setLanguageMessage(POLISH);
+        voiceMessage.setFrom("Test User");
+        voiceMessage.setTo("514763829");
+        return voiceMessage;
+    }
 }

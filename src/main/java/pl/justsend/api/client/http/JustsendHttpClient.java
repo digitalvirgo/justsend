@@ -29,12 +29,6 @@ import static java.lang.String.format;
 import static pl.justsend.api.client.http.utils.JSONSerializer.serialize;
 import static pl.justsend.api.client.http.utils.Printer.getNiceFormat;
 
-
-/**
- * User: posiadacz
- * Date: 21.03.18
- * Time: 16:09
- */
 public class JustsendHttpClient {
 
     private static final Logger logger = Logger.getLogger(JustsendHttpClient.class);
@@ -54,7 +48,7 @@ public class JustsendHttpClient {
         request.addHeader("User-Agent", USER_AGENT);
         request.addHeader("Content-Type", CONTENT_TYPE);
 
-        logger.info("Sending GET request to JUSTSEND_API_URL : " + url);
+        logger.info("Sending GET request to JUSTSEND_API_URL:\n " + url);
         HttpResponse response = client.execute(request);
 
         return processResponse(response);
@@ -78,7 +72,7 @@ public class JustsendHttpClient {
             request.setEntity(params);
         }
 
-        logger.info(format("Sending POST request to JUSTSEND_API_URL : %s\n with content: %s.", url, data == null ? "" : data));
+        logger.info(format("Sending POST request to JUSTSEND_API_URL:\n %s\n with content: %s.", url, data == null ? "" : data));
         HttpResponse response = client.execute(request);
 
         return processResponse(response);
@@ -106,7 +100,7 @@ public class JustsendHttpClient {
             name = file.getName();
         }
 
-        logger.info("Sending POST request to JUSTSEND_API_URL : " + url + "\n with file: " + name);
+        logger.info("Sending POST request to JUSTSEND_API_URL:\n " + url + "\n with file: " + name);
 
         HttpResponse response = client.execute(request);
 
@@ -143,7 +137,7 @@ public class JustsendHttpClient {
         StringEntity params = new StringEntity(data);
         request.setEntity(params);
 
-        logger.info("Sending POST request to JUSTSEND_API_URL : " + url + "\n with content: " + data);
+        logger.info("Sending POST request to JUSTSEND_API_URL:\n " + url + "\n with content: " + data);
         HttpResponse response = client.execute(request);
 
         return processResponse(response);
@@ -158,32 +152,57 @@ public class JustsendHttpClient {
         request.addHeader("User-Agent", USER_AGENT);
         request.addHeader("Content-Type", CONTENT_TYPE);
 
-        logger.info("Sending PUT request to JUSTSEND_API_URL : " + url);
+        logger.info("Sending PUT request to JUSTSEND_API_URL:\n " + url);
         HttpResponse response = client.execute(request);
 
         return processResponse(response);
 
     }
 
+    public String doGetByte(String url) throws IOException, JustsendApiClientException {
+        HttpClient client = HttpClientBuilder.create().build();
+
+        HttpGet request = new HttpGet(url);
+        request.addHeader("User-Agent", USER_AGENT);
+        request.addHeader("Content-Type", CONTENT_TYPE);
+
+        logger.info("Sending GET request to JUSTSEND_API_URL:\n " + url);
+        HttpResponse response = client.execute(request);
+
+        return processByteResponse(response);
+    }
+
+    private String processByteResponse(HttpResponse response) throws JustsendApiClientException, IOException {
+        BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+
+        String result = rd.lines().collect(Collectors.joining("\n"));
+
+        int statusCode = response.getStatusLine().getStatusCode();
+        if (statusCode == 200) {
+            return result;
+        } else {
+            logger.error(getNiceFormat(result));
+            throw new JustsendApiClientException("Connection failed. Response code: " + response.getStatusLine().getStatusCode());
+        }
+    }
 
     private JSResponse processResponse(HttpResponse response) throws JustsendApiClientException, IOException {
 
-        logger.info("processResponse : " + response.getStatusLine().getStatusCode());
 
         BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
 
         String result = rd.lines().collect(Collectors.joining());
 
-        if (response.getStatusLine().getStatusCode() == 200) {
+        logger.info(format("Response StatusCode = %s.", response.getStatusLine().getStatusCode()));
+        logger.info(format("Response content = %s.", getNiceFormat(result)));
 
-            logger.info(getNiceFormat(result));
+        if (response.getStatusLine().getStatusCode() == 200) {
 
             JSResponse jsResponse = JSONSerializer.deserialize(result, JSResponse.class);
             JSONObject jsonObject = new JSONObject(result);
 
             if (!jsonObject.isNull("data")) {
-
-                logger.info("Object: " + jsonObject.get("data").getClass());
+                logger.debug("Object: " + jsonObject.get("data").getClass());
 
                 Object o = jsonObject.get("data");
 
@@ -200,7 +219,6 @@ public class JustsendHttpClient {
                 } else {
                     throw new JustsendApiClientException("Class " + o.getClass() + " not supported by response parser");
                 }
-
             }
 
             return jsResponse;
@@ -210,4 +228,5 @@ public class JustsendHttpClient {
             throw new JustsendApiClientException("Connection failed. Response code: " + response.getStatusLine().getStatusCode());
         }
     }
+
 }

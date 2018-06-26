@@ -1,15 +1,10 @@
 package pl.justsend.api.client.services;
 
 import pl.justsend.api.client.model.Message;
+import pl.justsend.api.client.model.VoiceMessage;
 import pl.justsend.api.client.model.enums.BulkVariant;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
 
-/**
-
- * User: posiadacz
- * Date: 29.03.18
- * Time: 12:33
- */
 public interface MessageService {
 
     /**
@@ -17,6 +12,7 @@ public interface MessageService {
      *
      * @param message wysłana wiadomość
      * @return message ID
+     * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
      */
 
     Long sendMessage(Message message) throws JustsendApiClientException;
@@ -29,6 +25,7 @@ public interface MessageService {
      * @param message Treść wiadomośći
      * @param bulkVariant bulkVariant
      * @return message id
+     * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
      */
 
     Long sendMessage(String to, String from, String message, BulkVariant bulkVariant) throws JustsendApiClientException;
@@ -39,9 +36,17 @@ public interface MessageService {
      * @param to Odbiorca wiadomośc
      * @param message Treść wiadomośći
      * @return message Id
+     * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
      */
 
     Long sendMessageECO(String to, String message) throws JustsendApiClientException;
 
-//    void sendVoiceMessage(String to, String from, String message, BulkVariant bulkVariant);
+    /**
+     * Wysyła wiadomość głosową
+     *
+     * @param voiceMessage
+     * @return message id
+     * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
+     */
+    Long sendVoiceMessage(VoiceMessage voiceMessage) throws JustsendApiClientException;
 }

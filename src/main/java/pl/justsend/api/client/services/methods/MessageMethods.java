@@ -1,11 +1,5 @@
 package pl.justsend.api.client.services.methods;
 
-/**
-
- * User: posiadacz
- * Date: 29.03.18
- * Time: 13:29
- */
 public enum MessageMethods {
 
     SEND_MESSAGE("/message/send/{appKey}"),

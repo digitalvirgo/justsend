@@ -1,11 +1,5 @@
 package pl.justsend.api.client.services.methods;
 
-/**
-
- * User: posiadacz
- * Date: 30.03.18
- * Time: 13:05
- */
 public enum BlackListMethods {
 
     ADD_NUMBERS_TO_BLACKLIST("/blacklist/add/numbers/{appKey}"),

@@ -1,8 +1,9 @@
 package pl.justsend.api.client.services;
 
+import pl.justsend.api.client.model.PanelReportResponseMessage;
 import pl.justsend.api.client.model.ReportResponse;
-import pl.justsend.api.client.model.dto.ResponseMessageDTO;
-import pl.justsend.api.client.model.dto.SingleBulkReportDTO;
+import pl.justsend.api.client.model.SingleBulkReport;
+import pl.justsend.api.client.model.enums.OrderEnum;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
 
 import java.time.LocalDate;
@@ -16,6 +17,7 @@ public interface PanelReportService {
      * @param rowFrom Indeks startowy rekordów do pobrania
      * @param rowSize Ilość rekordów do pobrania
      * @return
+     * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
      */
 
     List<ReportResponse> retrieveBulksDuringSend(
@@ -30,18 +32,20 @@ public interface PanelReportService {
      * @param sort    Parametr sortowania
      * @param order   Porządek (0 - ASC, 1 - DESC)
      * @return
+     * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
      */
 
     List<ReportResponse> retrieveBulksDuringSendPagin(
             Integer rowFrom,
             Integer rowSize,
             String sort,
-            Integer order) throws JustsendApiClientException;
+            OrderEnum order) throws JustsendApiClientException;
 
     /**
-     * Zwraca liczbę bulków do wysłania.
+     * Zwraca liczbę wiadomości do wysłania.
      *
      * @return
+     * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
      */
 
     Long retrieveBulksDuringSendCount() throws JustsendApiClientException;
@@ -52,7 +56,8 @@ public interface PanelReportService {
      * @param to       Data do (yyyy-MM-dd)
      * @param id       Identyfikator zwrotki
      * @param prefix   Nazwa prefixu
-     * @return
+     * @return liczbe wiadomości zwrotnych
+     * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
      */
 
     Long retrieveCountResponseMessages(
@@ -73,9 +78,10 @@ public interface PanelReportService {
      * @param startRow Początek
      * @param countRow Koniec
      * @return
+     * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
      */
 
-    List<ResponseMessageDTO> retrieveResponseMessages(
+    List<PanelReportResponseMessage> retrieveResponseMessages(
             Integer prefixId,
             LocalDate from,
             LocalDate to,
@@ -95,10 +101,11 @@ public interface PanelReportService {
      * @param id         Identyfikator zwrotki
      * @param prefix     Nazwa prefixu
      * @return
+     * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
      */
 
-    List<ResponseMessageDTO> retrieveResponseMessagesPagin(Integer pageNumber, Integer countRow, Integer prefixId,
-                                                           LocalDate from, LocalDate to, String sort, OrderEnum order, Long id, String prefix) throws JustsendApiClientException;
+    List<PanelReportResponseMessage> retrieveResponseMessagesPagin(Integer pageNumber, Integer countRow, Integer prefixId,
+                                                                   LocalDate from, LocalDate to, String sort, OrderEnum order, Long id, String prefix) throws JustsendApiClientException;
 
     /**
      * Zwraca informacje o masowych wysyłkach zrealizowanych w danym okresie czasu  w formie listy.
@@ -113,6 +120,7 @@ public interface PanelReportService {
      * @param name       Nazwa wysyłki
      * @param sender     "Nadawca"
      * @return
+     * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
      */
 
     List<ReportResponse> retrieveBulkListByDatePagin(
@@ -138,9 +146,10 @@ public interface PanelReportService {
      * @param id      Identyfikator wysyłki
      * @param sender  Nazwa wysyłającego
      * @return
+     * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
      */
 
-    List<SingleBulkReportDTO> retrieveSingleBulksByStartDate(
+    List<SingleBulkReport> retrieveSingleBulksByStartDate(
             LocalDate from,
             LocalDate to,
             Integer rowFrom,

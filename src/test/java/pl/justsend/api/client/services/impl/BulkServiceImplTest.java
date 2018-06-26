@@ -24,10 +24,34 @@ public class BulkServiceImplTest {
     private BulkService bulkService;
     private GroupService groupService;
 
+    public static Bulk sendBulk() {
+        Bulk bulk = new Bulk();
+        setBaseBulk(bulk);
+        bulk.setGroupId(2393L);
+        return bulk;
+    }
+
+    public static Bulk sendBulk(String name, String sender) {
+        Bulk bulk = sendBulk();
+        bulk.setName(name);
+        bulk.setFrom(sender);
+        return bulk;
+    }
+
+    private static void setBaseBulk(BaseBulk bulk) {
+        bulk.setName("Name12345");
+        bulk.setMessage("Test message");
+        bulk.setBulkVariant(ECO);
+        bulk.setFrom("BulkService");
+        bulk.setTo(asList("514746368"));
+        bulk.setLanguage(LanguageMessage.POLISH);
+        bulk.setSendDate("2018-06-20T16:54:67-00:00");
+    }
+
     @BeforeClass
     public void setUp() {
         bulkService = new BulkServiceImpl(APP_KEY);
-        groupService= new GroupServiceImpl(APP_KEY);
+        groupService = new GroupServiceImpl(APP_KEY);
     }
 
     @Test
@@ -53,10 +77,10 @@ public class BulkServiceImplTest {
 
 
         LOGGER.info("=========   retrieve aliases ===========");
-        List<SenderResponse> senderResponses = bulkService.retrieveAliases();
-        Assertions.assertThat(senderResponses).isNotNull();
-        Assertions.assertThat(senderResponses).isNotEmpty();
-        LOGGER.info("senderResponses = " + senderResponses);
+        List<SenderResponse> retrieveAliasesResponse = bulkService.retrieveAliases();
+        Assertions.assertThat(retrieveAliasesResponse).isNotNull();
+        Assertions.assertThat(retrieveAliasesResponse).isNotEmpty();
+        LOGGER.info("senderResponses = " + retrieveAliasesResponse);
 
 
         LOGGER.info("=========   retrieve bulk recipient by message status  ===========");
@@ -90,7 +114,6 @@ public class BulkServiceImplTest {
         BulkResponse bulkGroupListResponse = bulkService.sendBulk(bulkGroupList);
         Assertions.assertThat(bulkGroupListResponse).isNotNull();
         LOGGER.info("bulkGroupListResponse = " + TestHelper.toString(bulkGroupListResponse));
-
     }
 
     private GroupCreate groupCreate() {
@@ -101,34 +124,10 @@ public class BulkServiceImplTest {
     }
 
     private BulkGroupList createBulkGroupListRequest(Long groupID) {
-        BulkGroupList bulkGroupList =new BulkGroupList();
+        BulkGroupList bulkGroupList = new BulkGroupList();
         setBaseBulk(bulkGroupList);
         bulkGroupList.setGroupIds(asList(groupID));
         return bulkGroupList;
-    }
-
-    public static Bulk sendBulk() {
-        Bulk bulk = new Bulk();
-        setBaseBulk(bulk);
-        bulk.setGroupId(2393L);
-        return bulk;
-    }
-
-    public static Bulk sendBulk(String name, String sender) {
-        Bulk bulk = sendBulk();
-        bulk.setName(name);
-        bulk.setFrom(sender);
-        return bulk;
-    }
-
-    private static void setBaseBulk(BaseBulk bulk){
-        bulk.setName("Name12345");
-        bulk.setMessage("Test message");
-        bulk.setBulkVariant(ECO);
-        bulk.setFrom("BulkService");
-        bulk.setTo(asList("514746368"));
-        bulk.setLanguage(LanguageMessage.POLISH);
-        bulk.setSendDate("2018-06-20T16:54:67-00:00");
     }
 
 }

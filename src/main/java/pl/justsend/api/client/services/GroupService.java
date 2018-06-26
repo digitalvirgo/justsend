@@ -1,12 +1,6 @@
 package pl.justsend.api.client.services;
 
-import pl.justsend.api.client.model.Group;
-import pl.justsend.api.client.model.GroupCreate;
-import pl.justsend.api.client.model.GroupResponse;
-import pl.justsend.api.client.model.GroupUpdate;
-import pl.justsend.api.client.model.dto.GroupDTO;
-import pl.justsend.api.client.model.dto.PrefixDTO;
-import pl.justsend.api.client.model.dto.PrefixReservationDTO;
+import pl.justsend.api.client.model.*;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
 
 import java.io.File;
@@ -18,6 +12,7 @@ public interface GroupService {
      * Zwraca listę grup
      *
      * @return lista group
+     * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
      */
 
     List<GroupResponse> retrieveGroups() throws JustsendApiClientException;
@@ -27,6 +22,7 @@ public interface GroupService {
      *
      * @param groupId Id grupy
      * @return
+     * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
      */
 
     Group retrieveGroup(Long groupId) throws JustsendApiClientException;
@@ -36,6 +32,7 @@ public interface GroupService {
      *
      * @param groupCreate create group request
      * @return group Id (Text: Created group id: {number})
+     * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
      */
 
     String createGroup(GroupCreate groupCreate) throws JustsendApiClientException;
@@ -45,6 +42,7 @@ public interface GroupService {
      *
      * @param groupId numer grupy
      * @return text: Removed group id: {groupId}
+     * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
      */
 
     String removeGroup(Long groupId) throws JustsendApiClientException;
@@ -54,6 +52,7 @@ public interface GroupService {
      *
      * @param groupUpdate
      * @return text: Added: 1 numbers
+     * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
      */
 
     String addNumberToGroup(GroupUpdate groupUpdate) throws JustsendApiClientException;
@@ -63,6 +62,7 @@ public interface GroupService {
      *
      * @param groupUpdate groupUpdate request
      * @return text: Removed: 2 numbers
+     * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
      */
 
     String removeNumbersFromGroup(GroupUpdate groupUpdate) throws JustsendApiClientException;
@@ -71,18 +71,20 @@ public interface GroupService {
      * Zwraca listę wolnych prefixów
      *
      * @return
+     * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
      */
 
-    List<PrefixReservationDTO> getGroupPrefix() throws JustsendApiClientException;
+    List<PrefixReservation> getGroupPrefix() throws JustsendApiClientException;
 
     /**
      * Rezerwuje prefix
      *
-     * @param prefixReservationDTO
+     * @param prefixReservation
      * @return info o zarezerowowanym prefiksie
+     * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
      */
 
-    PrefixDTO reservationPrefix(PrefixReservationDTO prefixReservationDTO) throws JustsendApiClientException;
+    Prefix reservationPrefix(PrefixReservation prefixReservation) throws JustsendApiClientException;
 
     /**
      * Dodaje numery z pliku do grupy
@@ -90,16 +92,17 @@ public interface GroupService {
      * @param groupId Identyfikator grupy
      * @param inputData
      * @return text: Successful
-     * @throws JustsendApiClientException
+     * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
      */
 
-    String addMsisdnToGroup(Long groupId, File inputData) throws JustsendApiClientException;
+    String addNumbersToGroup(Long groupId, File inputData) throws JustsendApiClientException;
 
     /**
      * Aktualizuje grupę
      *
      * @param groupDTO
      * @return
+     * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
      */
 
     GroupDTO updateGroup(GroupDTO groupDTO) throws JustsendApiClientException;

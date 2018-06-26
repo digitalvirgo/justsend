@@ -2,21 +2,19 @@ package pl.justsend.api.client.services.impl;
 
 import com.google.gson.reflect.TypeToken;
 import pl.justsend.api.client.model.*;
-import pl.justsend.api.client.model.dto.FileReportStatusDTO;
-import pl.justsend.api.client.model.dto.SingleBulkReportDTO;
-import pl.justsend.api.client.services.BaseService;
 import pl.justsend.api.client.services.ReportService;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 import static java.lang.String.valueOf;
+import static pl.justsend.api.client.http.utils.DateUtils.convertDate;
 
 public class ReportServiceImpl extends BaseService implements ReportService {
 
     /**
-     *
      * @param appKey Klucz api
      */
 
@@ -25,8 +23,8 @@ public class ReportServiceImpl extends BaseService implements ReportService {
     }
 
     @Override
-    public List<ReportResponse> retrieveBulkByDate(final String from, final String to) throws JustsendApiClientException {
-        String url = createURL("/report/{appKey}/{from}/{to}", "from", from, "to", to);
+    public List<ReportResponse> retrieveBulkByDate(final LocalDate from, final LocalDate to) throws JustsendApiClientException {
+        String url = createURL("/report/{appKey}/{from}/{to}", "from", convertDate(from), "to", convertDate(to));
 
         try {
 
@@ -46,8 +44,7 @@ public class ReportServiceImpl extends BaseService implements ReportService {
         try {
 
             JSResponse jsResponse = justsendHttpClient.doGet(url);
-            return processResponse(jsResponse, new TypeToken<ReportResponse>() {
-            }.getType());
+            return processResponse(jsResponse, ReportResponse.class);
 
         } catch (IOException e) {
             throw new JustsendApiClientException("connection failed: " + e.getMessage());
@@ -71,13 +68,13 @@ public class ReportServiceImpl extends BaseService implements ReportService {
     }
 
     @Override
-    public List<ResponseMessage> retrieveResponseMessages(final String prefix, final String from, final String to) throws JustsendApiClientException {
-        String url = createURL("/report/response/messages/{appKey}/{prefix}/{from}/{to}", "prefix", prefix, "from", from, "to", to);
+    public List<ReportResponseMessage> retrieveResponseMessages(final String prefix, final LocalDate from, final LocalDate to) throws JustsendApiClientException {
+        String url = createURL("/report/response/messages/{appKey}/{prefix}/{from}/{to}", "prefix", prefix, "from", convertDate(from), "to", convertDate(to));
 
         try {
 
             JSResponse jsResponse = justsendHttpClient.doGet(url);
-            return processResponse(jsResponse, new TypeToken<List<ResponseMessage>>() {
+            return processResponse(jsResponse, new TypeToken<List<ReportResponseMessage>>() {
             }.getType());
 
         } catch (IOException e) {
@@ -100,8 +97,8 @@ public class ReportServiceImpl extends BaseService implements ReportService {
     }
 
     @Override
-    public List<ReportMessageResponse> retrieveReportMessagesByDate(final String from, final String to) throws JustsendApiClientException {
-        String url = createURL("/report/message/{appKey}/{from}/{to}", "from", from, "to", to);
+    public List<ReportMessageResponse> retrieveReportMessagesByDate(final LocalDate from, final LocalDate to) throws JustsendApiClientException {
+        String url = createURL("/report/message/{appKey}/{from}/{to}", "from", convertDate(from), "to", convertDate(to));
         try {
 
             JSResponse jsResponse = justsendHttpClient.doGet(url);
@@ -115,13 +112,13 @@ public class ReportServiceImpl extends BaseService implements ReportService {
 
 
     @Override
-    public List<ReportResponse> retrieveBulkListByDate(final String from, final String to, final Integer rowFrom, final Integer rowSize) throws JustsendApiClientException {
+    public List<ReportResponse> retrieveBulkListByDate(final LocalDate from, final LocalDate to, final Integer rowFrom, final Integer rowSize) throws JustsendApiClientException {
         String url = createURL("/report/list/reportBulks/{appKey}/{from}/{to}/{rowFrom}/{rowSize}"
-                , "from", from, "to", to, "rowFrom", valueOf(rowFrom), "rowSize", valueOf(rowSize));
+                , "from", convertDate(from), "to", convertDate(to), "rowFrom", valueOf(rowFrom), "rowSize", valueOf(rowSize));
         try {
 
             JSResponse jsResponse = justsendHttpClient.doGet(url);
-            return processResponse(jsResponse, new TypeToken<List<ReportMessageResponse>>() {
+            return processResponse(jsResponse, new TypeToken<List<ReportResponse>>() {
             }.getType());
 
         } catch (IOException e) {
@@ -131,9 +128,9 @@ public class ReportServiceImpl extends BaseService implements ReportService {
 
 
     @Override
-    public Long retrieveBulkListCountByDate(final String from, final String to, final Long id, final String name, final String sender) throws JustsendApiClientException {
+    public Long retrieveBulkListCountByDate(final LocalDate from, final LocalDate to, final Long id, final String name, final String sender) throws JustsendApiClientException {
         String url = createURL("/report/list/reportBulksCount/{appKey}/{from}/{to}"
-                , "from", from, "to", to);
+                , "from", convertDate(from), "to", convertDate(to));
         url = addParameters(url, "id", valueOf(id), "name", name, "sender", sender);
         try {
 
@@ -146,13 +143,13 @@ public class ReportServiceImpl extends BaseService implements ReportService {
     }
 
     @Override
-    public List<SingleBulkReportDTO> retrieveSingleBulksByStartDate(final String from, final String to, final Integer rowFrom, final Integer rowSize) throws JustsendApiClientException {
+    public List<SingleBulkReport> retrieveSingleBulksByStartDate(final LocalDate from, final LocalDate to, final Integer rowFrom, final Integer rowSize) throws JustsendApiClientException {
         String url = createURL("/report/list/reportSingleBulks/{appKey}/{from}/{to}/{rowFrom}/{rowSize}"
-                , "from", from, "to", to, "rowFrom", valueOf(rowFrom), "rowSize", valueOf(rowSize));
+                , "from", convertDate(from), "to", convertDate(to), "rowFrom", valueOf(rowFrom), "rowSize", valueOf(rowSize));
         try {
 
             JSResponse jsResponse = justsendHttpClient.doGet(url);
-            return processResponse(jsResponse, new TypeToken<List<SingleBulkReportDTO>>() {
+            return processResponse(jsResponse, new TypeToken<List<SingleBulkReport>>() {
             }.getType());
 
         } catch (IOException e) {
@@ -161,9 +158,9 @@ public class ReportServiceImpl extends BaseService implements ReportService {
     }
 
     @Override
-    public Long retrieveSingleBulksCountByStartDate(final String from, final String to, final Long id, final String sender) throws JustsendApiClientException {
+    public Long retrieveSingleBulksCountByStartDate(final LocalDate from, final LocalDate to, final Long id, final String sender) throws JustsendApiClientException {
         String url = createURL("/report/list/reportSingleBulksCount/{appKey}/{from}/{to}"
-                , "from", from, "to", to);
+                , "from", convertDate(from), "to", convertDate(to));
         url = addParameters(url, "id", valueOf(id), "sender", sender);
         try {
 
@@ -176,49 +173,52 @@ public class ReportServiceImpl extends BaseService implements ReportService {
     }
 
     @Override
-    public void generateBulkHistoryReport(final String from, final String to) throws JustsendApiClientException {
+    public String generateBulkHistoryReport(final LocalDate from, final LocalDate to) throws JustsendApiClientException {
         String url = createURL("/report/file/generate/bulkHistory/{appKey}/{from}/{to}"
-                , "from", from, "to", to);
+                , "from", convertDate(from), "to", convertDate(to));
         try {
 
-            justsendHttpClient.doGet(url);
+            JSResponse jsResponse = justsendHttpClient.doGet(url);
+            return processResponse(jsResponse, String.class);
         } catch (IOException e) {
             throw new JustsendApiClientException("connection failed: " + e.getMessage());
         }
     }
 
     @Override
-    public void generateSingleBulkHistoryReport(final String from, final String to) throws JustsendApiClientException {
+    public String generateSingleBulkHistoryReport(final LocalDate from, final LocalDate to) throws JustsendApiClientException {
         String url = createURL("/report/file/generate/singleBulkHistory/{appKey}/{from}/{to}"
-                , "from", from, "to", to);
+                , "from", convertDate(from), "to", convertDate(to));
         try {
 
-            justsendHttpClient.doGet(url);
+            JSResponse jsResponse = justsendHttpClient.doGet(url);
+            return processResponse(jsResponse, String.class);
         } catch (IOException e) {
             throw new JustsendApiClientException("connection failed: " + e.getMessage());
         }
     }
 
     @Override
-    public void generateBulkRecipientsReport(final Long bulkId) throws JustsendApiClientException {
+    public String generateBulkRecipientsReport(final Long bulkId) throws JustsendApiClientException {
         String url = createURL("/report/file/generate/bulkRecipients/{appKey}/{bulkId}"
                 , "bulkId", valueOf(bulkId));
         try {
 
-            justsendHttpClient.doGet(url);
+            JSResponse jsResponse = justsendHttpClient.doGet(url);
+            return processResponse(jsResponse, String.class);
         } catch (IOException e) {
             throw new JustsendApiClientException("connection failed: " + e.getMessage());
         }
     }
 
     @Override
-    public FileReportStatusDTO getReportStatus(final String searchKey) throws JustsendApiClientException {
+    public FileReportStatus getReportStatus(final String searchKey) throws JustsendApiClientException {
         String url = createURL("/report/file/status/{appKey}/{searchKey}"
                 , "searchKey", searchKey);
         try {
 
             JSResponse jsResponse = justsendHttpClient.doGet(url);
-            return processResponse(jsResponse, FileReportStatusDTO.class);
+            return processResponse(jsResponse, FileReportStatus.class);
 
         } catch (IOException e) {
             throw new JustsendApiClientException("connection failed: " + e.getMessage());
@@ -226,26 +226,24 @@ public class ReportServiceImpl extends BaseService implements ReportService {
     }
 
     @Override
-    public byte[] getReports(final String fileId) throws JustsendApiClientException {
+    public String getReports(final String fileId) throws JustsendApiClientException {
         String url = createURL("/report/file/get/{appKey}/{fileId}"
                 , "fileId", fileId);
         try {
 
-            JSResponse jsResponse = justsendHttpClient.doGet(url);
-            //TODO: check if it work
-            return processResponse(jsResponse, byte[].class);
+            return justsendHttpClient.doGetByte(url);
         } catch (IOException e) {
             throw new JustsendApiClientException("connection failed: " + e.getMessage());
         }
     }
 
     @Override
-    public List<FileReportStatusDTO> listBulkHistoryReports() throws JustsendApiClientException {
+    public List<FileReportStatus> listBulkHistoryReports() throws JustsendApiClientException {
         String url = createURL("/report/file/list/bulkHistory/{appKey}");
         try {
 
             JSResponse jsResponse = justsendHttpClient.doGet(url);
-            return processResponse(jsResponse, new TypeToken<List<FileReportStatusDTO>>() {
+            return processResponse(jsResponse, new TypeToken<List<FileReportStatus>>() {
             }.getType());
 
         } catch (IOException e) {
@@ -254,12 +252,12 @@ public class ReportServiceImpl extends BaseService implements ReportService {
     }
 
     @Override
-    public List<FileReportStatusDTO> listBulkRecipientsReports() throws JustsendApiClientException {
+    public List<FileReportStatus> listBulkRecipientsReports() throws JustsendApiClientException {
         String url = createURL("/report/file/list/bulkRecipients/{appKey}");
         try {
 
             JSResponse jsResponse = justsendHttpClient.doGet(url);
-            return processResponse(jsResponse, new TypeToken<List<FileReportStatusDTO>>() {
+            return processResponse(jsResponse, new TypeToken<List<FileReportStatus>>() {
             }.getType());
 
         } catch (IOException e) {
@@ -268,12 +266,12 @@ public class ReportServiceImpl extends BaseService implements ReportService {
     }
 
     @Override
-    public List<FileReportStatusDTO> listSingleBulkRecipientsReports() throws JustsendApiClientException {
+    public List<FileReportStatus> listSingleBulkRecipientsReports() throws JustsendApiClientException {
         String url = createURL("/report/file/list/singleBulkHistory/{appKey}");
         try {
 
             JSResponse jsResponse = justsendHttpClient.doGet(url);
-            return processResponse(jsResponse, new TypeToken<List<FileReportStatusDTO>>() {
+            return processResponse(jsResponse, new TypeToken<List<FileReportStatus>>() {
             }.getType());
 
         } catch (IOException e) {
@@ -282,11 +280,12 @@ public class ReportServiceImpl extends BaseService implements ReportService {
     }
 
     @Override
-    public void generateGroupMsisdns(final Long groupId) throws JustsendApiClientException {
+    public String generateBulkHistoryReport(final Long groupId) throws JustsendApiClientException {
         String url = createURL("/report/file/generate/groupMsisds/{appKey}/{groupId}", "groupId", valueOf(groupId));
         try {
 
-            justsendHttpClient.doGet(url);
+            JSResponse jsResponse = justsendHttpClient.doGet(url);
+            return processResponse(jsResponse, String.class);
         } catch (IOException e) {
             throw new JustsendApiClientException("connection failed: " + e.getMessage());
         }

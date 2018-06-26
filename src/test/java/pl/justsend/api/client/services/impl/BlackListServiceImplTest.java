@@ -1,5 +1,6 @@
 package pl.justsend.api.client.services.impl;
 
+import org.assertj.core.api.Assertions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -10,12 +11,6 @@ import java.util.List;
 
 import static pl.justsend.api.client.services.impl.TestHelper.APP_KEY;
 
-/**
-
- * User: posiadacz
- * Date: 30.03.18
- * Time: 13:17
- */
 public class BlackListServiceImplTest extends BlackListServiceTestDataProvider {
 
     private BlackListService blackListService;
@@ -35,7 +30,7 @@ public class BlackListServiceImplTest extends BlackListServiceTestDataProvider {
     public void addNumbersToBlackListTest(List<String> firstMsisdnList, List<String> secondMsisdnList) throws JustsendApiClientException {
         List<String> listNumbers = blackListService.retrieveNumbers();
         blackListService.addNumbersToBlackList(firstMsisdnList);
-        Assert.assertTrue(listNumbers.size() >= firstMsisdnList.size());
+        Assertions.assertThat(listNumbers).hasSameSizeAs(firstMsisdnList);
     }
 
     @Test(dataProvider = "blackListIncorrectMsisdnDataProvider")
@@ -60,7 +55,7 @@ public class BlackListServiceImplTest extends BlackListServiceTestDataProvider {
         String response;
         List<String> savedMsisdns;
 
-        /* clear saved msisdn list */
+        /* clear saved number list */
         savedMsisdns = blackListService.retrieveNumbers();
         Assert.assertNotNull(savedMsisdns);
         if (savedMsisdns.size() > 0) {
