@@ -15,6 +15,11 @@ import static java.lang.String.valueOf;
 
 public class ReportServiceImpl extends BaseService implements ReportService {
 
+    /**
+     *
+     * @param appKey Klucz api
+     */
+
     public ReportServiceImpl(String appKey) {
         super(appKey);
     }

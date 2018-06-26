@@ -14,8 +14,8 @@ import java.util.List;
 import static java.util.Arrays.asList;
 import static pl.justsend.api.client.model.enums.BulkStatus.CANCELED;
 import static pl.justsend.api.client.model.enums.BulkVariant.ECO;
-import static pl.justsend.api.client.services.impl.BaseTest.APP_KEY;
 import static pl.justsend.api.client.services.impl.GroupServiceImplTest.getGroupID;
+import static pl.justsend.api.client.services.impl.TestHelper.APP_KEY;
 
 public class BulkServiceImplTest {
 

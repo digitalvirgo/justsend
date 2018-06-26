@@ -2,7 +2,7 @@ package pl.justsend.api.client.services.impl;
 
 import org.apache.log4j.Logger;
 import org.assertj.core.api.Assertions;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pl.justsend.api.client.model.*;
 import pl.justsend.api.client.model.dto.GroupDTO;
@@ -22,7 +22,8 @@ import static java.lang.Long.valueOf;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static pl.justsend.api.client.model.enums.PrefixAccessType.GLOBAL;
-import static pl.justsend.api.client.services.impl.BaseTest.APP_KEY;
+import static pl.justsend.api.client.services.impl.TestHelper.APP_KEY;
+import static pl.justsend.api.client.services.impl.TestHelper.APP_KEY_ADMINISTRATOR;
 
 public class GroupServiceImplTest {
 
@@ -30,10 +31,10 @@ public class GroupServiceImplTest {
     private GroupService groupService;
     private PrefixServiceImpl prefixService;
 
-    @BeforeMethod
+    @BeforeClass
     public void setUp() {
         groupService = new GroupServiceImpl(APP_KEY);
-        prefixService = new PrefixServiceImpl("123456");
+        prefixService = new PrefixServiceImpl(APP_KEY_ADMINISTRATOR);
     }
 
     @Test

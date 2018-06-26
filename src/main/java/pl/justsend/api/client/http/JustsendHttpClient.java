@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.stream.Collectors;
 
+import static java.lang.String.format;
 import static pl.justsend.api.client.http.utils.JSONSerializer.serialize;
 import static pl.justsend.api.client.http.utils.Printer.getNiceFormat;
 
@@ -77,7 +78,7 @@ public class JustsendHttpClient {
             request.setEntity(params);
         }
 
-        logger.info("Sending POST request to JUSTSEND_API_URL : " + url + "\n with content: " + data);
+        logger.info(format("Sending POST request to JUSTSEND_API_URL : %s\n with content: %s.", url, data == null ? "" : data));
         HttpResponse response = client.execute(request);
 
         return processResponse(response);

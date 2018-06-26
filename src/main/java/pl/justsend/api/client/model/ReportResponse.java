@@ -6,15 +6,15 @@
 package pl.justsend.api.client.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import pl.justsend.api.client.model.enums.BulkStatus;
 
 import java.util.Date;
 import java.util.Map;
 
 @Data
+@EqualsAndHashCode
 public class ReportResponse extends BaseModel {
-    
-
 
     private Long bulkId;
     private String bulkName;

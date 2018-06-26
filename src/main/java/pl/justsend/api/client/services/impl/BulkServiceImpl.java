@@ -21,6 +21,11 @@ import static java.lang.String.valueOf;
  */
 public class BulkServiceImpl extends BaseService implements BulkService {
 
+    /**
+     *
+     * @param appKey Klucz api
+     */
+
     public BulkServiceImpl(String appKey) {
         super(appKey);
     }

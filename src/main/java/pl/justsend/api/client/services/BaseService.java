@@ -7,10 +7,12 @@ import pl.justsend.api.client.model.JSResponse;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
 
 import java.lang.reflect.Type;
+import java.util.regex.Matcher;
+
+import static java.util.regex.Matcher.quoteReplacement;
 
 
 /**
-
  * User: posiadacz
  * Date: 21.03.18
  * Time: 16:03
@@ -23,6 +25,10 @@ public abstract class BaseService {
 
     protected JustsendHttpClient justsendHttpClient;
     protected String appKey;
+
+    /**
+     * @param appKey Klucz api
+     */
 
     public BaseService(String appKey) {
         this.appKey = appKey;
@@ -79,14 +85,14 @@ public abstract class BaseService {
 
     protected String addParameters(String url, String... param) throws JustsendApiClientException {
         if (param.length % 2 != 0) {
-            throw new JustsendApiClientException("Incorrect parameters number, should be allways two multiplayer!");
+            throw new JustsendApiClientException("Incorrect parameters number, should be allays two multiplayer!");
         }
 
         StringBuilder parameters = new StringBuilder("?");
         for (int i = 0; i < param.length; i += 2) {
-            logger.info("param:" + i / 2 + ": " + param[i] + " = " + param[i + 1]);
+            logger.info(String.format("param: %s : %s = %s ", i / 2, param[i], param[i + 1]));
             parameters.append(param[i]).append("=").append(param[i + 1]);
-            if (i != param.length) {
+            if (i != (param.length - 2)) {
                 parameters.append("&");
             }
         }

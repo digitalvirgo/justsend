@@ -2,21 +2,23 @@ package pl.justsend.api.client.services.impl;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.log4j.Logger;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import pl.justsend.api.client.model.*;
+import pl.justsend.api.client.model.BulkResponse;
+import pl.justsend.api.client.model.ReportMessageResponse;
+import pl.justsend.api.client.model.ReportResponse;
+import pl.justsend.api.client.model.ResponseMessage;
 import pl.justsend.api.client.model.dto.FileReportStatusDTO;
 import pl.justsend.api.client.model.dto.SingleBulkReportDTO;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static org.apache.commons.lang3.builder.ToStringStyle.SIMPLE_STYLE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static pl.justsend.api.client.services.impl.BulkServiceImplTest.sendBulk;
-import static pl.justsend.api.client.services.impl.BaseTest.APP_KEY;
+import static pl.justsend.api.client.services.impl.TestHelper.APP_KEY;
+import static pl.justsend.api.client.services.impl.TestHelper.daysBeforeNow;
 
 public class ReportServiceImplTest {
 
@@ -24,13 +26,12 @@ public class ReportServiceImplTest {
 
     private ReportServiceImpl reportService;
     private BulkServiceImpl bulkService;
-    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private String bulkName = "Name12345";
     private String sender = "BulkService";
     private BulkResponse bulkResponse;
 
 
-    @BeforeMethod
+    @BeforeClass
     public void setUp() throws JustsendApiClientException {
         reportService = new ReportServiceImpl(APP_KEY);
         bulkService = new BulkServiceImpl(APP_KEY);
@@ -112,12 +113,6 @@ public class ReportServiceImplTest {
 
 //        reportService.getReports();
 //        reportService.getReportStatus();
-    }
-
-    private String daysBeforeNow(int minusDays) {
-        LocalDate localDate = LocalDate.now().minusDays(minusDays);
-        return dtf.format(localDate);
-
     }
 
     @Test

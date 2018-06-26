@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
 
 import static pl.justsend.api.client.model.enums.AddressPostBackType.SHIPMENTS_STATUS;
-import static pl.justsend.api.client.services.impl.BaseTest.APP_KEY;
+import static pl.justsend.api.client.services.impl.TestHelper.APP_KEY;
 
 public class PostBackServiceImplTest {
 
@@ -23,8 +23,7 @@ public class PostBackServiceImplTest {
     @Test
     public void testSendPostBack() throws JustsendApiClientException {
         String response = postBackService.sendPostBack(SHIPMENTS_STATUS, "StringJson");
-        Assertions.assertThat(response).isNotNull();
-        LOGGER.info("response = " + response);
+        Assertions.assertThat(response).isEqualTo("OK");
     }
 
 }

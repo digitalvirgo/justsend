@@ -20,6 +20,11 @@ import java.net.URLEncoder;
  */
 public class MessageServiceImpl extends BaseService implements MessageService {
 
+    /**
+     *
+     * @param appKey Klucz api
+     */
+
     public MessageServiceImpl(String appKey) {
         super(appKey);
     }
@@ -83,7 +88,5 @@ public class MessageServiceImpl extends BaseService implements MessageService {
         } catch (IOException e) {
             throw new JustsendApiClientException("connection failed: " + e.getMessage());
         }
-
     }
-
 }
