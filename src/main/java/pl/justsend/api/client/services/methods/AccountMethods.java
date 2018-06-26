@@ -11,7 +11,7 @@ public enum AccountMethods {
     RETRIEVE_ACCOUNT("/accounts/account/{appKey}"),
     CREATE_SUB_ACCOUNT("/accounts/create/subaccount/{appKey}?appKey={appKey}"),
     DEACTIVATE_ACCOUNT("/accounts/deactivate/{userAppKey}"),
-    EDIT_SUB_ACCOUNT("/accounts/edit/subaccount/{appKey}/{subId}?firstName={firstName}&surname={surname}&password={password}&description={description}"),
+    EDIT_SUB_ACCOUNT("/accounts/edit/subaccount/{appKey}/{subId}"),
     RESET_SUB_ACCOUNT("/accounts/reset/{appKey}/{subId}"),
     RETRIEVE_SUB_ACCOUNT("/accounts/subaccount/{appKey}"),
     RETRIEVE_SUB_ACCOUNTS_LIST("/accounts/subaccounts/list/{appKey}");

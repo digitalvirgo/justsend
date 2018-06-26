@@ -12,11 +12,12 @@ import pl.justsend.api.client.services.exception.JustsendApiClientException;
 import pl.justsend.api.client.services.methods.AccountMethods;
 
 import java.io.IOException;
-import java.net.URLEncoder;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-/**
+import static java.lang.String.valueOf;
 
+/**
  * User: posiadacz
  * Date: 21.03.18
  * Time: 16:03
@@ -24,7 +25,6 @@ import java.util.List;
 public class AccountServiceImpl extends BaseService implements AccountService {
 
     /**
-     *
      * @param appKey Klucz api
      */
 
@@ -61,7 +61,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         } catch (IOException e) {
             throw new JustsendApiClientException("connection failed: " + e.getMessage());
         }
-        
+
     }
 
     @Override
@@ -81,18 +81,18 @@ public class AccountServiceImpl extends BaseService implements AccountService {
     }
 
     @Override
-    public SubAccount editSubAccount(String userAppKey, String firstName, String surname, String password, String description) throws JustsendApiClientException {
-
-        String url = createURL(AccountMethods.EDIT_SUB_ACCOUNT.getPath(), "subId", userAppKey, "firstName", firstName, "surname", surname, "password", password, "description", description);
+    public SubAccount editSubAccount(Long subUserID, String firstName, String surname, String password, String description) throws JustsendApiClientException {
 
         try {
+            String url = createURL(AccountMethods.EDIT_SUB_ACCOUNT.getPath(), "subId", valueOf(subUserID));
 
-            //TODO: check if it shouldn't be used
-            password = URLEncoder.encode(password, "UTF-8");
+            url = addParameters(url, "firstname", firstName, "surname", surname, "password", password, "description", description);
 
-            JSResponse jsResponse = justsendHttpClient.doPost(url, "");
+            JSResponse jsResponse = justsendHttpClient.doPost(url, null);
             return processResponse(jsResponse, SubAccount.class);
 
+        } catch (UnsupportedEncodingException e) {
+            throw new JustsendApiClientException("problem encoding password : " + e.getMessage());
         } catch (IOException e) {
             throw new JustsendApiClientException("connection failed: " + e.getMessage());
         }
@@ -100,9 +100,9 @@ public class AccountServiceImpl extends BaseService implements AccountService {
     }
 
     @Override
-    public String resetSubAccount(String userAppKey) throws JustsendApiClientException {
+    public String resetSubAccount(Long subId) throws JustsendApiClientException {
 
-        String url = createURL(AccountMethods.RESET_SUB_ACCOUNT.getPath(), "subId", userAppKey);
+        String url = createURL(AccountMethods.RESET_SUB_ACCOUNT.getPath(), "subId", valueOf(subId));
 
         try {
 
@@ -139,7 +139,8 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         try {
 
             JSResponse jsResponse = justsendHttpClient.doGet(url);
-            return processResponse(jsResponse, new TypeToken<List<SubAccount>>(){}.getType());
+            return processResponse(jsResponse, new TypeToken<List<SubAccount>>() {
+            }.getType());
 
         } catch (IOException e) {
             throw new JustsendApiClientException("connection failed: " + e.getMessage());

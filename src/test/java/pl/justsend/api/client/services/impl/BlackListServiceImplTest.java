@@ -3,9 +3,12 @@ package pl.justsend.api.client.services.impl;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import pl.justsend.api.client.services.BlackListService;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
 
 import java.util.List;
+
+import static pl.justsend.api.client.services.impl.TestHelper.APP_KEY;
 
 /**
 
@@ -14,6 +17,8 @@ import java.util.List;
  * Time: 13:17
  */
 public class BlackListServiceImplTest extends BlackListServiceTestDataProvider {
+
+    private BlackListService blackListService;
 
     @BeforeClass
     public void init() {

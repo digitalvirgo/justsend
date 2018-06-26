@@ -11,7 +11,7 @@ import java.util.List;
  * Date: 30.03.18
  * Time: 13:29
  */
-public class BlackListServiceTestDataProvider extends BaseTest {
+public class BlackListServiceTestDataProvider {
 
     protected static final String ADD_MSISDN_RESPONSE_REGEX = "Added: [0-9]* numbers";
     protected static final String REMOVE_MSISDN_RESPONSE_REGEX = "Removed: [0-9]* numbers";

@@ -1,14 +1,14 @@
 package pl.justsend.api.client.services.impl;
 
-import org.assertj.core.api.Assertions;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pl.justsend.api.client.model.Message;
 import pl.justsend.api.client.model.enums.BulkVariant;
+import pl.justsend.api.client.services.MessageService;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static pl.justsend.api.client.services.impl.TestHelper.APP_KEY;
 
 /**
 
@@ -17,6 +17,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Time: 13:42
  */
 public class MessageServiceImplTest extends MessageSerivceTestDataProvider {
+
+    protected MessageService messageService;
 
     @BeforeClass
     public void init() {

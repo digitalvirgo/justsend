@@ -1,53 +1,87 @@
 package pl.justsend.api.client.services.impl;
 
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+import pl.justsend.api.client.model.Bulk;
+import pl.justsend.api.client.model.BulkResponse;
+import pl.justsend.api.client.model.ReportResponse;
+import pl.justsend.api.client.model.dto.ResponseMessageDTO;
+import pl.justsend.api.client.model.dto.SingleBulkReportDTO;
+import pl.justsend.api.client.services.OrderEnum;
+import pl.justsend.api.client.services.exception.JustsendApiClientException;
 
-import static pl.justsend.api.client.services.impl.BaseTest.APP_KEY;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static pl.justsend.api.client.services.impl.BulkServiceImplTest.sendBulk;
+import static pl.justsend.api.client.services.impl.TestHelper.APP_KEY_ADMINISTRATOR;
+import static pl.justsend.api.client.services.impl.TestHelper.daysBeforeNowLD;
 
 public class PanelReportServiceImplTest {
 
     private PanelReportServiceImpl panelReportService;
+    private BulkServiceImpl bulkService;
+    private BulkResponse bulkResponse;
 
-    @BeforeMethod
-    public void setUp() {
-        panelReportService = new PanelReportServiceImpl(APP_KEY);
+    @BeforeClass
+    public void setUp() throws JustsendApiClientException {
+        panelReportService = new PanelReportServiceImpl(APP_KEY_ADMINISTRATOR);
+        bulkService = new BulkServiceImpl(APP_KEY_ADMINISTRATOR);
+
+        Bulk sendBulk = sendBulk();
+        bulkResponse = bulkService.sendBulk(sendBulk);
     }
 
-//    @Test
-//    public void testRetrieveBulksDuringSend() throws JustsendApiClientException {
-//        List<ReportResponse> reportResponses = panelReportService.retrieveBulksDuringSend(1, 10);
-//
-//    }
-//
-//    @Test
-//    public void testRetrieveBulksDuringSendPagin() {
-//        panelReportService.retrieveBulkListByDatePagin()
-//    }
-//
-//    @Test
-//    public void testRetrieveBulksDuringSendCount() throws JustsendApiClientException {
-//        Long retrieveBulksDuringSendCount = panelReportService.retrieveBulksDuringSendCount();
-//    }
-//
-//    @Test
-//    public void testRetrieveCountResponseMessages() {
-//        panelReportService.retrieveCountResponseMessages()
-//    }
-//
-//    @Test
-//    public void testRetrieveResponseMessages() {
-//        panelReportService.retrieveResponseMessages()
-//    }
-//
-//    @Test
-//    public void testRetrieveResponseMessagesPagin() {
-//    }
-//
-//    @Test
-//    public void testRetrieveBulkListByDatePagin() {
-//    }
-//
-//    @Test
-//    public void testRetrieveSingleBulksByStartDate() {
-//    }
+    @Test
+    public void testRetrieveBulksDuringSend() throws JustsendApiClientException {
+        List<ReportResponse> reportResponses = panelReportService.retrieveBulksDuringSend(0, 10);
+        assertThat(reportResponses).filteredOn("bulkId",bulkResponse.getId()).hasSize(1);
+    }
+
+
+    //TODO Działa raz dziala raz nie RMI problems :/
+    @Test
+    public void testRetrieveBulksDuringSendPagin() throws JustsendApiClientException {
+        List<ReportResponse> reportResponses = panelReportService.retrieveBulkListByDatePagin(daysBeforeNowLD(2), daysBeforeNowLD(0), 0, 10, null, OrderEnum.ASC, bulkResponse.getId(), bulkResponse.getName(), bulkResponse.getFrom());
+
+    }
+
+    @Test
+    public void testRetrieveBulksDuringSendCount() throws JustsendApiClientException {
+        Long retrieveBulksDuringSendCount = panelReportService.retrieveBulksDuringSendCount();
+        assertThat(retrieveBulksDuringSendCount).isPositive();
+    }
+
+    @Test
+    public void testRetrieveCountResponseMessages() throws JustsendApiClientException {
+        Long retrieveCountResponse = panelReportService.retrieveCountResponseMessages(1, daysBeforeNowLD(1), daysBeforeNowLD(0), 1L, "prefix", 1, 1);
+        assertThat(retrieveCountResponse).isEqualTo(0);
+    }
+
+    @Test
+    public void testRetrieveResponseMessages() throws JustsendApiClientException {
+        List<ResponseMessageDTO> responseMessageDTOS = panelReportService.retrieveResponseMessages(1, daysBeforeNowLD(1), daysBeforeNowLD(0), 1, 10);
+        assertThat(responseMessageDTOS).isEmpty();
+    }
+
+    @Test
+    public void testRetrieveResponseMessagesPagin() throws JustsendApiClientException {
+        List<ResponseMessageDTO> responseMessageDTOS = panelReportService.retrieveResponseMessagesPagin(
+                1, 10, 1, daysBeforeNowLD(1), daysBeforeNowLD(0),
+                null, OrderEnum.ASC, 1L, "prefix");
+        assertThat(responseMessageDTOS).isEmpty();
+    }
+
+    //TODO Działa raz dziala raz nie RMI problems :/
+    @Test
+    public void testRetrieveBulkListByDatePagin() throws JustsendApiClientException {
+        List<ReportResponse> reportResponses = panelReportService.retrieveBulkListByDatePagin(daysBeforeNowLD(1), daysBeforeNowLD(0), 1, 10, null, OrderEnum.ASC, bulkResponse.getId(), bulkResponse.getName(), bulkResponse.getFrom());
+        assertThat(reportResponses).isEmpty();
+    }
+
+    @Test
+    public void testRetrieveSingleBulksByStartDate() throws JustsendApiClientException {
+        List<SingleBulkReportDTO> singleBulkReportDTOS = panelReportService.retrieveSingleBulksByStartDate(daysBeforeNowLD(1), daysBeforeNowLD(0), 0, 10, null, OrderEnum.ASC, bulkResponse.getId(), bulkResponse.getFrom());
+        assertThat(singleBulkReportDTOS).isEmpty();
+    }
 }

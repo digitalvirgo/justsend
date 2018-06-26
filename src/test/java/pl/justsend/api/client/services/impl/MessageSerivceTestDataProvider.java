@@ -9,7 +9,7 @@ import pl.justsend.api.client.model.enums.BulkVariant;
  * Date: 30.03.18
  * Time: 13:26
  */
-public class MessageSerivceTestDataProvider extends BaseTest {
+public class MessageSerivceTestDataProvider {
 
     @DataProvider()
     protected static Object[][] sendMessageTestDataProvider() {

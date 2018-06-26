@@ -3,9 +3,7 @@ package pl.justsend.api.client.services.impl;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.log4j.Logger;
-import org.assertj.core.api.Assertions;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pl.justsend.api.client.model.SubAccount;
 import pl.justsend.api.client.model.SubAccountRaw;
@@ -18,8 +16,7 @@ import java.util.UUID;
 
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
-import static pl.justsend.api.client.services.impl.BaseTest.APP_KEY;
-import static pl.justsend.api.client.services.impl.BaseTest.APP_KEY_ADMINISTRATOR;
+import static pl.justsend.api.client.services.impl.TestHelper.APP_KEY_ADMINISTRATOR;
 
 public class PaymentServiceImplTest {
 
