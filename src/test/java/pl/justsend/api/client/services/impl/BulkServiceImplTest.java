@@ -10,8 +10,10 @@ import pl.justsend.api.client.services.GroupService;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
 
 import java.util.List;
+import java.util.Random;
 
 import static java.util.Arrays.asList;
+import static org.assertj.core.api.Assertions.assertThat;
 import static pl.justsend.api.client.model.enums.BulkStatus.CANCELED;
 import static pl.justsend.api.client.model.enums.BulkVariant.ECO;
 import static pl.justsend.api.client.services.impl.GroupServiceImplTest.getGroupID;
@@ -24,25 +26,37 @@ public class BulkServiceImplTest {
     private BulkService bulkService;
     private GroupService groupService;
 
-    public static Bulk sendBulk() {
+    public static Bulk createSendBulk() {
         Bulk bulk = new Bulk();
         setBaseBulk(bulk);
         bulk.setGroupId(2393L);
         return bulk;
     }
 
-    public static Bulk sendBulk(String name, String sender) {
-        Bulk bulk = sendBulk();
+    public static Bulk createSendBulk(String name, String sender) {
+        Bulk bulk = createSendBulk();
         bulk.setName(name);
         bulk.setFrom(sender);
         return bulk;
     }
 
-    private static void setBaseBulk(BaseBulk bulk) {
-        bulk.setName("Name12345");
+    public static Bulk createSendBulkToGroup(Long groupId) {
+        Bulk bulk = new Bulk();
+        bulk.setName("Name" + new Random().nextInt(10000));
         bulk.setMessage("Test message");
         bulk.setBulkVariant(ECO);
-        bulk.setFrom("BulkService");
+        bulk.setFrom("Bulk"+ new Random().nextInt(1000));
+        bulk.setLanguage(LanguageMessage.POLISH);
+        bulk.setSendDate("2018-06-20T16:54:67-00:00");
+        bulk.setGroupId(groupId);
+        return bulk;
+    }
+
+    private static void setBaseBulk(BaseBulk bulk) {
+        bulk.setName("Name" + new Random().nextInt(10000));
+        bulk.setMessage("Test message");
+        bulk.setBulkVariant(ECO);
+        bulk.setFrom("Bulk"+ new Random().nextInt(1000));
         bulk.setTo(asList("514746368"));
         bulk.setLanguage(LanguageMessage.POLISH);
         bulk.setSendDate("2018-06-20T16:54:67-00:00");
@@ -57,49 +71,64 @@ public class BulkServiceImplTest {
     @Test
     public void testBulkFlow() throws JustsendApiClientException {
         LOGGER.info("=========   send Bulk  ===========");
-        Bulk sendBulk = sendBulk();
+        Bulk sendBulk = createSendBulk();
         BulkResponse sendBulkResponse = bulkService.sendBulk(sendBulk);
-        Assertions.assertThat(sendBulkResponse.getName()).startsWith(sendBulk.getName());
+        assertThat(sendBulkResponse.getName()).startsWith(sendBulk.getName());
         LOGGER.info("bulkResponse = " + TestHelper.toString(sendBulkResponse));
 
 
         LOGGER.info("=========   cancel Bulk By Id ===========");
         BulkResponse cancelBulkResponse = bulkService.cancelBulkById(sendBulkResponse.getId());
-        Assertions.assertThat(cancelBulkResponse.getId()).isEqualTo(sendBulkResponse.getId());
-        Assertions.assertThat(cancelBulkResponse.getBulkStatus()).isEqualTo(CANCELED);
+        assertThat(cancelBulkResponse.getId()).isEqualTo(sendBulkResponse.getId());
+        assertThat(cancelBulkResponse.getBulkStatus()).isEqualTo(CANCELED);
         LOGGER.info("cancelBulkResponse = " + TestHelper.toString(cancelBulkResponse));
 
 
         LOGGER.info("=========   retrieve Bulk By Id ===========");
         BulkResponse retrieveBulkByIdResponse = bulkService.retrieveBulkById(sendBulkResponse.getId());
-        Assertions.assertThat(retrieveBulkByIdResponse.getId()).isEqualTo(sendBulkResponse.getId());
+        assertThat(retrieveBulkByIdResponse.getId()).isEqualTo(sendBulkResponse.getId());
         LOGGER.info("retrieveBulkByIdResponse = " + TestHelper.toString(retrieveBulkByIdResponse));
-
-
-        LOGGER.info("=========   retrieve aliases ===========");
-        List<SenderResponse> retrieveAliasesResponse = bulkService.retrieveAliases();
-        Assertions.assertThat(retrieveAliasesResponse).isNotNull();
-        Assertions.assertThat(retrieveAliasesResponse).isNotEmpty();
-        LOGGER.info("senderResponses = " + retrieveAliasesResponse);
-
 
         LOGGER.info("=========   retrieve bulk recipient by message status  ===========");
         List<String> bulkRecipientsByMessageStatus = bulkService.retrieveBulkRecipientsByMessageStatus(MessageStatus.NOT_SENT, sendBulkResponse.getId());
-        Assertions.assertThat(bulkRecipientsByMessageStatus.size()).isEqualTo(1);
-        Assertions.assertThat(bulkRecipientsByMessageStatus.get(0)).endsWith(sendBulk.getTo().get(0));
+        assertThat(bulkRecipientsByMessageStatus.size()).isEqualTo(1);
+        assertThat(bulkRecipientsByMessageStatus.get(0)).endsWith(sendBulk.getTo().get(0));
         LOGGER.info("bulkRecipientsByMessageStatus = " + bulkRecipientsByMessageStatus);
+    }
 
+    @Test
+    public void testSendBulkWithoutConfirmation() throws JustsendApiClientException {
         LOGGER.info("=========   send Bulk Without Confirmation  ===========");
+        Bulk sendBulk = createSendBulk();
         BulkResponse sendBulkWithoutConfirmationResponse = bulkService.sendBulkWithoutConfirmation(sendBulk);
-        Assertions.assertThat(sendBulkWithoutConfirmationResponse.getName()).startsWith(sendBulk.getName());
+        assertThat(sendBulkWithoutConfirmationResponse.getName()).startsWith(sendBulk.getName());
         LOGGER.info("sendBulkWithoutConfirmation = " + sendBulkWithoutConfirmationResponse);
+    }
 
-        LOGGER.info("=========   send Personalized Bulk  ===========");
+    @Test
+    public void testSendPersonalizedBulk() throws JustsendApiClientException {
         Long personalizedBulk = bulkService.sendPersonalizedBulk(
                 "testPersonalizedBulk", "damian", "2017-09-12T12:23:34+02:00", "ECO",
                 true, LanguageMessage.POLISH, new TestHelper().getFile("personalizedMessage.txt"));
-        Assertions.assertThat(personalizedBulk).isGreaterThan(0L);
+        assertThat(personalizedBulk).isGreaterThan(0L);
         LOGGER.info("personalizedBulk = " + personalizedBulk);
+    }
+
+    @Test
+    public void testSendPersonalizedBulkWithoutLanguage() throws JustsendApiClientException {
+        Long personalizedBulk = bulkService.sendPersonalizedBulk(
+                "testPersonalizedBulk", "damian", "2017-09-12T12:23:34+02:00", "ECO",
+                true, new TestHelper().getFile("personalizedMessage.txt"));
+        assertThat(personalizedBulk).isGreaterThan(0L);
+        LOGGER.info("personalizedBulk = " + personalizedBulk);
+    }
+
+    @Test
+    public void testRetrieveAliases() throws JustsendApiClientException {
+        List<SenderResponse> retrieveAliasesResponse = bulkService.retrieveAliases();
+        assertThat(retrieveAliasesResponse).isNotNull();
+        assertThat(retrieveAliasesResponse).isNotEmpty();
+        LOGGER.info("senderResponses = " + retrieveAliasesResponse);
     }
 
     @Test
@@ -112,7 +141,7 @@ public class BulkServiceImplTest {
         LOGGER.info("=========   send Bulk Group List ===========");
         BulkGroupList bulkGroupList = createBulkGroupListRequest(groupID);
         BulkResponse bulkGroupListResponse = bulkService.sendBulk(bulkGroupList);
-        Assertions.assertThat(bulkGroupListResponse).isNotNull();
+        assertThat(bulkGroupListResponse.getGroupIds()).containsExactly(groupID);
         LOGGER.info("bulkGroupListResponse = " + TestHelper.toString(bulkGroupListResponse));
     }
 

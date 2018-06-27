@@ -170,4 +170,27 @@ public class BulkServiceImpl extends BaseService implements BulkService {
             throw new JustsendApiClientException("connection failed: " + e.getMessage());
         }
     }
+
+    @Override
+    public Long sendPersonalizedBulk(
+            final String name,
+            final String from,
+            final String data,
+            final String bulkVariant,
+            final Boolean personalized,
+            final File inputData) throws JustsendApiClientException {
+
+        String url = createURL("/bulk/send/personalized/{appKey}/{name}/{from}/{data}/{bulkVariant}/{personalized}",
+                "name", name, "from", from, "data", data, "bulkVariant", bulkVariant,
+                "personalized", personalized.toString());
+
+        try {
+
+            JSResponse jsResponse = justsendHttpClient.doMultiPartPost(url, inputData);
+            return processResponse(jsResponse, Long.class);
+
+        } catch (IOException e) {
+            throw new JustsendApiClientException("connection failed: " + e.getMessage());
+        }
+    }
 }

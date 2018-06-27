@@ -29,7 +29,7 @@ public class AccountServiceImplTest {
     }
 
     @Test
-    public void accountFlowTest() throws JustsendApiClientException {
+    public void accountCreationAndDeactivationTest() throws JustsendApiClientException {
         LOGGER.info("============== create sub Account ============");
         List<SubAccount> subAccountListBeforeNewAccountCreation = accountService.retrieveSubAccountsList();
 
@@ -50,13 +50,23 @@ public class AccountServiceImplTest {
         List<SubAccount> subAccountListAfterDeactivation = accountService.retrieveSubAccountsList();
         // TODO: metoda nie deaktywuje konta, cos nie dziala w aplikacji
         //        assertThat(subAccountListAfterDeactivation).filteredOn("subid",subAccountList.get(index).getSubid()).isEqualTo(UserStatus.NOT_ACTIVE);
+    }
 
+    //TODO: not used, maybe disable it
+    @Test(enabled = false)
+    public void testEditSubAccount() throws JustsendApiClientException {
+        //get: JustsendApiClientException: INTERNAL_ERROR - Internal system error, no information in logs
+        //given
+        String email = UUID.randomUUID() + "@justsendapiclient.pl";
+        SubAccountRaw subAccountRaw = new SubAccountRaw(email, "12345678", "Test", "API", "", 100);
+        SubAccount subAccount = accountService.createSubAccount(subAccountRaw);
 
-        //TODO check why I get: JustsendApiClientException: INTERNAL_ERROR - Internal system error, no information in logs
-        LOGGER.info("============== edit sub account ============");
-        String newSurname = subAccount.getContactSurname() + "1234";
-        SubAccount subAccountAfterEdit = accountService.editSubAccount(subAccount.getSubid(), subAccount.getContactFirstname(), newSurname, subAccount.getPassword(), subAccount.getDescription());
-        Assert.assertNotEquals(newSurname, subAccountAfterEdit.getContactSurname());
+        String newFirstName = subAccount.getContactFirstname() + "1234";
+        //when
+        SubAccount subAccountAfterEdit = accountService.editSubAccount(subAccount.getSubid(), newFirstName, subAccount.getContactSurname(), subAccount.getPassword(), subAccount.getDescription());
+
+        //then
+        Assert.assertNotEquals(newFirstName, subAccountAfterEdit.getContactFirstname());
     }
 
     @Test

@@ -100,4 +100,25 @@ public interface BulkService {
             Boolean personalized,
             LanguageMessage language,
             File inputData) throws JustsendApiClientException;
+
+    /**
+     * Wysyła bulka spersonalizowanego z pliku
+     *
+     * @param name         Unikalna nazwa wysyłki
+     * @param from         Nadawca wiadomości
+     * @param data         Data wysyłki (yyyy-MM-ddTHH:mm:ss+02:00)
+     * @param bulkVariant  Wariant wysyłki (ECO - basic, FULL - unique, PRO - dynamic, VOICE - voice)
+     * @param personalized Czy spersonalizowana wysyłka
+     * @param inputData    inputData
+     * @return bulkId, 0 if input data is empty
+     * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
+     */
+
+    Long sendPersonalizedBulk(
+            String name,
+            String from,
+            String data,
+            String bulkVariant,
+            Boolean personalized,
+            File inputData) throws JustsendApiClientException;
 }

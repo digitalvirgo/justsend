@@ -15,6 +15,7 @@ public abstract class BaseService {
 
     protected static final Logger logger = Logger.getLogger(BaseService.class);
 
+    //TODO how to nicely resolve url change test/prod
     protected static final String JUSTSEND_API_URL = "http://justsend-api.dcos.staging.avantis.pl/api/rest";
 
     protected JustsendHttpClient justsendHttpClient;
@@ -28,6 +29,8 @@ public abstract class BaseService {
         this.appKey = appKey;
         justsendHttpClient = new JustsendHttpClient();
     }
+
+
 
     protected void validateResponse(JSResponse jsResponse) throws JustsendApiClientException {
 
