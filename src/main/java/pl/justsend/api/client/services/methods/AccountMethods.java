@@ -1,11 +1,5 @@
 package pl.justsend.api.client.services.methods;
 
-/**
-
- * User: posiadacz
- * Date: 28.03.18
- * Time: 15:38
- */
 public enum AccountMethods {
 
     RETRIEVE_ACCOUNT("/accounts/account/{appKey}"),

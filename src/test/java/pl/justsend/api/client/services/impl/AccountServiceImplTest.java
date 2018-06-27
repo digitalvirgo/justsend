@@ -18,11 +18,6 @@ import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 import static pl.justsend.api.client.services.impl.TestHelper.APP_KEY;
 
-/**
- * User: posiadacz
- * Date: 03.04.18
- * Time: 14:36
- */
 public class AccountServiceImplTest {
 
     private AccountService accountService;

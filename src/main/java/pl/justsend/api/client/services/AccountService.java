@@ -7,12 +7,6 @@ import pl.justsend.api.client.services.exception.JustsendApiClientException;
 
 import java.util.List;
 
-/**
-
- * User: posiadacz
- * Date: 21.03.18
- * Time: 15:43
- */
 public interface AccountService {
 
     /**
@@ -20,6 +14,7 @@ public interface AccountService {
      *
      * @param subAccountRaw zapytanie do tworzenia konta
      * @return informacje o utworzonym koncie
+     * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
      */
 
     SubAccount createSubAccount(SubAccountRaw subAccountRaw) throws JustsendApiClientException;
@@ -33,7 +28,7 @@ public interface AccountService {
      * @param password Password
      * @param description Description
      * @return informacje o koncie
-     * @throws JustsendApiClientException
+     * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
      */
 
     SubAccount editSubAccount(Long subUserID, String firstName, String surname, String password, String description) throws JustsendApiClientException;
@@ -42,6 +37,7 @@ public interface AccountService {
      * Deaktywacja konta
      *
      * @return text: Slave with id : {0} was deactivated/Master with id : {0} and his Slaves were deactivated
+     * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
      */
 
     String deactivateAccount(String userAppKey) throws JustsendApiClientException;
@@ -50,6 +46,7 @@ public interface AccountService {
      * Pobieranie użytkownika
      *
      * @return zwraca informacje o koncie
+     * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
      */
 
     Account retrieveAccount() throws JustsendApiClientException;
@@ -59,6 +56,7 @@ public interface AccountService {
      *
      * @param subId SubUser id
      * @return text: Slave appKey with id {0} has been reset
+     * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
      */
 
     String resetSubAccount(Long subId) throws JustsendApiClientException;
@@ -68,6 +66,7 @@ public interface AccountService {
      *
      * @param userAppKey Klucz api (SLAVE)
      * @return zwraca informacje o koncie
+     * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
      */
 
     SubAccount retrieveSubAccount(String userAppKey) throws JustsendApiClientException;
@@ -76,6 +75,7 @@ public interface AccountService {
      * Pobieranie listy podużytkowników
      *
      * @return zwraca informacje o listach użytkowników
+     * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
      */
 
 

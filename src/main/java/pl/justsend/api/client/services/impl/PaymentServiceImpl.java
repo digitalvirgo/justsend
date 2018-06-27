@@ -2,7 +2,6 @@ package pl.justsend.api.client.services.impl;
 
 import pl.justsend.api.client.model.JSResponse;
 import pl.justsend.api.client.model.UserPurseResponse;
-import pl.justsend.api.client.services.BaseService;
 import pl.justsend.api.client.services.PaymentService;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
 
@@ -13,7 +12,6 @@ import static java.lang.String.valueOf;
 public class PaymentServiceImpl extends BaseService implements PaymentService {
 
     /**
-     *
      * @param appKey Klucz api
      */
 
@@ -51,7 +49,7 @@ public class PaymentServiceImpl extends BaseService implements PaymentService {
 
     @Override
     public String setBalancePointsUser(final Integer subId, final Long points) throws JustsendApiClientException {
-        String url = createURL("/payment/subaccount/{appKey}/{subId}/{points}","subId", valueOf(subId), "points", valueOf(points));
+        String url = createURL("/payment/subaccount/{appKey}/{subId}/{points}", "subId", valueOf(subId), "points", valueOf(points));
 
         try {
 

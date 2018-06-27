@@ -2,10 +2,6 @@ package pl.justsend.api.client.services.impl;
 
 import com.google.gson.reflect.TypeToken;
 import pl.justsend.api.client.model.*;
-import pl.justsend.api.client.model.dto.GroupDTO;
-import pl.justsend.api.client.model.dto.PrefixDTO;
-import pl.justsend.api.client.model.dto.PrefixReservationDTO;
-import pl.justsend.api.client.services.BaseService;
 import pl.justsend.api.client.services.GroupService;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
 
@@ -18,7 +14,6 @@ import static java.lang.String.valueOf;
 public class GroupServiceImpl extends BaseService implements GroupService {
 
     /**
-     *
      * @param appKey Klucz api
      */
 
@@ -71,7 +66,7 @@ public class GroupServiceImpl extends BaseService implements GroupService {
 
     @Override
     public String removeGroup(final Long groupId) throws JustsendApiClientException {
-        String url = createURL("/group/remove/{appKey}/{groupId}","groupId", valueOf(groupId));
+        String url = createURL("/group/remove/{appKey}/{groupId}", "groupId", valueOf(groupId));
 
         try {
 
@@ -115,13 +110,14 @@ public class GroupServiceImpl extends BaseService implements GroupService {
     }
 
     @Override
-    public List<PrefixReservationDTO> getGroupPrefix() throws JustsendApiClientException {
+    public List<PrefixReservation> getGroupPrefix() throws JustsendApiClientException {
         String url = createURL("/group/getGroupPrefix/{appKey}");
 
         try {
 
             JSResponse jsResponse = justsendHttpClient.doGet(url);
-            return processResponse(jsResponse, new TypeToken<List<PrefixReservationDTO>>(){}.getType());
+            return processResponse(jsResponse, new TypeToken<List<PrefixReservation>>() {
+            }.getType());
 
         } catch (IOException e) {
             throw new JustsendApiClientException("connection failed: " + e.getMessage());
@@ -129,13 +125,13 @@ public class GroupServiceImpl extends BaseService implements GroupService {
     }
 
     @Override
-    public PrefixDTO reservationPrefix(final PrefixReservationDTO prefixReservationDTO) throws JustsendApiClientException {
+    public Prefix reservationPrefix(final PrefixReservation prefixReservation) throws JustsendApiClientException {
         String url = createURL("/group/reservationPrefix/{appKey}");
 
         try {
 
-            JSResponse jsResponse = justsendHttpClient.doPost(url,prefixReservationDTO);
-            return processResponse(jsResponse, PrefixDTO.class);
+            JSResponse jsResponse = justsendHttpClient.doPost(url, prefixReservation);
+            return processResponse(jsResponse, Prefix.class);
 
         } catch (IOException e) {
             throw new JustsendApiClientException("connection failed: " + e.getMessage());
@@ -143,13 +139,10 @@ public class GroupServiceImpl extends BaseService implements GroupService {
     }
 
     @Override
-    public String addMsisdnToGroup(
-            final Long groupId,
-            final File inputData) throws JustsendApiClientException {
-        String url = createURL("/group/addMsisdns/{appKey}/{groupId}","groupId", valueOf(groupId));
+    public String addNumbersToGroup(final Long groupId, final File inputData) throws JustsendApiClientException {
+        String url = createURL("/group/addMsisdns/{appKey}/{groupId}", "groupId", valueOf(groupId));
 
         try {
-            //TODO check the  MultipartFile serialization to json
             JSResponse jsResponse = justsendHttpClient.doMultiPartPost(url, inputData);
             return processResponse(jsResponse, String.class);
 

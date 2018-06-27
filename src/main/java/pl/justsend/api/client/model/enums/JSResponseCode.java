@@ -1,11 +1,5 @@
 package pl.justsend.api.client.model.enums;
 
-/**
-
- * User: posiadacz
- * Date: 27.03.18
- * Time: 14:46
- */
 public enum JSResponseCode {
 
     INVALID_VALUE("Invalid value of {0} parameter"),

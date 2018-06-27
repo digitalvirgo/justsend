@@ -5,12 +5,6 @@ import org.testng.annotations.DataProvider;
 import java.util.Arrays;
 import java.util.List;
 
-/**
-
- * User: posiadacz
- * Date: 30.03.18
- * Time: 13:29
- */
 public class BlackListServiceTestDataProvider {
 
     protected static final String ADD_MSISDN_RESPONSE_REGEX = "Added: [0-9]* numbers";

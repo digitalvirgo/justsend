@@ -2,8 +2,6 @@ package pl.justsend.api.client.services.impl;
 
 import com.google.gson.reflect.TypeToken;
 import pl.justsend.api.client.model.*;
-import pl.justsend.api.client.model.dto.PersonalizedBulkReportDTO;
-import pl.justsend.api.client.services.BaseService;
 import pl.justsend.api.client.services.BulkService;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
 
@@ -13,16 +11,9 @@ import java.util.List;
 
 import static java.lang.String.valueOf;
 
-/**
-
- * User: posiadacz
- * Date: 04.04.18
- * Time: 14:27
- */
 public class BulkServiceImpl extends BaseService implements BulkService {
 
     /**
-     *
      * @param appKey Klucz api
      */
 
@@ -130,24 +121,26 @@ public class BulkServiceImpl extends BaseService implements BulkService {
         try {
 
             JSResponse jsResponse = justsendHttpClient.doGet(url);
-            return processResponse(jsResponse, new TypeToken<List<SenderResponse>>(){}.getType());
+            return processResponse(jsResponse, new TypeToken<List<SenderResponse>>() {
+            }.getType());
 
         } catch (IOException e) {
             throw new JustsendApiClientException("connection failed: " + e.getMessage());
         }
     }
 
-    public List<PersonalizedBulkReportDTO> retrieveBulkRecipientsByPersonalizedMessageStatus(
+    public List<PersonalizedBulkReport> retrieveBulkRecipientsByPersonalizedMessageStatus(
             final MessageStatus messageStatus,
             final Long bulkId) throws JustsendApiClientException {
 
         String url = createURL("/bulk/recipient/personalized/{appKey}/{messageStatus}/{bulkId}"
-                ,"messageStatus",messageStatus.name(),"bulkId", valueOf(bulkId));
+                , "messageStatus", messageStatus.name(), "bulkId", valueOf(bulkId));
 
         try {
 
             JSResponse jsResponse = justsendHttpClient.doGet(url);
-            return processResponse(jsResponse, new TypeToken<List<SenderResponse>>(){}.getType());
+            return processResponse(jsResponse, new TypeToken<List<SenderResponse>>() {
+            }.getType());
 
         } catch (IOException e) {
             throw new JustsendApiClientException("connection failed: " + e.getMessage());
@@ -165,8 +158,8 @@ public class BulkServiceImpl extends BaseService implements BulkService {
             final File inputData) throws JustsendApiClientException {
 
         String url = createURL("/bulk/send/personalized/{appKey}/{name}/{from}/{data}/{bulkVariant}/{personalized}/{language}",
-                "name",name,"from", from, "data", data,"bulkVariant", bulkVariant,
-                "personalized", personalized.toString(),"language",language.name());
+                "name", name, "from", from, "data", data, "bulkVariant", bulkVariant,
+                "personalized", personalized.toString(), "language", language.name());
 
         try {
 

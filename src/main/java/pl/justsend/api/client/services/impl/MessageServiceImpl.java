@@ -3,8 +3,8 @@ package pl.justsend.api.client.services.impl;
 import pl.justsend.api.client.http.utils.JSONSerializer;
 import pl.justsend.api.client.model.JSResponse;
 import pl.justsend.api.client.model.Message;
+import pl.justsend.api.client.model.VoiceMessage;
 import pl.justsend.api.client.model.enums.BulkVariant;
-import pl.justsend.api.client.services.BaseService;
 import pl.justsend.api.client.services.MessageService;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
 import pl.justsend.api.client.services.methods.MessageMethods;
@@ -13,15 +13,10 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-/**
- * User: posiadacz
- * Date: 29.03.18
- * Time: 13:21
- */
+
 public class MessageServiceImpl extends BaseService implements MessageService {
 
     /**
-     *
      * @param appKey Klucz api
      */
 
@@ -66,7 +61,7 @@ public class MessageServiceImpl extends BaseService implements MessageService {
         } catch (IOException e) {
             throw new JustsendApiClientException("connection failed: " + e.getMessage());
         }
-        
+
     }
 
     @Override
@@ -83,6 +78,21 @@ public class MessageServiceImpl extends BaseService implements MessageService {
         try {
 
             JSResponse jsResponse = justsendHttpClient.doGet(url);
+            return processResponse(jsResponse, Long.class);
+
+        } catch (IOException e) {
+            throw new JustsendApiClientException("connection failed: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public Long sendVoiceMessage(VoiceMessage voiceMessage) throws JustsendApiClientException {
+
+        String url = createURL("/message/sendVoice/{appKey}");
+
+        try {
+
+            JSResponse jsResponse = justsendHttpClient.doPost(url, voiceMessage);
             return processResponse(jsResponse, Long.class);
 
         } catch (IOException e) {

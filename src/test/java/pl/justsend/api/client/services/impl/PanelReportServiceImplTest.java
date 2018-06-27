@@ -2,12 +2,8 @@ package pl.justsend.api.client.services.impl;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import pl.justsend.api.client.model.Bulk;
-import pl.justsend.api.client.model.BulkResponse;
-import pl.justsend.api.client.model.ReportResponse;
-import pl.justsend.api.client.model.dto.ResponseMessageDTO;
-import pl.justsend.api.client.model.dto.SingleBulkReportDTO;
-import pl.justsend.api.client.services.OrderEnum;
+import pl.justsend.api.client.model.*;
+import pl.justsend.api.client.model.enums.OrderEnum;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
 
 import java.util.List;
@@ -35,14 +31,16 @@ public class PanelReportServiceImplTest {
     @Test
     public void testRetrieveBulksDuringSend() throws JustsendApiClientException {
         List<ReportResponse> reportResponses = panelReportService.retrieveBulksDuringSend(0, 10);
-        assertThat(reportResponses).filteredOn("bulkId",bulkResponse.getId()).hasSize(1);
+        assertThat(reportResponses).filteredOn("bulkId", bulkResponse.getId()).hasSize(1);
     }
 
 
     //TODO Działa raz dziala raz nie RMI problems :/
+    //java.lang.ClassNotFoundException: org.springframework.dao.InvalidDataAccessApiUsageException (no security manager: RMI cla
+    //ss loader disabled)
     @Test
     public void testRetrieveBulksDuringSendPagin() throws JustsendApiClientException {
-        List<ReportResponse> reportResponses = panelReportService.retrieveBulkListByDatePagin(daysBeforeNowLD(2), daysBeforeNowLD(0), 0, 10, null, OrderEnum.ASC, bulkResponse.getId(), bulkResponse.getName(), bulkResponse.getFrom());
+        List<ReportResponse> reportResponses = panelReportService.retrieveBulksDuringSendPagin(0, 100, null, OrderEnum.ASC);
 
     }
 
@@ -60,19 +58,21 @@ public class PanelReportServiceImplTest {
 
     @Test
     public void testRetrieveResponseMessages() throws JustsendApiClientException {
-        List<ResponseMessageDTO> responseMessageDTOS = panelReportService.retrieveResponseMessages(1, daysBeforeNowLD(1), daysBeforeNowLD(0), 1, 10);
-        assertThat(responseMessageDTOS).isEmpty();
+        List<PanelReportResponseMessage> panelReportResponseMessages = panelReportService.retrieveResponseMessages(1, daysBeforeNowLD(1), daysBeforeNowLD(0), 1, 10);
+        assertThat(panelReportResponseMessages).isEmpty();
     }
 
     @Test
     public void testRetrieveResponseMessagesPagin() throws JustsendApiClientException {
-        List<ResponseMessageDTO> responseMessageDTOS = panelReportService.retrieveResponseMessagesPagin(
+        List<PanelReportResponseMessage> panelReportResponseMessages = panelReportService.retrieveResponseMessagesPagin(
                 1, 10, 1, daysBeforeNowLD(1), daysBeforeNowLD(0),
                 null, OrderEnum.ASC, 1L, "prefix");
-        assertThat(responseMessageDTOS).isEmpty();
+        assertThat(panelReportResponseMessages).isEmpty();
     }
 
     //TODO Działa raz dziala raz nie RMI problems :/
+    //java.lang.ClassNotFoundException: org.springframework.dao.InvalidDataAccessApiUsageException (no security manager: RMI cla
+    //ss loader disabled)
     @Test
     public void testRetrieveBulkListByDatePagin() throws JustsendApiClientException {
         List<ReportResponse> reportResponses = panelReportService.retrieveBulkListByDatePagin(daysBeforeNowLD(1), daysBeforeNowLD(0), 1, 10, null, OrderEnum.ASC, bulkResponse.getId(), bulkResponse.getName(), bulkResponse.getFrom());
@@ -81,7 +81,7 @@ public class PanelReportServiceImplTest {
 
     @Test
     public void testRetrieveSingleBulksByStartDate() throws JustsendApiClientException {
-        List<SingleBulkReportDTO> singleBulkReportDTOS = panelReportService.retrieveSingleBulksByStartDate(daysBeforeNowLD(1), daysBeforeNowLD(0), 0, 10, null, OrderEnum.ASC, bulkResponse.getId(), bulkResponse.getFrom());
-        assertThat(singleBulkReportDTOS).isEmpty();
+        List<SingleBulkReport> singleBulkReports = panelReportService.retrieveSingleBulksByStartDate(daysBeforeNowLD(1), daysBeforeNowLD(0), 0, 10, null, OrderEnum.ASC, bulkResponse.getId(), bulkResponse.getFrom());
+        assertThat(singleBulkReports).isEmpty();
     }
 }
