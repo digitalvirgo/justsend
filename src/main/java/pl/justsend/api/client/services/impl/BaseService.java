@@ -3,21 +3,27 @@ package pl.justsend.api.client.services.impl;
 import org.apache.log4j.Logger;
 import pl.justsend.api.client.http.JustsendHttpClient;
 import pl.justsend.api.client.http.utils.JSONSerializer;
+import pl.justsend.api.client.model.Bulk;
 import pl.justsend.api.client.model.JSResponse;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.util.Properties;
 
 import static java.lang.String.format;
+import static java.util.Objects.nonNull;
 
 
 public abstract class BaseService {
 
-    protected static final Logger logger = Logger.getLogger(BaseService.class);
+    protected static final Logger LOGGER = Logger.getLogger(BaseService.class);
 
-    //TODO how to nicely resolve url change test/prod
-    protected static final String JUSTSEND_API_URL = "http://justsend-api.dcos.staging.avantis.pl/api/rest";
+    protected Properties properties;
+    protected String JUSTSEND_API_URL;
 
+    //TODO add production URL
     protected JustsendHttpClient justsendHttpClient;
     protected String appKey;
 
@@ -28,14 +34,32 @@ public abstract class BaseService {
     public BaseService(String appKey) {
         this.appKey = appKey;
         justsendHttpClient = new JustsendHttpClient();
+        initProperties();
     }
 
+    public void initProperties() {
 
+        if (nonNull(properties) && !properties.isEmpty()) {
+            return;
+        }
+        InputStream inputStream = BaseService.class.getClassLoader().getResourceAsStream("config/config.properties");
+
+        properties = new Properties();
+        try {
+            properties.load(inputStream);
+            LOGGER.debug("Initialized properties.");
+            LOGGER.debug(properties.toString());
+            JUSTSEND_API_URL = properties.getProperty("justsend.api.url");
+        } catch (IOException e) {
+            new IllegalStateException("Problem with initializing properties.");
+        }
+
+    }
 
     protected void validateResponse(JSResponse jsResponse) throws JustsendApiClientException {
 
         if (jsResponse.getErrorId() != 0) {
-            logger.error("Wrong request: " + jsResponse);
+            LOGGER.error("Wrong request: " + jsResponse);
             throw new JustsendApiClientException(jsResponse.getResponseCode() + " - " + jsResponse.getMessage(), jsResponse);
         }
 
@@ -65,7 +89,7 @@ public abstract class BaseService {
             }
 
             for (int i = 0; i < pathVar.length; i += 2) {
-                logger.debug("pathVar:" + i / 2 + ": " + pathVar[i] + " = " + pathVar[i + 1]);
+                LOGGER.debug("pathVar:" + i / 2 + ": " + pathVar[i] + " = " + pathVar[i + 1]);
                 if (!url.contains(pathVar[i])) {
                     throw new JustsendApiClientException("Parameter don't exist in path.");
                 }
@@ -85,12 +109,18 @@ public abstract class BaseService {
 
         StringBuilder parameters = new StringBuilder("?");
         for (int i = 0; i < param.length; i += 2) {
-            logger.debug(format("param: %s : %s = %s ", i / 2, param[i], param[i + 1]));
+            LOGGER.debug(format("param: %s : %s = %s ", i / 2, param[i], param[i + 1]));
             parameters.append(param[i]).append("=").append(param[i + 1]);
             if (i != (param.length - 2)) {
                 parameters.append("&");
             }
         }
         return url.concat(parameters.toString());
+    }
+
+    public static void main(String[] args) throws JustsendApiClientException {
+        BulkServiceImpl bulkService = new BulkServiceImpl("JDJhJDEyJDN2c1NWQ2o1ZHh1U3M1WHpmYXpFN3VhRGZQSUlub3hwT3hIRzU1bkJ4MWpjbVZPaFAxcEdP");
+        Bulk o = new Bulk();
+        bulkService.sendBulk(o);
     }
 }

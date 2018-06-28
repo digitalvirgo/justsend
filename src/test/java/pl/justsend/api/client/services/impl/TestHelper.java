@@ -12,15 +12,9 @@ public class TestHelper {
 
     public static final String APP_KEY = "JDJhJDEyJDN2c1NWQ2o1ZHh1U3M1WHpmYXpFN3VhRGZQSUlub3hwT3hIRzU1bkJ4MWpjbVZPaFAxcEdP";
     public static final String APP_KEY_ADMINISTRATOR = "123456";
-    private final static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public static ReflectionToStringBuilder toString(Object object) {
         return new ReflectionToStringBuilder(object, ToStringStyle.SHORT_PREFIX_STYLE);
-    }
-
-    public static String daysBeforeNow(int minusDays) {
-        LocalDate localDate = LocalDate.now().minusDays(minusDays);
-        return dtf.format(localDate);
     }
 
     public static LocalDate daysBeforeNowLD(int minusDays) {
