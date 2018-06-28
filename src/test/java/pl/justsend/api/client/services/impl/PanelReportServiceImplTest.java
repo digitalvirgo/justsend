@@ -3,13 +3,17 @@ package pl.justsend.api.client.services.impl;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pl.justsend.api.client.model.*;
+import pl.justsend.api.client.model.enums.BulkVariant;
 import pl.justsend.api.client.model.enums.OrderEnum;
+import pl.justsend.api.client.services.MessageService;
 import pl.justsend.api.client.services.exception.JustsendApiClientException;
 
 import java.util.List;
+import java.util.Random;
 
+import static java.lang.Thread.sleep;
 import static org.assertj.core.api.Assertions.assertThat;
-import static pl.justsend.api.client.services.impl.BulkServiceImplTest.sendBulk;
+import static pl.justsend.api.client.services.impl.TestHelper.APP_KEY;
 import static pl.justsend.api.client.services.impl.TestHelper.APP_KEY_ADMINISTRATOR;
 import static pl.justsend.api.client.services.impl.TestHelper.daysBeforeNowLD;
 
@@ -18,13 +22,15 @@ public class PanelReportServiceImplTest {
     private PanelReportServiceImpl panelReportService;
     private BulkServiceImpl bulkService;
     private BulkResponse bulkResponse;
+    private MessageService messageService;
 
     @BeforeClass
     public void setUp() throws JustsendApiClientException {
         panelReportService = new PanelReportServiceImpl(APP_KEY_ADMINISTRATOR);
         bulkService = new BulkServiceImpl(APP_KEY_ADMINISTRATOR);
+        messageService = new MessageServiceImpl(APP_KEY);
 
-        Bulk sendBulk = sendBulk();
+        Bulk sendBulk = BulkServiceImplTest.createSendBulk();
         bulkResponse = bulkService.sendBulk(sendBulk);
     }
 
@@ -52,18 +58,21 @@ public class PanelReportServiceImplTest {
 
     @Test
     public void testRetrieveCountResponseMessages() throws JustsendApiClientException {
+        //TODO create more meaningful test, when will be able to send response messages
         Long retrieveCountResponse = panelReportService.retrieveCountResponseMessages(1, daysBeforeNowLD(1), daysBeforeNowLD(0), 1L, "prefix", 1, 1);
         assertThat(retrieveCountResponse).isEqualTo(0);
     }
 
     @Test
     public void testRetrieveResponseMessages() throws JustsendApiClientException {
+        //TODO create more meaningful test, when will be able to send response messages
         List<PanelReportResponseMessage> panelReportResponseMessages = panelReportService.retrieveResponseMessages(1, daysBeforeNowLD(1), daysBeforeNowLD(0), 1, 10);
         assertThat(panelReportResponseMessages).isEmpty();
     }
 
     @Test
     public void testRetrieveResponseMessagesPagin() throws JustsendApiClientException {
+        //TODO create more meaningful test, when will be able to send response messages
         List<PanelReportResponseMessage> panelReportResponseMessages = panelReportService.retrieveResponseMessagesPagin(
                 1, 10, 1, daysBeforeNowLD(1), daysBeforeNowLD(0),
                 null, OrderEnum.ASC, 1L, "prefix");
@@ -80,8 +89,17 @@ public class PanelReportServiceImplTest {
     }
 
     @Test
-    public void testRetrieveSingleBulksByStartDate() throws JustsendApiClientException {
-        List<SingleBulkReport> singleBulkReports = panelReportService.retrieveSingleBulksByStartDate(daysBeforeNowLD(1), daysBeforeNowLD(0), 0, 10, null, OrderEnum.ASC, bulkResponse.getId(), bulkResponse.getFrom());
-        assertThat(singleBulkReports).isEmpty();
+    public void testRetrieveSingleBulksByStartDate() throws JustsendApiClientException, InterruptedException {
+        //given
+        //TODO why dose not retrieve any message
+        String sender = "sender" + new Random().nextInt(100000);
+        Long singleBulkId = messageService.sendMessage("48505948311", sender, "Justsend lib api test", BulkVariant.ECO);
+
+        sleep(30000);
+        //when
+        List<SingleBulkReport> singleBulkReports = panelReportService.retrieveSingleBulksByStartDate(daysBeforeNowLD(1), daysBeforeNowLD(-1), 0, 10, null, OrderEnum.ASC, singleBulkId, sender);
+
+        //then
+        assertThat(singleBulkReports).hasSize(1);
     }
 }

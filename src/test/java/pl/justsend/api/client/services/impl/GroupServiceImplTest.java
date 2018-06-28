@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 import static java.lang.Long.valueOf;
+import static java.lang.Thread.sleep;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static pl.justsend.api.client.model.enums.PrefixAccessType.GLOBAL;
@@ -69,12 +70,19 @@ public class GroupServiceImplTest {
     }
 
     @Test
-    public void testRemoveGroup() throws JustsendApiClientException {
+    public void testRemoveGroup() throws Exception {
         //when
         String removeGroup = groupService.removeGroup(groupID);
 
         //then
         assertThat(removeGroup).startsWith("Removed group id:");
+        try {
+            groupService.retrieveGroup(groupID);
+        } catch (JustsendApiClientException e) {
+            if (!e.getMessage().equals("NOT_FOUND - Not found")) {
+                throw new Exception("Check why retrive method did not return NOT_FOUND - Not found.");
+            }
+        }
     }
 
     @Test
@@ -87,6 +95,8 @@ public class GroupServiceImplTest {
 
         //then
         assertThat(addNumberToGroup).isEqualTo("Added: 1 numbers");
+        Group group = groupService.retrieveGroup(groupID);
+        assertThat(group.getMembers()).containsExactlyInAnyOrder("Number1", "Number2","514746372");
     }
 
     @Test
@@ -99,13 +109,21 @@ public class GroupServiceImplTest {
 
         //then
         assertThat(removeNumbersFromGroup).isEqualTo("Removed: 2 numbers");
+        Group group = groupService.retrieveGroup(groupID);
+        assertThat(group.getMembers()).isEmpty();
     }
 
     @Test
-    public void testAddMsisdnToGroup() throws JustsendApiClientException {
+    public void testAddMsisdnToGroup() throws JustsendApiClientException, InterruptedException {
         //TODO: why it adds two times same number
+        //when
         String groupResponses = groupService.addNumbersToGroup(groupID, new TestHelper().getFile("groupMisin.txt"));
+
+        //then
         Assertions.assertThat(groupResponses).isEqualTo("Successful");
+//        sleep(15000);
+//        Group group = groupService.retrieveGroup(groupID);
+//        assertThat(group.getMembers()).containsExactlyInAnyOrder("Number1", "Number2","514132134");
     }
 
     @Test
@@ -117,6 +135,8 @@ public class GroupServiceImplTest {
         GroupDTO updateGroupRequest = updateGroup(groupID, number);
         GroupDTO updateGroupResponse = groupService.updateGroup(updateGroupRequest);
 
+
+        //TODO The request sent by the client was syntactically incorrect. od dzisiaj
         //then
         Assertions.assertThat(updateGroupResponse.getMembers().get(2).getNumber()).isEqualTo(number);
     }
@@ -131,8 +151,9 @@ public class GroupServiceImplTest {
         Assertions.assertThat(groupResponses).isNotEmpty();
     }
 
-    @Test
+    @Test(enabled = false)
     public void reservationPrefixTest() throws JustsendApiClientException {
+        //test dosen't works, because prefix is reserved for 72h
         //given
         String prefixName = "prefixTest";
         Prefix prefixCreationResponse = prefixService.createPrefix(createPrefixRequest(prefixName));
@@ -161,7 +182,7 @@ public class GroupServiceImplTest {
 
     private Prefix createPrefixRequest(String prefixName) {
         Prefix prefix = new Prefix();
-        prefix.setPrefixType(PrefixType.GROUP_COMMAND);
+        prefix.setPrefixType(PrefixType.VERIFY_COMMAND);
         prefix.setName(prefixName);
         prefix.setPrefixAccessType(GLOBAL);
         return prefix;
