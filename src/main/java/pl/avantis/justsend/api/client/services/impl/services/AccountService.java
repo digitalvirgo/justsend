@@ -35,6 +35,7 @@ public interface AccountService {
 
     /**
      * Deaktywacja konta
+     * @param userAppKey user appkey
      *
      * @return text: Slave with id : {0} was deactivated/Master with id : {0} and his Slaves were deactivated
      * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie

@@ -28,15 +28,18 @@ import static java.lang.Thread.sleep;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.builder.ToStringStyle.SIMPLE_STYLE;
 import static org.assertj.core.api.Assertions.assertThat;
-import static pl.avantis.justsend.api.client.services.impl.TestHelper.APP_KEY_ADMINISTRATOR;
-import static pl.avantis.justsend.api.client.services.impl.enums.BulkVariant.TEST;
-import static pl.avantis.justsend.api.client.test.helpers.BulkBuilder.bulkWithDefaultFieldsSet;
 import static pl.avantis.justsend.api.client.services.impl.TestHelper.APP_KEY;
 import static pl.avantis.justsend.api.client.services.impl.TestHelper.GROUP_ID;
+import static pl.avantis.justsend.api.client.services.impl.TestHelper.checkIfProdUrl;
 import static pl.avantis.justsend.api.client.services.impl.TestHelper.daysBeforeNowLD;
 import static pl.avantis.justsend.api.client.services.impl.TestHelper.getFileNamePart;
+import static pl.avantis.justsend.api.client.services.impl.enums.BulkVariant.TEST;
 import static pl.avantis.justsend.api.client.services.impl.enums.FileNamePartEnum.FILE_ID;
 import static pl.avantis.justsend.api.client.services.impl.enums.FileReportStatuses.GENERATING;
+import static pl.avantis.justsend.api.client.test.helpers.BulkBuilder.bulkWithDefaultFieldsSet;
+import static pl.avantis.justsend.api.client.test.helpers.Commands.GET_RESPONSE;
+import static pl.avantis.justsend.api.client.test.helpers.Commands.GET_USER_DELIVERY_ACK;
+import static pl.avantis.justsend.api.client.test.helpers.DataGenerator.getRandomPhoneNumber;
 
 public class ReportServiceImplTest {
 
@@ -59,6 +62,7 @@ public class ReportServiceImplTest {
     @BeforeClass
     public void setUp() throws JustsendApiClientException {
         reportService = new ReportServiceImpl(APP_KEY);
+        checkIfProdUrl(reportService);
         bulkService = new BulkServiceImpl(APP_KEY);
         accountService = new AccountServiceImpl(APP_KEY);
         messageService = new MessageServiceImpl(APP_KEY);
@@ -104,12 +108,14 @@ public class ReportServiceImplTest {
 
     @Test
     public void testRetrieveBulkReportByBulkId() throws JustsendApiClientException {
-
+        //when
         ReportResponse retrieveBulkReportByBulkIdResponse = reportService.retrieveBulkReportByBulkId(bulkResponse.getId());
 
+        //then
         assertThat(retrieveBulkReportByBulkIdResponse.getBulkName()).isSubstringOf(bulkResponse.getName());
         LOGGER.info("retrieveBulkReportByBulkIdResponse = " + retrieveBulkReportByBulkIdResponse);
     }
+
 
     @Test
     public void testRetrieveReportSubAccount() throws JustsendApiClientException {
@@ -130,18 +136,24 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void testRetrieveResponseMessages() throws JustsendApiClientException {
+    public void testRetrieveResponseMessages() throws JustsendApiClientException, InterruptedException {
         //given
         List<Prefix> prefixes = prefixService.retrieveAllPrefixesPagin("GLOBAL", 0, 10);
         String prefix = prefixes.get(0).getName();
-        Bulk sendBulk = bulkWithDefaultFieldsSet().withTo(asList(dataFactory.getNumberText(6))).withBulkVariant(TEST).withMessage(format("    %s   Damian",prefix)).build();
+        String toNumber = "48514875" + dataFactory.getNumberText(3);
+        Bulk sendBulk = bulkWithDefaultFieldsSet()
+                .withTo(asList(getRandomPhoneNumber()))
+                .withBulkVariant(TEST)
+                .withMessage(format(" %s   %s:%s   Damian", GET_USER_DELIVERY_ACK, GET_RESPONSE, prefix))
+                .build();
         BulkResponse bulkResponse = bulkService.sendBulk(sendBulk);
 
+        sleep(20000);
         //when
         List<ReportResponseMessage> retrieveResponseMessagesReportResponse = reportService.retrieveResponseMessages(prefix, daysBeforeNowLD(1), daysBeforeNowLD(-1));
 
         //then
-        assertThat(retrieveResponseMessagesReportResponse).filteredOn("number", bulkResponse.getTo().get(0)).hasSize(1);
+        assertThat(retrieveResponseMessagesReportResponse).filteredOn("msisdn", toNumber).size().isGreaterThanOrEqualTo(1);
         LOGGER.info("retrieveResponseMessages = " + retrieveResponseMessagesReportResponse);
     }
 

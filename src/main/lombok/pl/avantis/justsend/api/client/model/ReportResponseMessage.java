@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
 public class ReportResponseMessage extends BaseModel {
 
     private String prefix;
-    private String number;
+    private String msisdn;
     private String message;
     private String createDate;
 }

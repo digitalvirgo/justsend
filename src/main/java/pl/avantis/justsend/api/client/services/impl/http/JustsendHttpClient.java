@@ -45,6 +45,22 @@ public class JustsendHttpClient {
         this.appKey = appKey;
     }
 
+    public JSResponse doGet(String url, String headerAppKey) throws IOException, JustsendApiClientException {
+
+        HttpClient client = HttpClientBuilder.create().build();
+
+        HttpGet request = new HttpGet(url);
+        request.addHeader(APP_KEY_HEADER_NAME, headerAppKey);
+        request.addHeader("User-Agent", USER_AGENT);
+        request.addHeader("Content-Type", CONTENT_TYPE);
+
+        logger.info("Sending GET request to JUSTSEND_API_URL:\n " + url);
+        HttpResponse response = client.execute(request);
+
+        return processResponse(response);
+
+    }
+
     public JSResponse doGet(String url) throws IOException, JustsendApiClientException {
 
         HttpClient client = HttpClientBuilder.create().build();
@@ -102,7 +118,7 @@ public class JustsendHttpClient {
 
             FileBody fileBody = new FileBody(file);
             builder.addPart("inputData", fileBody);
-            if (!isBlank(text)){
+            if (!isBlank(text)) {
                 builder.addTextBody("group", text);
             }
 

@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pl.avantis.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
 
+import static pl.avantis.justsend.api.client.services.impl.TestHelper.checkIfProdUrl;
 import static pl.avantis.justsend.api.client.services.impl.enums.AddressPostBackType.SHIPMENTS_STATUS;
 
 public class PostBackServiceImplTest {
@@ -17,6 +18,7 @@ public class PostBackServiceImplTest {
     @BeforeClass
     public void setUp() {
         postBackService = new PostBackServiceImpl(TestHelper.APP_KEY);
+        checkIfProdUrl(postBackService);
     }
 
     @Test

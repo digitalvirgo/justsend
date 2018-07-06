@@ -3,9 +3,9 @@ package pl.avantis.justsend.api.client.services.impl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
+import org.fluttercode.datafactory.impl.DataFactory;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import pl.avantis.justsend.api.client.model.BaseBulk;
 import pl.avantis.justsend.api.client.model.Bulk;
 import pl.avantis.justsend.api.client.model.BulkGroupList;
 import pl.avantis.justsend.api.client.model.BulkResponse;
@@ -13,36 +13,38 @@ import pl.avantis.justsend.api.client.model.GroupCreate;
 import pl.avantis.justsend.api.client.model.LanguageMessage;
 import pl.avantis.justsend.api.client.model.MessageStatus;
 import pl.avantis.justsend.api.client.model.SenderResponse;
-import pl.avantis.justsend.api.client.services.impl.enums.BulkVariant;
-import pl.avantis.justsend.api.client.services.impl.services.BulkService;
 import pl.avantis.justsend.api.client.services.impl.services.GroupService;
 import pl.avantis.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
+import pl.avantis.justsend.api.client.test.helpers.Commands;
 
 import java.util.List;
-import java.util.Random;
 
+import static java.lang.Thread.sleep;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static pl.avantis.justsend.api.client.services.impl.enums.BulkVariant.TEST;
-import static pl.avantis.justsend.api.client.test.helpers.BulkBuilder.bulkWithDefaultFieldsSet;
 import static pl.avantis.justsend.api.client.services.impl.TestHelper.APP_KEY;
 import static pl.avantis.justsend.api.client.services.impl.TestHelper.GROUP_ID;
+import static pl.avantis.justsend.api.client.services.impl.TestHelper.checkIfProdUrl;
 import static pl.avantis.justsend.api.client.services.impl.enums.BulkStatus.CANCELED;
-import static pl.avantis.justsend.api.client.services.impl.enums.BulkVariant.ECO;
+import static pl.avantis.justsend.api.client.services.impl.enums.BulkVariant.TEST;
+import static pl.avantis.justsend.api.client.test.helpers.BulkBuilder.bulkWithDefaultFieldsSet;
 import static pl.avantis.justsend.api.client.test.helpers.BulkGroupListBuilder.bulkGroupListWithDefaultListSet;
 
 public class BulkServiceImplTest {
 
     private static Logger LOGGER = Logger.getLogger(BulkServiceImplTest.class);
 
-    private BulkService bulkService;
+    private BulkServiceImpl bulkService;
     private GroupService groupService;
 
     private ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
+    private DataFactory dataFactory = new DataFactory();
+
     @BeforeClass
     public void setUp() {
         bulkService = new BulkServiceImpl(APP_KEY);
+        checkIfProdUrl(bulkService);
         groupService = new GroupServiceImpl(APP_KEY);
     }
 
@@ -72,6 +74,23 @@ public class BulkServiceImplTest {
         assertThat(bulkRecipientsByMessageStatus.size()).isEqualTo(1);
         assertThat(bulkRecipientsByMessageStatus.get(0)).endsWith(sendBulk.getTo().get(0));
         LOGGER.info("bulkRecipientsByMessageStatus = " + bulkRecipientsByMessageStatus);
+    }
+
+    @Test
+    public void when_SendBulkWithTestGET_USER_ACK_then_bulkRecipientWillHaveStateDELIVERED() throws JustsendApiClientException, InterruptedException {
+        //given
+        Bulk sendBulk = bulkWithDefaultFieldsSet()
+                .withTo(asList("514875" + dataFactory.getNumberText(3)))
+                .withBulkVariant(TEST)
+                .withMessage(Commands.GET_USER_DELIVERY_ACK + " Damian").build();
+        BulkResponse bulkResponse = bulkService.sendBulk(sendBulk);
+
+        sleep(30000); // time needed to proceed message
+        //when
+        List<String> bulkRecipients = bulkService.retrieveBulkRecipientsByMessageStatus(MessageStatus.DELIVERED, bulkResponse.getId());
+
+        //then
+        assertThat(bulkRecipients).contains("48" + sendBulk.getTo().get(0));
     }
 
     @Test

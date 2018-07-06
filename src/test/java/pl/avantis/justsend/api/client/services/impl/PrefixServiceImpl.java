@@ -1,5 +1,6 @@
 package pl.avantis.justsend.api.client.services.impl;
 
+import com.google.gson.reflect.TypeToken;
 import pl.avantis.justsend.api.client.model.JSResponse;
 import pl.avantis.justsend.api.client.model.Prefix;
 import pl.avantis.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
@@ -33,11 +34,10 @@ class PrefixServiceImpl extends BaseService {
 
         try {
             JSResponse jsResponse = justsendHttpClient.doGet(url);
-            return processResponse(jsResponse, Prefix.class);
+            return processResponse(jsResponse, new TypeToken<List<Prefix>>(){}.getType());
 
         } catch (IOException e) {
             throw new JustsendApiClientException("connection failed: " + e.getMessage());
         }
     }
-
 }

@@ -83,11 +83,10 @@ public class PanelReportServiceImpl extends BaseService implements PanelReportSe
             final LocalDate from,
             final LocalDate to,
             final Long id,
-            final String prefix,
-            final Integer startRow,
-            final Integer countRow) throws JustsendApiClientException {
+            final String prefix
+            ) throws JustsendApiClientException {
         String url = createURL("/v2/wwwReport/retrieveCountResponseMessages");
-        url = addParameters(url, "prefixId", valueOf(prefixId), "from", convertDate(from), "to", convertDate(to), "id", valueOf(id), "prefix", prefix, "startRow", valueOf(startRow), "countRow", valueOf(countRow));
+        url = addParameters(url, "prefixId", valueOf(prefixId), "from", convertDate(from), "to", convertDate(to), "id", valueOf(id), "prefix", prefix);
 
         try {
 

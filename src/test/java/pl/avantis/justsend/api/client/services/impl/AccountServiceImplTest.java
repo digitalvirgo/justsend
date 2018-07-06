@@ -8,24 +8,33 @@ import org.testng.annotations.Test;
 import pl.avantis.justsend.api.client.model.Account;
 import pl.avantis.justsend.api.client.model.SubAccount;
 import pl.avantis.justsend.api.client.model.SubAccountRaw;
-import pl.avantis.justsend.api.client.services.impl.services.AccountService;
+import pl.avantis.justsend.api.client.services.impl.enums.UserStatus;
 import pl.avantis.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.LogManager;
 
 import static java.lang.String.format;
+import static java.lang.Thread.sleep;
 import static org.assertj.core.api.Assertions.assertThat;
 import static pl.avantis.justsend.api.client.services.impl.TestHelper.APP_KEY;
+import static pl.avantis.justsend.api.client.services.impl.TestHelper.checkIfProdUrl;
+import static pl.avantis.justsend.api.client.test.helpers.DataGenerator.getRandomEmail;
 
 public class AccountServiceImplTest {
 
-    private AccountService accountService;
+    private AccountServiceImpl accountService;
     private Logger LOGGER = Logger.getLogger(AccountServiceImplTest.class);
 
-    @BeforeClass
-    public void init() {
+    @BeforeClass(alwaysRun = true)
+    protected void setUp() throws SecurityException, IOException {
         accountService = new AccountServiceImpl(APP_KEY);
+        checkIfProdUrl(accountService);
+        FileInputStream fis = new FileInputStream(AccountServiceImplTest.class.getResource("/log4j.xml").getFile());
+        LogManager.getLogManager().readConfiguration(fis);
     }
 
     @Test
@@ -33,31 +42,34 @@ public class AccountServiceImplTest {
         LOGGER.info("============== create sub Account ============");
         List<SubAccount> subAccountListBeforeNewAccountCreation = accountService.retrieveSubAccountsList();
 
-        String email = UUID.randomUUID() + "@justsendapiclient.pl";
+        String email = getRandomEmail();
         SubAccountRaw subAccountRaw = new SubAccountRaw(email, "12345678", "Test", "API", "", 100);
-        SubAccount subAccount = accountService.createSubAccount(subAccountRaw);
-        assertThat(subAccount.getEmail()).isEqualTo(email);
+        SubAccount subAccountResponse = accountService.createSubAccount(subAccountRaw);
+        assertThat(subAccountResponse.getEmail()).isEqualTo(email);
 
         List<SubAccount> subAccountListAfterNewAccountCreation = accountService.retrieveSubAccountsList();
         Assert.assertEquals(subAccountListBeforeNewAccountCreation.size() + 1, subAccountListAfterNewAccountCreation.size());
 
 
         LOGGER.info("==============  deactivate account ============");
-        List<SubAccount> subAccountList = accountService.retrieveSubAccountsList();
-        int index = subAccountList.size() - 1;
-        String deactivateAccount = accountService.deactivateAccount(subAccountList.get(index).getAppKey());
-        assertThat(deactivateAccount).isEqualTo(format("Slave with id : %s was deactivated", subAccountList.get(index).getSubid()));
+        //when
+        String deactivateAccount = accountService.deactivateAccount(subAccountResponse.getAppKey());
+
+        //TODO account deactivation problem with hibernate caching
+        //then
+        assertThat(deactivateAccount).isEqualTo(format("Slave with id : %s was deactivated", subAccountResponse.getSubid()));
         List<SubAccount> subAccountListAfterDeactivation = accountService.retrieveSubAccountsList();
-        // TODO: metoda nie deaktywuje konta, cos nie dziala w aplikacji
-        //        assertThat(subAccountListAfterDeactivation).filteredOn("subid",subAccountList.get(index).getSubid()).isEqualTo(UserStatus.NOT_ACTIVE);
+        assertThat(subAccountListAfterDeactivation)
+                .filteredOn("subid", subAccountResponse.getSubid())
+                .allMatch((subAccount -> subAccount.getUserStatus().equals(UserStatus.NOT_ACTIVE)));
     }
 
-    //TODO: not used, maybe disable it
+    //TODO: most probably also problem with hibernate cache
     @Test(enabled = false)
     public void testEditSubAccount() throws JustsendApiClientException {
         //get: JustsendApiClientException: INTERNAL_ERROR - Internal system error, no information in logs
         //given
-        String email = UUID.randomUUID() + "@justsendapiclient.pl";
+        String email = getRandomEmail();
         SubAccountRaw subAccountRaw = new SubAccountRaw(email, "12345678", "Test", "API", "", 100);
         SubAccount subAccount = accountService.createSubAccount(subAccountRaw);
 

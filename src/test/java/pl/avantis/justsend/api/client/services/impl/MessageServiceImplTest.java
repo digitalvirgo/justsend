@@ -5,20 +5,21 @@ import org.testng.annotations.Test;
 import pl.avantis.justsend.api.client.model.Message;
 import pl.avantis.justsend.api.client.model.VoiceMessage;
 import pl.avantis.justsend.api.client.services.impl.enums.BulkVariant;
-import pl.avantis.justsend.api.client.services.impl.services.MessageService;
 import pl.avantis.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static pl.avantis.justsend.api.client.model.LanguageMessage.POLISH;
 import static pl.avantis.justsend.api.client.services.impl.TestHelper.APP_KEY;
+import static pl.avantis.justsend.api.client.services.impl.TestHelper.checkIfProdUrl;
 
 public class MessageServiceImplTest extends MessageSerivceTestDataProvider {
 
-    protected MessageService messageService;
+    protected MessageServiceImpl messageService;
 
     @BeforeClass
     public void init() {
         messageService = new MessageServiceImpl(APP_KEY);
+        checkIfProdUrl(messageService);
     }
 
     /* sendMessage - post */

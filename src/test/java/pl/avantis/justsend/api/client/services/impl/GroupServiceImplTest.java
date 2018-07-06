@@ -15,7 +15,6 @@ import pl.avantis.justsend.api.client.model.GroupUpdate;
 import pl.avantis.justsend.api.client.model.Prefix;
 import pl.avantis.justsend.api.client.model.PrefixReservation;
 import pl.avantis.justsend.api.client.services.impl.enums.PrefixType;
-import pl.avantis.justsend.api.client.services.impl.services.GroupService;
 import pl.avantis.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
 
 import java.util.Date;
@@ -23,16 +22,18 @@ import java.util.List;
 import java.util.Random;
 
 import static java.lang.Long.valueOf;
+import static java.lang.Thread.sleep;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static pl.avantis.justsend.api.client.services.impl.TestHelper.APP_KEY;
 import static pl.avantis.justsend.api.client.services.impl.TestHelper.APP_KEY_ADMINISTRATOR;
+import static pl.avantis.justsend.api.client.services.impl.TestHelper.checkIfProdUrl;
 import static pl.avantis.justsend.api.client.services.impl.enums.PrefixAccessType.GLOBAL;
 
 public class GroupServiceImplTest {
 
     private static Logger LOGGER = Logger.getLogger(GroupServiceImplTest.class);
-    private GroupService groupService;
+    private GroupServiceImpl groupService;
     private PrefixServiceImpl prefixService;
     private Long groupID;
     private static final Random random = new Random();
@@ -54,6 +55,8 @@ public class GroupServiceImplTest {
     public void setUp() throws JustsendApiClientException, JsonProcessingException {
 
         groupService = new GroupServiceImpl(APP_KEY);
+
+        checkIfProdUrl(groupService);
         prefixService = new PrefixServiceImpl(APP_KEY_ADMINISTRATOR);
 
         String group = groupService.createGroup(groupCreate(), new TestHelper().getFile("emptyFile.txt"));
@@ -123,15 +126,15 @@ public class GroupServiceImplTest {
 
     @Test
     public void testAddMsisdnToGroup() throws JustsendApiClientException, InterruptedException {
-        //TODO: why it adds two times same number
         //when
         String groupResponses = groupService.addNumbersToGroup(groupID, new TestHelper().getFile("groupMisin.txt"));
 
         //then
         Assertions.assertThat(groupResponses).isEqualTo("Successful");
-//        sleep(15000);
-//        Group group = groupService.retrieveGroup(groupID);
-//        assertThat(group.getMembers()).containsExactlyInAnyOrder("Number1", "Number2","514132134");
+
+        sleep(30000); // time to process file
+        Group group = groupService.retrieveGroup(groupID);
+        assertThat(group.getMembers()).containsExactlyInAnyOrder("Number1", "Number2","48514132134");
     }
 
     @Test
@@ -143,10 +146,8 @@ public class GroupServiceImplTest {
         GroupDTO updateGroupRequest = updateGroup(groupID, number);
         GroupDTO updateGroupResponse = groupService.updateGroup(updateGroupRequest);
 
-
-        //TODO The request sent by the client was syntactically incorrect. od 26/07/2018
         //then
-        Assertions.assertThat(updateGroupResponse.getMembers().get(2).getNumber()).isEqualTo(number);
+        Assertions.assertThat(updateGroupResponse.getMembers().get(2).getMsisdn()).isEqualTo(number);
     }
 
     @Test

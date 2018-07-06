@@ -1,23 +1,27 @@
 package pl.avantis.justsend.api.client.services.impl;
 
-import org.assertj.core.api.Assertions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import pl.avantis.justsend.api.client.services.impl.services.BlackListService;
 import pl.avantis.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
 
 import java.util.List;
 
+import static java.util.Arrays.asList;
+import static org.assertj.core.api.Assertions.assertThat;
 import static pl.avantis.justsend.api.client.services.impl.TestHelper.APP_KEY;
+import static pl.avantis.justsend.api.client.services.impl.TestHelper.checkIfProdUrl;
+import static pl.avantis.justsend.api.client.test.helpers.DataGenerator.getIncoretPhoneNumber;
+import static pl.avantis.justsend.api.client.test.helpers.DataGenerator.getRandomPhoneNumber;
 
 public class BlackListServiceImplTest extends BlackListServiceTestDataProvider {
 
-    private BlackListService blackListService;
+    private BlackListServiceImpl blackListService;
 
     @BeforeClass
     public void init() {
         blackListService = new BlackListServiceImpl(APP_KEY);
+        checkIfProdUrl(blackListService);
     }
 
     @Test
@@ -26,26 +30,47 @@ public class BlackListServiceImplTest extends BlackListServiceTestDataProvider {
         Assert.assertNotNull(listNumbers);
     }
 
-    @Test(dataProvider = "blackListFlowTestDataProvider")
-    public void addNumbersToBlackListTest(List<String> firstMsisdnList, List<String> secondMsisdnList) throws JustsendApiClientException {
-        List<String> listNumbers = blackListService.retrieveNumbers();
-        blackListService.addNumbersToBlackList(firstMsisdnList);
-        Assertions.assertThat(listNumbers).hasSameSizeAs(firstMsisdnList);
+    @Test
+    public void addNumbersToBlackListTest() throws JustsendApiClientException {
+        //given
+        List<String> numbers = asList(getRandomPhoneNumber(), getRandomPhoneNumber());
+
+        //when
+        String response = blackListService.addNumbersToBlackList(numbers);
+
+        //then
+        assertThat(response).isEqualTo("Added: 2 numbers");
+        List<String> afterListNumbers = blackListService.retrieveNumbers();
+        assertThat(afterListNumbers).contains(numbers.get(0), numbers.get(1));
     }
 
-    @Test(dataProvider = "blackListIncorrectMsisdnDataProvider")
-    public void addNumbersToBlackListIncorrectMisdnTest(List<String> msisdnList) throws JustsendApiClientException {
+    @Test
+    public void addNumbersToBlackListIncorrectMisdnTest() throws JustsendApiClientException {
+        //given
         List<String> beforeListNumbers = blackListService.retrieveNumbers();
-        blackListService.addNumbersToBlackList(msisdnList);
+
+        //when
+        List<String> incorrectPhoneNumbers = asList(getIncoretPhoneNumber(), getIncoretPhoneNumber());
+        blackListService.addNumbersToBlackList(incorrectPhoneNumbers);
+
+        //then
         List<String> afterListNumbers = blackListService.retrieveNumbers();
         Assert.assertEquals(beforeListNumbers.size(), afterListNumbers.size());
     }
 
-    @Test(dataProvider = "blackListFlowTestDataProvider")
-    public void removeNumbersFromBlackListTest(List<String> firstMsisdnList, List<String> secondMsisdnList) throws JustsendApiClientException {
-        List<String> listNumbers = blackListService.retrieveNumbers();
-        blackListService.removeNumbersFromBlackList(firstMsisdnList);
-        Assert.assertTrue(listNumbers.size() <= firstMsisdnList.size());
+    @Test
+    public void removeNumbersFromBlackListTest() throws JustsendApiClientException {
+        //given
+        String randomPhoneNumber = getRandomPhoneNumber();
+        blackListService.addNumbersToBlackList(asList(randomPhoneNumber));
+
+        //when
+        String response = blackListService.removeNumbersFromBlackList(asList(randomPhoneNumber));
+
+        //then
+        assertThat(response).isEqualTo("Removed: 1 numbers");
+        List<String> afterBlackListNumbers = blackListService.retrieveNumbers();
+        assertThat(afterBlackListNumbers).doesNotContain(randomPhoneNumber);
     }
 
     @Test(dataProvider = "blackListFlowTestDataProvider")

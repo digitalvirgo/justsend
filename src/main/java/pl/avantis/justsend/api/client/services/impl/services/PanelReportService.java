@@ -65,9 +65,7 @@ public interface PanelReportService {
             LocalDate from,
             LocalDate to,
             Long id,
-            String prefix,
-            Integer startRow,
-            Integer countRow) throws JustsendApiClientException;
+            String prefix) throws JustsendApiClientException;
 
     /**
      * Zwraca wszystkie wiadomości zwrotne

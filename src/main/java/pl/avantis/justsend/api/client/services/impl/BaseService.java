@@ -22,9 +22,10 @@ public abstract class BaseService {
     protected static final Logger LOGGER = Logger.getLogger(BaseService.class);
 
     protected Properties properties;
+
+    //TODO add production link
     protected String JUSTSEND_API_URL;
 
-    //TODO add production URL
     protected JustsendHttpClient justsendHttpClient;
 
     /**
@@ -118,9 +119,8 @@ public abstract class BaseService {
         return url.concat(parameters.toString());
     }
 
-    public static void main(String[] args) throws JustsendApiClientException {
-        BulkServiceImpl bulkService = new BulkServiceImpl("JDJhJDEyJDN2c1NWQ2o1ZHh1U3M1WHpmYXpFN3VhRGZQSUlub3hwT3hIRzU1bkJ4MWpjbVZPaFAxcEdP");
-        Bulk o = new Bulk();
-        bulkService.sendBulk(o);
+
+    public String getJUSTSEND_API_URL() {
+        return JUSTSEND_API_URL;
     }
 }

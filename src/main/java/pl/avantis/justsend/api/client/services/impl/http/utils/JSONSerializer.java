@@ -13,8 +13,8 @@ public class JSONSerializer {
 
     private static Gson gson;
 
-    public static <T> T deserialize(String s, Type tClass) {
-        return getGson().fromJson(s, tClass);
+    public static <T> T deserialize(String json, Type tClass) {
+        return getGson().fromJson(json, tClass);
     }
 
     public static String serialize(Object o) {
@@ -26,8 +26,8 @@ public class JSONSerializer {
             gson = new GsonBuilder()
                     .registerTypeAdapter(Date.class, (JsonDeserializer<Date>) (json, typeOfT, context) -> new Date(json.getAsJsonPrimitive().getAsLong()))
                     .registerTypeAdapter(Date.class, (JsonSerializer<Date>) (date, type, jsonSerializationContext) -> new JsonPrimitive(date.getTime()))
+                    .setPrettyPrinting()
                     .create();
-
         }
         return gson;
     }

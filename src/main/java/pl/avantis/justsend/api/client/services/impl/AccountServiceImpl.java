@@ -65,7 +65,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
 
         try {
 
-            JSResponse jsResponse = justsendHttpClient.doGet(url);
+            JSResponse jsResponse = justsendHttpClient.doGet(url, userAppKey);
             return processResponse(jsResponse, String.class);
 
         } catch (IOException e) {
