@@ -1,6 +1,5 @@
 package pl.avantis.justsend.api.client.services.impl;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.log4j.Logger;
 import org.fluttercode.datafactory.impl.DataFactory;
 import org.testng.annotations.BeforeClass;
@@ -26,7 +25,6 @@ import java.util.Random;
 import static java.lang.String.format;
 import static java.lang.Thread.sleep;
 import static java.util.Arrays.asList;
-import static org.apache.commons.lang3.builder.ToStringStyle.SIMPLE_STYLE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static pl.avantis.justsend.api.client.services.impl.TestHelper.APP_KEY;
 import static pl.avantis.justsend.api.client.services.impl.TestHelper.GROUP_ID;
@@ -55,7 +53,7 @@ public class ReportServiceImplTest {
     private PrefixServiceImpl prefixService;
 
     private String bulkName = "Name" + new Random().nextInt();
-    private String sender = "sender" + new Random().nextInt(100000);
+    private String senderSingleBulk = "senderS" + new Random().nextInt(100000);
     private BulkResponse bulkResponse;
     private Long singleBulkId;
 
@@ -72,10 +70,10 @@ public class ReportServiceImplTest {
 
         dataFactory = new DataFactory();
 
-        bulkResponse = bulkService.sendBulk(bulkWithDefaultFieldsSet().withGroupId(GROUP_ID).withName(bulkName).withFrom(sender).build());
+        bulkResponse = bulkService.sendBulk(bulkWithDefaultFieldsSet().withGroupId(GROUP_ID).build());
         bulkService.cancelBulkById(bulkResponse.getId());
 
-        singleBulkId = messageService.sendMessage("48505948311", sender, "Justsend lib api test", BulkVariant.ECO);
+        singleBulkId = messageService.sendMessage("48505948311", bulkResponse.getFrom(), "Justsend lib api test", BulkVariant.ECO);
     }
 
     @Test
@@ -125,7 +123,7 @@ public class ReportServiceImplTest {
         SubAccount subAccount = subAccounts.get(0);
 
         BulkServiceImpl bulkServiceSubAccount = new BulkServiceImpl(subAccount.getAppKey());
-        BulkResponse bulkResponse = bulkServiceSubAccount.sendBulk(bulkWithDefaultFieldsSet().withGroupId(GROUP_ID).withName(bulkName).withFrom(sender).build());
+        BulkResponse bulkResponse = bulkServiceSubAccount.sendBulk(bulkWithDefaultFieldsSet().withGroupId(GROUP_ID).withName(bulkName).build());
         bulkServiceSubAccount.cancelBulkById(bulkResponse.getId());
 
         //when
@@ -163,19 +161,16 @@ public class ReportServiceImplTest {
         ReportMessageResponse retrieveSingleBulkReportByBulkIdResponse = reportService.retrieveSingleBulkReportByBulkId(singleBulkId);
 
         //then
-        assertThat(retrieveSingleBulkReportByBulkIdResponse.getFrom()).isEqualTo(sender);
-        LOGGER.info("retrieveSingleBulkReportByBulkIdResponse = " + new ReflectionToStringBuilder(retrieveSingleBulkReportByBulkIdResponse, SIMPLE_STYLE));
+        assertThat(retrieveSingleBulkReportByBulkIdResponse.getFrom()).isEqualTo(senderSingleBulk);
     }
 
     @Test
     public void testRetrieveReportMessagesByDate() throws JustsendApiClientException {
         //when
-        List<ReportMessageResponse> reportMessageResponses = reportService.retrieveReportMessagesByDate(daysBeforeNowLD(1), daysBeforeNowLD(0));
+        List<ReportMessageResponse> reportMessageResponses = reportService.retrieveReportMessagesByDate(daysBeforeNowLD(1), daysBeforeNowLD(-1));
 
-        //TODO: why in this method is retrieveSingleBulksByStartDate(loginDTO,
-        //                    loginDTO.getUsername(), startDate, endDate, rowFrom: 0, rowSize: 0) rowFrom??, rowSize??
         //then
-        assertThat(reportMessageResponses).isNotEmpty();
+        assertThat(reportMessageResponses).filteredOn("from", bulkResponse.getFrom()).size().isEqualTo(1);
         LOGGER.info("reportMessageResponses = " + reportMessageResponses);
     }
 
@@ -204,14 +199,14 @@ public class ReportServiceImplTest {
         List<SingleBulkReport> singleBulkReport = reportService.retrieveSingleBulksByStartDate(daysBeforeNowLD(1), daysBeforeNowLD(0), 0, 100);
 
         //then
-        assertThat(singleBulkReport).filteredOn("sender", sender).hasSize(1);
+        assertThat(singleBulkReport).filteredOn("senderSingleBulk", senderSingleBulk).hasSize(1);
         LOGGER.info("singleBulkReport = " + singleBulkReport);
     }
 
     @Test
     public void testRetrieveSingleBulksCountByStartDate() throws JustsendApiClientException {
         //when
-        Long retrieveSingleBulksCountByStartDateResponse = reportService.retrieveSingleBulksCountByStartDate(daysBeforeNowLD(1), daysBeforeNowLD(-1), singleBulkId, sender);
+        Long retrieveSingleBulksCountByStartDateResponse = reportService.retrieveSingleBulksCountByStartDate(daysBeforeNowLD(1), daysBeforeNowLD(-1), singleBulkId, senderSingleBulk);
 
         //TODO: why it dosen't  return any result, entity is in database??
         //then

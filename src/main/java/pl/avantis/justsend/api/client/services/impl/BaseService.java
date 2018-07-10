@@ -23,7 +23,6 @@ public abstract class BaseService {
 
     protected Properties properties;
 
-    //TODO add production link
     protected String JUSTSEND_API_URL;
 
     protected JustsendHttpClient justsendHttpClient;

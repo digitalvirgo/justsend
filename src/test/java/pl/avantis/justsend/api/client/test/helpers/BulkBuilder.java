@@ -31,7 +31,7 @@ public final class BulkBuilder {
     public static BulkBuilder bulkWithDefaultFieldsSet() {
         BulkBuilder bulkBuilder = new BulkBuilder();
         bulkBuilder.withName("Name" + random.nextInt(10000));
-        bulkBuilder.withMessage("Test message");
+        bulkBuilder.withMessage("Api jar test");
         bulkBuilder.withBulkVariant(ECO);
         bulkBuilder.withFrom("Bulk" + random.nextInt(1000));
         bulkBuilder.withTo(asList("514746368"));

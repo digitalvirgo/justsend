@@ -56,7 +56,7 @@ public class PanelReportServiceImpl extends BaseService implements PanelReportSe
         try {
 
             JSResponse jsResponse = justsendHttpClient.doGet(url);
-            return processResponse(jsResponse, Long.class);
+            return processResponse(jsResponse, new TypeToken<List<ReportResponse>>(){}.getType());
 
         } catch (IOException e) {
             throw new JustsendApiClientException("connection failed: " + e.getMessage());
