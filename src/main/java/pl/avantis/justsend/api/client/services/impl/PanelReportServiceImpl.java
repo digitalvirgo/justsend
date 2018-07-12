@@ -16,6 +16,8 @@ import java.util.List;
 import static java.lang.String.valueOf;
 import static pl.avantis.justsend.api.client.services.impl.http.utils.DateUtils.convertDate;
 
+
+//TODO: internal app-i remove or hidden
 public class PanelReportServiceImpl extends BaseService implements PanelReportService {
 
     /**

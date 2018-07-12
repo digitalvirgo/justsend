@@ -3,6 +3,7 @@ package pl.avantis.justsend.api.client.services.impl;
 import org.fluttercode.datafactory.impl.DataFactory;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import pl.avantis.justsend.api.client.model.Account;
 import pl.avantis.justsend.api.client.model.Bulk;
 import pl.avantis.justsend.api.client.model.BulkResponse;
 import pl.avantis.justsend.api.client.model.PanelReportResponseMessage;
@@ -40,6 +41,7 @@ public class PanelReportServiceImplTest {
     private MessageService messageService;
     private PrefixServiceImpl prefixService;
     private DataFactory dataFactory;
+    private AccountServiceImpl accountService;
 
     @BeforeClass
     public void setUp() throws JustsendApiClientException {
@@ -48,6 +50,7 @@ public class PanelReportServiceImplTest {
         bulkService = new BulkServiceImpl(APP_KEY_ADMINISTRATOR);
         messageService = new MessageServiceImpl(APP_KEY);
         prefixService = new PrefixServiceImpl(APP_KEY);
+        accountService = new AccountServiceImpl(APP_KEY);
 
         dataFactory = new DataFactory();
 
@@ -82,9 +85,12 @@ public class PanelReportServiceImplTest {
     @Test
     public void testRetrieveCountResponseMessages() throws JustsendApiClientException, InterruptedException {
         //given
+        Account account = accountService.retrieveAccount();
+
         List<Prefix> prefixes = prefixService.retrieveAllPrefixesPagin("GLOBAL", 0, 10);
         Prefix prefix = prefixes.get(0);
         String toNumber = "48514875" + dataFactory.getNumberText(3);
+
         Bulk sendBulk = bulkWithDefaultFieldsSet()
                 .withTo(asList(toNumber))
                 .withBulkVariant(TEST)
@@ -92,10 +98,12 @@ public class PanelReportServiceImplTest {
                 .build();
         BulkResponse bulkResponse = bulkService.sendBulk(sendBulk);
 
-        sleep(25000);
+
+
+        sleep(30000);
         //when
         Long retrieveCountResponse = panelReportService.retrieveCountResponseMessages(
-                prefix.getId(), daysBeforeNowLD(1), daysBeforeNowLD(-1), bulkResponse.getId(), prefix.getName());
+                prefix.getId(), daysBeforeNowLD(1), daysBeforeNowLD(-1), account.getId(), prefix.getName());
 
 
         //then
@@ -115,7 +123,7 @@ public class PanelReportServiceImplTest {
                 .build();
         BulkResponse bulkResponse = bulkService.sendBulk(sendBulk);
 
-        sleep(25000);
+        sleep(30000);
         //when
         List<PanelReportResponseMessage> panelReportResponseMessages = panelReportService.retrieveResponseMessages(
                 prefix.getId(), daysBeforeNowLD(1), daysBeforeNowLD(-1), 0, MAX_VALUE);
@@ -140,7 +148,7 @@ public class PanelReportServiceImplTest {
                 .build();
         BulkResponse bulkResponse = bulkService.sendBulk(sendBulk);
 
-        sleep(25000);
+        sleep(30000);
 
         //when
         List<PanelReportResponseMessage> panelReportResponseMessages = panelReportService.retrieveResponseMessagesPagin(

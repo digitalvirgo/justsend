@@ -131,7 +131,7 @@ public class BulkServiceImplTest {
     @Test
     public void testSendBulkGroupListFlow() throws JustsendApiClientException, JsonProcessingException {
         LOGGER.info("=========   create group ===========");
-        String group = groupService.createGroup(groupCreate(), new TestHelper().getFile("emptyFile.txt"));
+        String group = groupService.createGroup(groupCreate());
         Long groupID = GroupServiceImplTest.getGroupID(group);
 
         LOGGER.info("=========   send Bulk Group List ===========");
@@ -141,10 +141,10 @@ public class BulkServiceImplTest {
         LOGGER.info("bulkGroupListResponse = " + TestHelper.toString(bulkGroupListResponse));
     }
 
-    private String groupCreate() throws JsonProcessingException {
+    private GroupCreate groupCreate() throws JsonProcessingException {
         GroupCreate groupCreate = new GroupCreate();
         groupCreate.setName("name");
         groupCreate.setMembers(asList("Number1", "Number2"));
-        return OBJECT_MAPPER.writeValueAsString(groupCreate);
+        return groupCreate;
     }
 }

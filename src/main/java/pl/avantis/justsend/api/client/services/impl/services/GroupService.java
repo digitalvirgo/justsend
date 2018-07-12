@@ -1,6 +1,7 @@
 package pl.avantis.justsend.api.client.services.impl.services;
 
 import pl.avantis.justsend.api.client.model.Group;
+import pl.avantis.justsend.api.client.model.GroupCreate;
 import pl.avantis.justsend.api.client.model.GroupDTO;
 import pl.avantis.justsend.api.client.model.GroupResponse;
 import pl.avantis.justsend.api.client.model.GroupUpdate;
@@ -35,13 +36,15 @@ public interface GroupService {
     /**
      * Tworzy grupę
      *
-     * @param group Dane do grupy
+     * @param groupCreate Dane do grupy
      * @param file Plik z numerami
      * @return group Id (Text: Created group id: {number})
      * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
      */
 
-    String createGroup(String group, File file) throws JustsendApiClientException;
+    String createGroup(GroupCreate groupCreate, File file) throws JustsendApiClientException;
+
+    String createGroup(GroupCreate groupCreate) throws JustsendApiClientException;
 
     /**
      * Usuwa grupę

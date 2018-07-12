@@ -27,6 +27,7 @@ import static java.lang.Thread.sleep;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static pl.avantis.justsend.api.client.services.impl.TestHelper.APP_KEY;
+import static pl.avantis.justsend.api.client.services.impl.TestHelper.APP_KEY_FOR_PREFIX_PREFIX_TEST;
 import static pl.avantis.justsend.api.client.services.impl.TestHelper.GROUP_ID;
 import static pl.avantis.justsend.api.client.services.impl.TestHelper.checkIfProdUrl;
 import static pl.avantis.justsend.api.client.services.impl.TestHelper.daysBeforeNowLD;
@@ -37,6 +38,7 @@ import static pl.avantis.justsend.api.client.services.impl.enums.FileReportStatu
 import static pl.avantis.justsend.api.client.test.helpers.BulkBuilder.bulkWithDefaultFieldsSet;
 import static pl.avantis.justsend.api.client.test.helpers.Commands.GET_RESPONSE;
 import static pl.avantis.justsend.api.client.test.helpers.Commands.GET_USER_DELIVERY_ACK;
+import static pl.avantis.justsend.api.client.test.helpers.DataGenerator.getIncoretPhoneNumber;
 import static pl.avantis.justsend.api.client.test.helpers.DataGenerator.getRandomPhoneNumber;
 
 public class ReportServiceImplTest {
@@ -53,7 +55,7 @@ public class ReportServiceImplTest {
     private PrefixServiceImpl prefixService;
 
     private String bulkName = "Name" + new Random().nextInt();
-    private String senderSingleBulk = "senderS" + new Random().nextInt(100000);
+    private String senderSingleBulk = "sen" + new Random().nextInt(100000);
     private BulkResponse bulkResponse;
     private Long singleBulkId;
 
@@ -73,7 +75,7 @@ public class ReportServiceImplTest {
         bulkResponse = bulkService.sendBulk(bulkWithDefaultFieldsSet().withGroupId(GROUP_ID).build());
         bulkService.cancelBulkById(bulkResponse.getId());
 
-        singleBulkId = messageService.sendMessage("48505948311", bulkResponse.getFrom(), "Justsend lib api test", BulkVariant.ECO);
+        singleBulkId = messageService.sendMessage("48505948311", senderSingleBulk, "Justsend lib api test", BulkVariant.ECO);
     }
 
     @Test
@@ -95,12 +97,27 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void testRetrieveBulkByDate() throws JustsendApiClientException {
+    public void testRetrieveBulkByDate() throws JustsendApiClientException, InterruptedException {
+        //given
+        List<Prefix> prefixes = prefixService.retrieveAllPrefixesPagin("GLOBAL", 0, 10);
+        Prefix prefix = prefixes.get(0);
 
-        List<ReportResponse> retrieveBulkByDateResponses = reportService.retrieveBulkByDate(daysBeforeNowLD(1), daysBeforeNowLD(0));
+        Bulk sendBulk = bulkWithDefaultFieldsSet()
+                .withTo(asList(getRandomPhoneNumber()))
+                .withBulkVariant(TEST)
+                .withMessage(format(" %s   %s:%s   Damian", GET_USER_DELIVERY_ACK, GET_RESPONSE, prefix))
+                .build();
 
+        BulkResponse bulkResponse = bulkService.sendBulk(sendBulk);
+
+        sleep(30000);
+
+        //when
+        List<ReportResponse> retrieveBulkByDateResponses = reportService.retrieveBulkByDate(daysBeforeNowLD(1), daysBeforeNowLD(-1));
+
+        //then
         assertThat(retrieveBulkByDateResponses.size()).isGreaterThanOrEqualTo(1);
-        assertThat(retrieveBulkByDateResponses).filteredOn("bulkName", bulkName).hasSize(1);
+        assertThat(retrieveBulkByDateResponses).filteredOn("bulkId", bulkResponse.getId()).hasSize(1);
         LOGGER.info("retrieveBulkByDateResponses = " + retrieveBulkByDateResponses);
     }
 
@@ -123,7 +140,7 @@ public class ReportServiceImplTest {
         SubAccount subAccount = subAccounts.get(0);
 
         BulkServiceImpl bulkServiceSubAccount = new BulkServiceImpl(subAccount.getAppKey());
-        BulkResponse bulkResponse = bulkServiceSubAccount.sendBulk(bulkWithDefaultFieldsSet().withGroupId(GROUP_ID).withName(bulkName).build());
+        BulkResponse bulkResponse = bulkServiceSubAccount.sendBulk(bulkWithDefaultFieldsSet().withGroupId(GROUP_ID).build());
         bulkServiceSubAccount.cancelBulkById(bulkResponse.getId());
 
         //when
@@ -140,15 +157,15 @@ public class ReportServiceImplTest {
         String prefix = prefixes.get(0).getName();
         String toNumber = "48514875" + dataFactory.getNumberText(3);
         Bulk sendBulk = bulkWithDefaultFieldsSet()
-                .withTo(asList(getRandomPhoneNumber()))
+                .withTo(asList(toNumber))
                 .withBulkVariant(TEST)
                 .withMessage(format(" %s   %s:%s   Damian", GET_USER_DELIVERY_ACK, GET_RESPONSE, prefix))
                 .build();
         BulkResponse bulkResponse = bulkService.sendBulk(sendBulk);
 
-        sleep(20000);
+        sleep(60000);
         //when
-        List<ReportResponseMessage> retrieveResponseMessagesReportResponse = reportService.retrieveResponseMessages(prefix, daysBeforeNowLD(1), daysBeforeNowLD(-1));
+        List<ReportResponseMessage> retrieveResponseMessagesReportResponse = new ReportServiceImpl(APP_KEY_FOR_PREFIX_PREFIX_TEST).retrieveResponseMessages(prefix, daysBeforeNowLD(1), daysBeforeNowLD(-1));
 
         //then
         assertThat(retrieveResponseMessagesReportResponse).filteredOn("msisdn", toNumber).size().isGreaterThanOrEqualTo(1);
@@ -177,9 +194,9 @@ public class ReportServiceImplTest {
     @Test
     public void testRetrieveBulkListByDate() throws JustsendApiClientException {
         //when
-        List<ReportResponse> retrieveBulkListByDateResponses = reportService.retrieveBulkListByDate(daysBeforeNowLD(1), daysBeforeNowLD(0), 0, 100);
+        List<ReportResponse> retrieveBulkListByDateResponses = reportService.retrieveBulkListByDate(daysBeforeNowLD(1), daysBeforeNowLD(-1), 0, 100);
         //then
-        assertThat(retrieveBulkListByDateResponses).filteredOn("bulkName", bulkName).hasSize(1);
+        assertThat(retrieveBulkListByDateResponses).filteredOn("bulkName", bulkResponse.getShortName()).hasSize(1);
         LOGGER.info("retrieveBulkListByDateResponses = " + retrieveBulkListByDateResponses);
     }
 
@@ -199,7 +216,7 @@ public class ReportServiceImplTest {
         List<SingleBulkReport> singleBulkReport = reportService.retrieveSingleBulksByStartDate(daysBeforeNowLD(1), daysBeforeNowLD(0), 0, 100);
 
         //then
-        assertThat(singleBulkReport).filteredOn("senderSingleBulk", senderSingleBulk).hasSize(1);
+        assertThat(singleBulkReport).filteredOn("sender", senderSingleBulk).hasSize(1);
         LOGGER.info("singleBulkReport = " + singleBulkReport);
     }
 

@@ -89,7 +89,7 @@ public abstract class BaseService {
             }
 
             for (int i = 0; i < pathVar.length; i += 2) {
-                LOGGER.debug("pathVar:" + i / 2 + ": " + pathVar[i] + " = " + pathVar[i + 1]);
+                LOGGER.info("pathVar:" + i / 2 + ": " + pathVar[i] + " = " + pathVar[i + 1]);
                 if (!url.contains(pathVar[i])) {
                     throw new JustsendApiClientException("Parameter don't exist in path.");
                 }
@@ -109,7 +109,7 @@ public abstract class BaseService {
 
         StringBuilder parameters = new StringBuilder("?");
         for (int i = 0; i < param.length; i += 2) {
-            LOGGER.debug(format("param: %s : %s = %s ", i / 2, param[i], param[i + 1]));
+            LOGGER.info(format("param: %s : %s = %s ", i / 2, param[i], param[i + 1]));
             parameters.append(param[i]).append("=").append(param[i + 1]);
             if (i != (param.length - 2)) {
                 parameters.append("&");

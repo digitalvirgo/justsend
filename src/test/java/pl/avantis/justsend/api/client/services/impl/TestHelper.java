@@ -10,8 +10,8 @@ import java.time.LocalDate;
 
 public class TestHelper {
 
-//    public static final String APP_KEY = "JDJhJDEyJDN2c1NWQ2o1ZHh1U3M1WHpmYXpFN3VhRGZQSUlub3hwT3hIRzU1bkJ4MWpjbVZPaFAxcEdP";
-    public static final String APP_KEY = "JDJhJDEyJHVUZ2RnY0IvbXRiaUJrZGd0U2w2SHV3OEl3aTQ3d1J6aThUNzBYRzIza0lMZmdyZmhOV0Ft";
+    public static final String APP_KEY = "JDJhJDEyJDN2c1NWQ2o1ZHh1U3M1WHpmYXpFN3VhRGZQSUlub3hwT3hIRzU1bkJ4MWpjbVZPaFAxcEdP";
+    public static final String APP_KEY_FOR_PREFIX_PREFIX_TEST = "JDJhJDEyJFRCSC9qTFJIQzNmQmU0b0hqNDREY09qdmZ5ZktONkFTbi8uR0JQak9qQnVIbFlQZm96YUJl";
     public static final String APP_KEY_ADMINISTRATOR = "123456";
     public static final Long GROUP_ID = 2393L;
     public static final String PROD_URL = "justsend.pl";

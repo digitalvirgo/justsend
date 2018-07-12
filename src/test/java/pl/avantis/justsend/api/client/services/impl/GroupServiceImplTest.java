@@ -39,11 +39,11 @@ public class GroupServiceImplTest {
     private static final Random random = new Random();
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
-    public static String groupCreate() throws JsonProcessingException {
+    public static GroupCreate groupCreate() throws JsonProcessingException {
         GroupCreate groupCreate = new GroupCreate();
         groupCreate.setName("name" + random.nextInt(1000));
         groupCreate.setMembers(asList("Number1", "Number2"));
-        return OBJECT_MAPPER.writeValueAsString(groupCreate);
+        return groupCreate;
     }
 
     public static Long getGroupID(String group) {
@@ -77,6 +77,15 @@ public class GroupServiceImplTest {
     @Test
     public void testCreateGroup() throws JustsendApiClientException, JsonProcessingException {
         String group = groupService.createGroup(groupCreate(), new TestHelper().getFile("emptyFile.txt"));
+        assertThat(group).startsWith("Created group id: ");
+    }
+
+    @Test
+    public void testCreateGroupWithoutFile() throws JustsendApiClientException, JsonProcessingException {
+        //when
+        String group = groupService.createGroup(groupCreate());
+
+        //then
         assertThat(group).startsWith("Created group id: ");
     }
 

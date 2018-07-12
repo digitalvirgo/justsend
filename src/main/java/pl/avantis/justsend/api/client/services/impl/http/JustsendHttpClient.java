@@ -231,7 +231,7 @@ public class JustsendHttpClient {
             JSONObject jsonObject = new JSONObject(result);
 
             if (!jsonObject.isNull("data")) {
-                logger.debug("Object: " + jsonObject.get("data").getClass());
+                logger.info("Object: " + jsonObject.get("data").getClass());
 
                 Object o = jsonObject.get("data");
 

@@ -1,7 +1,9 @@
 package pl.avantis.justsend.api.client.services.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.reflect.TypeToken;
 import pl.avantis.justsend.api.client.model.Group;
+import pl.avantis.justsend.api.client.model.GroupCreate;
 import pl.avantis.justsend.api.client.model.GroupDTO;
 import pl.avantis.justsend.api.client.model.GroupResponse;
 import pl.avantis.justsend.api.client.model.GroupUpdate;
@@ -18,6 +20,8 @@ import java.util.List;
 import static java.lang.String.valueOf;
 
 public class GroupServiceImpl extends BaseService implements GroupService {
+
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     /**
      * @param appKey Klucz api
@@ -57,12 +61,25 @@ public class GroupServiceImpl extends BaseService implements GroupService {
     }
 
     @Override
-    public String createGroup(String group, File file) throws JustsendApiClientException {
+    public String createGroup(GroupCreate groupCreate, File file) throws JustsendApiClientException {
         String url = createURL("/v2/group/add");
 
         try {
+            String groupCreateText = OBJECT_MAPPER.writeValueAsString(groupCreate);
+            JSResponse jsResponse = justsendHttpClient.doMultiPartPost(url, groupCreateText, file);
+            return processResponse(jsResponse, String.class);
 
-            JSResponse jsResponse = justsendHttpClient.doMultiPartPost(url, group, file);
+        } catch (IOException e) {
+            throw new JustsendApiClientException("connection failed: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public String createGroup(GroupCreate groupCreate) throws JustsendApiClientException {
+        String url = createURL("/v2/group/addE");
+
+        try {
+            JSResponse jsResponse = justsendHttpClient.doPost(url, groupCreate);
             return processResponse(jsResponse, String.class);
 
         } catch (IOException e) {

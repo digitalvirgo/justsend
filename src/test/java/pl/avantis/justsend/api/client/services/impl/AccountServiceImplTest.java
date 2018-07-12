@@ -14,6 +14,7 @@ import pl.avantis.justsend.api.client.services.impl.services.exception.JustsendA
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.logging.LogManager;
 
@@ -22,6 +23,7 @@ import static java.lang.Thread.sleep;
 import static org.assertj.core.api.Assertions.assertThat;
 import static pl.avantis.justsend.api.client.services.impl.TestHelper.APP_KEY;
 import static pl.avantis.justsend.api.client.services.impl.TestHelper.checkIfProdUrl;
+import static pl.avantis.justsend.api.client.services.impl.enums.AccountType.SLAVE;
 import static pl.avantis.justsend.api.client.test.helpers.DataGenerator.getRandomEmail;
 
 public class AccountServiceImplTest {
@@ -122,12 +124,18 @@ public class AccountServiceImplTest {
     public void retrieveSubAccount() throws JustsendApiClientException {
         //given
         List<SubAccount> subAccountList = accountService.retrieveSubAccountsList();
+        SubAccount subAccountGiven = getSubAccount(subAccountList);
 
         //when
-        SubAccount subAccount = accountService.retrieveSubAccount(subAccountList.get(2).getAppKey());
+        SubAccount subAccountRetrieved = accountService.retrieveSubAccount(subAccountGiven.getAppKey());
 
         //then
-        Assert.assertEquals(subAccount.getContactFirstname(), subAccount.getContactFirstname());
+        assertThat(subAccountRetrieved.getContactFirstname()).isEqualTo(subAccountGiven.getContactFirstname());
+    }
+
+    private SubAccount getSubAccount(List<SubAccount> subAccountList) {
+        Optional<SubAccount> first = subAccountList.stream().filter(subAccount -> subAccount.getAccountType() == SLAVE).findFirst();
+        return first.get();
     }
 
     @Test(dependsOnMethods = "createSubAccountTest")
