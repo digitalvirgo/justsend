@@ -16,7 +16,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static java.lang.String.valueOf;
-import static pl.avantis.justsend.api.client.services.impl.http.utils.DateUtils.convertDate;
+import static pl.avantis.justsend.api.client.services.impl.utils.DateUtils.convertDate;
 
 public class ReportServiceImpl extends BaseService implements ReportService {
 

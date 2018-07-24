@@ -5,7 +5,7 @@ import pl.avantis.justsend.api.client.model.Account;
 import pl.avantis.justsend.api.client.model.JSResponse;
 import pl.avantis.justsend.api.client.model.SubAccount;
 import pl.avantis.justsend.api.client.model.SubAccountRaw;
-import pl.avantis.justsend.api.client.services.impl.http.utils.JSONSerializer;
+import pl.avantis.justsend.api.client.services.impl.utils.JSONSerializer;
 import pl.avantis.justsend.api.client.services.impl.services.AccountService;
 import pl.avantis.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
 import pl.avantis.justsend.api.client.services.impl.services.methods.AccountMethods;
@@ -111,7 +111,6 @@ public class AccountServiceImpl extends BaseService implements AccountService {
 
     @Override
     public SubAccount retrieveSubAccount(String userAppKey) throws JustsendApiClientException {
-
         String url = createURL(AccountMethods.RETRIEVE_SUB_ACCOUNT.getPath());
 
         try {

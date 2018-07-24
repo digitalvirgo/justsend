@@ -11,7 +11,7 @@ import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static pl.avantis.justsend.api.client.services.impl.TestHelper.APP_KEY;
 import static pl.avantis.justsend.api.client.services.impl.TestHelper.checkIfProdUrl;
-import static pl.avantis.justsend.api.client.test.helpers.DataGenerator.getIncoretPhoneNumber;
+import static pl.avantis.justsend.api.client.test.helpers.DataGenerator.getIncorrectPhoneNumber;
 import static pl.avantis.justsend.api.client.test.helpers.DataGenerator.getRandomPhoneNumber;
 
 public class BlackListServiceImplTest extends BlackListServiceTestDataProvider {
@@ -50,7 +50,7 @@ public class BlackListServiceImplTest extends BlackListServiceTestDataProvider {
         List<String> beforeListNumbers = blackListService.retrieveNumbers();
 
         //when
-        List<String> incorrectPhoneNumbers = asList(getIncoretPhoneNumber(), getIncoretPhoneNumber());
+        List<String> incorrectPhoneNumbers = asList(getIncorrectPhoneNumber(), getIncorrectPhoneNumber());
         blackListService.addNumbersToBlackList(incorrectPhoneNumbers);
 
         //then

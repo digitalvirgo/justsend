@@ -66,7 +66,7 @@ public class GroupServiceImpl extends BaseService implements GroupService {
 
         try {
             String groupCreateText = OBJECT_MAPPER.writeValueAsString(groupCreate);
-            JSResponse jsResponse = justsendHttpClient.doMultiPartPost(url, groupCreateText, file);
+            JSResponse jsResponse = justsendHttpClient.doMultiPartPost(url, "input", file, "group", groupCreateText);
             return processResponse(jsResponse, String.class);
 
         } catch (IOException e) {
@@ -166,7 +166,7 @@ public class GroupServiceImpl extends BaseService implements GroupService {
         String url = createURL("/v2/group/addMsisdns/{groupId}", "groupId", valueOf(groupId));
 
         try {
-            JSResponse jsResponse = justsendHttpClient.doMultiPartPost(url, inputData, null);
+            JSResponse jsResponse = justsendHttpClient.doMultiPartPost(url, "inputData", inputData, null, null);
             return processResponse(jsResponse, String.class);
 
         } catch (IOException e) {

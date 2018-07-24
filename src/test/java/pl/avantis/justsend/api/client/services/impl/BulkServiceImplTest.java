@@ -76,6 +76,8 @@ public class BulkServiceImplTest {
         LOGGER.info("bulkRecipientsByMessageStatus = " + bulkRecipientsByMessageStatus);
     }
 
+
+
     @Test
     public void when_SendBulkWithTestGET_USER_ACK_then_bulkRecipientWillHaveStateDELIVERED() throws JustsendApiClientException, InterruptedException {
         //given
@@ -85,7 +87,7 @@ public class BulkServiceImplTest {
                 .withMessage(Commands.GET_USER_DELIVERY_ACK + " Damian").build();
         BulkResponse bulkResponse = bulkService.sendBulk(sendBulk);
 
-        sleep(30000); // time needed to proceed message
+        sleep(70000); // time needed to proceed message
         //when
         List<String> bulkRecipients = bulkService.retrieveBulkRecipientsByMessageStatus(MessageStatus.DELIVERED, bulkResponse.getId());
 

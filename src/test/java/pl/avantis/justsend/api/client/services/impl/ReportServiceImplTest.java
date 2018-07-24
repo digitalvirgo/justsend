@@ -38,8 +38,10 @@ import static pl.avantis.justsend.api.client.services.impl.enums.FileReportStatu
 import static pl.avantis.justsend.api.client.test.helpers.BulkBuilder.bulkWithDefaultFieldsSet;
 import static pl.avantis.justsend.api.client.test.helpers.Commands.GET_RESPONSE;
 import static pl.avantis.justsend.api.client.test.helpers.Commands.GET_USER_DELIVERY_ACK;
-import static pl.avantis.justsend.api.client.test.helpers.DataGenerator.getIncoretPhoneNumber;
 import static pl.avantis.justsend.api.client.test.helpers.DataGenerator.getRandomPhoneNumber;
+
+
+//before running test check if just-mock-service runs in test env :)
 
 public class ReportServiceImplTest {
 
@@ -54,7 +56,6 @@ public class ReportServiceImplTest {
     private GroupServiceImpl groupService;
     private PrefixServiceImpl prefixService;
 
-    private String bulkName = "Name" + new Random().nextInt();
     private String senderSingleBulk = "sen" + new Random().nextInt(100000);
     private BulkResponse bulkResponse;
     private Long singleBulkId;
@@ -105,15 +106,16 @@ public class ReportServiceImplTest {
         Bulk sendBulk = bulkWithDefaultFieldsSet()
                 .withTo(asList(getRandomPhoneNumber()))
                 .withBulkVariant(TEST)
-                .withMessage(format(" %s   %s:%s   Damian", GET_USER_DELIVERY_ACK, GET_RESPONSE, prefix))
+                .withMessage(format(" %s   %s:%s   Damian", GET_USER_DELIVERY_ACK, GET_RESPONSE, prefix.getName()))
                 .build();
 
         BulkResponse bulkResponse = bulkService.sendBulk(sendBulk);
 
-        sleep(30000);
+        sleep(80000);
 
         //when
-        List<ReportResponse> retrieveBulkByDateResponses = reportService.retrieveBulkByDate(daysBeforeNowLD(1), daysBeforeNowLD(-1));
+        List<ReportResponse> retrieveBulkByDateResponses = reportService
+                .retrieveBulkByDate(daysBeforeNowLD(1), daysBeforeNowLD(-1));
 
         //then
         assertThat(retrieveBulkByDateResponses.size()).isGreaterThanOrEqualTo(1);
@@ -149,6 +151,8 @@ public class ReportServiceImplTest {
         //then
         assertThat(reportSubAccountResponses).filteredOn("bulkId", bulkResponse.getId()).hasSize(1);
     }
+
+    //Not work
 
     @Test
     public void testRetrieveResponseMessages() throws JustsendApiClientException, InterruptedException {
@@ -187,7 +191,7 @@ public class ReportServiceImplTest {
         List<ReportMessageResponse> reportMessageResponses = reportService.retrieveReportMessagesByDate(daysBeforeNowLD(1), daysBeforeNowLD(-1));
 
         //then
-        assertThat(reportMessageResponses).filteredOn("from", bulkResponse.getFrom()).size().isEqualTo(1);
+        assertThat(reportMessageResponses).filteredOn("from", senderSingleBulk).size().isEqualTo(1);
         LOGGER.info("reportMessageResponses = " + reportMessageResponses);
     }
 
@@ -220,12 +224,14 @@ public class ReportServiceImplTest {
         LOGGER.info("singleBulkReport = " + singleBulkReport);
     }
 
+
     @Test
-    public void testRetrieveSingleBulksCountByStartDate() throws JustsendApiClientException {
+    public void testRetrieveSingleBulksCountByStartDate() throws JustsendApiClientException, InterruptedException {
+        sleep(100000);
+
         //when
         Long retrieveSingleBulksCountByStartDateResponse = reportService.retrieveSingleBulksCountByStartDate(daysBeforeNowLD(1), daysBeforeNowLD(-1), singleBulkId, senderSingleBulk);
 
-        //TODO: why it dosen't  return any result, entity is in database??
         //then
         assertThat(retrieveSingleBulksCountByStartDateResponse).isEqualTo(1);
         LOGGER.info("retrieveSingleBulksCountByStartDateResponse = " + retrieveSingleBulksCountByStartDateResponse);

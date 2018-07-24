@@ -10,6 +10,7 @@ import pl.avantis.justsend.api.client.model.SubAccount;
 import pl.avantis.justsend.api.client.model.SubAccountRaw;
 import pl.avantis.justsend.api.client.services.impl.enums.UserStatus;
 import pl.avantis.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
+import pl.avantis.justsend.api.client.test.helpers.DataGenerator;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -24,6 +25,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static pl.avantis.justsend.api.client.services.impl.TestHelper.APP_KEY;
 import static pl.avantis.justsend.api.client.services.impl.TestHelper.checkIfProdUrl;
 import static pl.avantis.justsend.api.client.services.impl.enums.AccountType.SLAVE;
+import static pl.avantis.justsend.api.client.test.helpers.DataGenerator.generateDigitNumber;
 import static pl.avantis.justsend.api.client.test.helpers.DataGenerator.getRandomEmail;
 
 public class AccountServiceImplTest {
@@ -38,6 +40,8 @@ public class AccountServiceImplTest {
         FileInputStream fis = new FileInputStream(AccountServiceImplTest.class.getResource("/log4j.xml").getFile());
         LogManager.getLogManager().readConfiguration(fis);
     }
+
+    //Not work
 
     @Test
     public void accountCreationAndDeactivationTest() throws JustsendApiClientException {
@@ -57,7 +61,6 @@ public class AccountServiceImplTest {
         //when
         String deactivateAccount = accountService.deactivateAccount(subAccountResponse.getAppKey());
 
-        //TODO account deactivation problem with hibernate caching
         //then
         assertThat(deactivateAccount).isEqualTo(format("Slave with id : %s was deactivated", subAccountResponse.getSubid()));
         List<SubAccount> subAccountListAfterDeactivation = accountService.retrieveSubAccountsList();
@@ -66,21 +69,24 @@ public class AccountServiceImplTest {
                 .allMatch((subAccount -> subAccount.getUserStatus().equals(UserStatus.NOT_ACTIVE)));
     }
 
-    //TODO: most probably also problem with hibernate cache
-    @Test(enabled = false)
+    @Test
     public void testEditSubAccount() throws JustsendApiClientException {
-        //get: JustsendApiClientException: INTERNAL_ERROR - Internal system error, no information in logs
         //given
         String email = getRandomEmail();
         SubAccountRaw subAccountRaw = new SubAccountRaw(email, "12345678", "Test", "API", "", 100);
         SubAccount subAccount = accountService.createSubAccount(subAccountRaw);
 
-        String newFirstName = subAccount.getContactFirstname() + "1234";
+        String newFirstName = subAccount.getContactFirstname() + generateDigitNumber(4);
+        String newContactSurname = subAccount.getContactSurname() + generateDigitNumber(4);
+        String newDescription = subAccount.getDescription() + generateDigitNumber(4);
+
         //when
-        SubAccount subAccountAfterEdit = accountService.editSubAccount(subAccount.getSubid(), newFirstName, subAccount.getContactSurname(), subAccount.getPassword(), subAccount.getDescription());
+        SubAccount subAccountAfterEdit = accountService.editSubAccount(subAccount.getSubid(), newFirstName, newContactSurname, subAccount.getPassword(), newDescription);
 
         //then
-        Assert.assertNotEquals(newFirstName, subAccountAfterEdit.getContactFirstname());
+        assertThat(subAccountAfterEdit.getContactFirstname()).isEqualTo(newFirstName);
+        assertThat(subAccountAfterEdit.getContactSurname()).isEqualTo(newContactSurname);
+        assertThat(subAccountAfterEdit.getDescription()).isEqualTo(newDescription);
     }
 
     @Test

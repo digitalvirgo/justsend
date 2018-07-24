@@ -1,6 +1,7 @@
 package pl.avantis.justsend.api.client.services.impl.http.utils;
 
 import org.testng.annotations.Test;
+import pl.avantis.justsend.api.client.services.impl.utils.Printer;
 
 public class PrinterTest {
 

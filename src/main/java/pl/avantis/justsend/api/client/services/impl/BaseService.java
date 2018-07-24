@@ -1,11 +1,11 @@
 package pl.avantis.justsend.api.client.services.impl;
 
 import org.apache.log4j.Logger;
-import pl.avantis.justsend.api.client.model.Bulk;
 import pl.avantis.justsend.api.client.model.JSResponse;
 import pl.avantis.justsend.api.client.services.impl.http.JustsendHttpClient;
-import pl.avantis.justsend.api.client.services.impl.http.utils.JSONSerializer;
+import pl.avantis.justsend.api.client.services.impl.utils.JSONSerializer;
 import pl.avantis.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
+import pl.avantis.justsend.api.client.services.impl.utils.PropertiesContext;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,13 +15,14 @@ import java.util.Properties;
 import static java.lang.String.format;
 import static java.util.Objects.nonNull;
 import static java.util.Objects.requireNonNull;
+import static pl.avantis.justsend.api.client.services.impl.utils.PropertiesContext.getProperties;
 
 
 public abstract class BaseService {
 
     protected static final Logger LOGGER = Logger.getLogger(BaseService.class);
 
-    protected Properties properties;
+    private PropertiesContext propertiesContext;
 
     protected String JUSTSEND_API_URL;
 
@@ -38,21 +39,8 @@ public abstract class BaseService {
     }
 
     public void initProperties() {
-
-        if (nonNull(properties) && !properties.isEmpty()) {
-            return;
-        }
-        InputStream inputStream = BaseService.class.getClassLoader().getResourceAsStream("config/config.properties");
-
-        properties = new Properties();
-        try {
-            properties.load(inputStream);
-            LOGGER.debug("Initialized properties.");
-            LOGGER.debug(properties.toString());
-            JUSTSEND_API_URL = properties.getProperty("justsend.api.url");
-        } catch (IOException e) {
-            new IllegalStateException("Problem with initializing properties.");
-        }
+        PropertiesContext.init();
+        JUSTSEND_API_URL = getProperties().getProperty("justsend.api.url");
 
     }
 

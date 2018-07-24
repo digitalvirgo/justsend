@@ -170,7 +170,7 @@ public class BulkServiceImpl extends BaseService implements BulkService {
 
         try {
 
-            JSResponse jsResponse = justsendHttpClient.doMultiPartPost(url, inputData, null);
+            JSResponse jsResponse = justsendHttpClient.doMultiPartPost(url, "inputData", inputData, null,null);
             return processResponse(jsResponse, Long.class);
 
         } catch (IOException e) {
@@ -193,7 +193,7 @@ public class BulkServiceImpl extends BaseService implements BulkService {
 
         try {
 
-            JSResponse jsResponse = justsendHttpClient.doMultiPartPost(url, inputData, null);
+            JSResponse jsResponse = justsendHttpClient.doMultiPartPost(url, "inputData", inputData, null,null);
             return processResponse(jsResponse, Long.class);
 
         } catch (IOException e) {

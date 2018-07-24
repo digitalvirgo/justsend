@@ -1,4 +1,4 @@
-package pl.avantis.justsend.api.client.services.impl.http.utils;
+package pl.avantis.justsend.api.client.services.impl.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

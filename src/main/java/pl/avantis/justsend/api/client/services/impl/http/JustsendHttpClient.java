@@ -17,7 +17,7 @@ import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import pl.avantis.justsend.api.client.model.JSResponse;
-import pl.avantis.justsend.api.client.services.impl.http.utils.JSONSerializer;
+import pl.avantis.justsend.api.client.services.impl.utils.JSONSerializer;
 import pl.avantis.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
 
 import java.io.BufferedReader;
@@ -28,8 +28,8 @@ import java.util.stream.Collectors;
 
 import static java.lang.String.format;
 import static org.apache.http.util.TextUtils.isBlank;
-import static pl.avantis.justsend.api.client.services.impl.http.utils.JSONSerializer.serialize;
-import static pl.avantis.justsend.api.client.services.impl.http.utils.Printer.getNiceFormat;
+import static pl.avantis.justsend.api.client.services.impl.utils.JSONSerializer.serialize;
+import static pl.avantis.justsend.api.client.services.impl.utils.Printer.getNiceFormat;
 
 public class JustsendHttpClient {
 
@@ -98,11 +98,7 @@ public class JustsendHttpClient {
 
     }
 
-    public JSResponse doMultiPartPost(String url, String group, File file) throws IOException, JustsendApiClientException {
-        return doMultiPartPost(url, file, group);
-    }
-
-    public JSResponse doMultiPartPost(String url, File file, String text) throws IOException, JustsendApiClientException {
+    public JSResponse doMultiPartPost(String url, String fileInputName, File file, String textInputName, String text) throws IOException, JustsendApiClientException {
 
         HttpClient client = HttpClientBuilder.create().build();
 
@@ -117,9 +113,9 @@ public class JustsendHttpClient {
             builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
 
             FileBody fileBody = new FileBody(file);
-            builder.addPart("inputData", fileBody);
+            builder.addPart(fileInputName, fileBody);
             if (!isBlank(text)) {
-                builder.addTextBody("group", text);
+                builder.addTextBody(textInputName, text);
             }
 
             HttpEntity entity = builder.build();

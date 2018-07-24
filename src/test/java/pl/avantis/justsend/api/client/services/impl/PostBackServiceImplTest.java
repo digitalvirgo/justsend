@@ -21,7 +21,8 @@ public class PostBackServiceImplTest {
         checkIfProdUrl(postBackService);
     }
 
-    @Test
+    // removed from implementation for testing
+    @Test(enabled = false)
     public void testSendPostBack() throws JustsendApiClientException {
         String response = postBackService.sendPostBack(SHIPMENTS_STATUS, "StringJson");
         Assertions.assertThat(response).isEqualTo("OK");
