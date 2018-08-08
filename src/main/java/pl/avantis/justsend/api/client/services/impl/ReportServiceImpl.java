@@ -2,6 +2,7 @@ package pl.avantis.justsend.api.client.services.impl;
 
 import com.google.gson.reflect.TypeToken;
 import pl.avantis.justsend.api.client.model.FileReportStatus;
+import pl.avantis.justsend.api.client.model.FileReportStatusDTO;
 import pl.avantis.justsend.api.client.model.JSResponse;
 import pl.avantis.justsend.api.client.model.ReportMessageResponse;
 import pl.avantis.justsend.api.client.model.ReportResponse;
@@ -296,5 +297,34 @@ public class ReportServiceImpl extends BaseService implements ReportService {
             throw new JustsendApiClientException("connection failed: " + e.getMessage());
         }
     }
+
+//    TODO add methods to test
+
+    @Override
+    public void generateResponseHistory(final LocalDate from, final LocalDate to) {
+        String url = createURL("/v2/report/file/generate/responseHistory/{from}/{to}",
+                "from", convertDate(from), "to", convertDate(to));
+
+        try {
+            justsendHttpClient.doGet(url);
+        } catch (IOException e) {
+            throw new JustsendApiClientException("connection failed: " + e.getMessage());
+        }
+
+    }
+
+    @Override
+    public List<FileReportStatusDTO> getResponseHistory() {
+        String url = createURL("/v2/report/file/list/responseHistory");
+
+        try {
+            JSResponse jsResponse = justsendHttpClient.doGet(url);
+            return processResponse(jsResponse, new TypeToken<List<FileReportStatusDTO>>(){}.getType());
+        } catch (IOException e) {
+            throw new JustsendApiClientException("connection failed: " + e.getMessage());
+        }
+    }
+
+
 }
 

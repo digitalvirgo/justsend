@@ -31,4 +31,6 @@ public abstract class BaseBulk extends BaseModel {
 
     private LanguageMessage language;
 
+    private String groupSmsContent;
+
 }

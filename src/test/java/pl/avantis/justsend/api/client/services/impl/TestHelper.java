@@ -35,8 +35,8 @@ public class TestHelper {
         return new File(file);
     }
 
-    public static void checkIfProdUrl(BaseService baseService){
-        if (baseService.getJUSTSEND_API_URL().contains(PROD_URL)){
+    public static void checkIfProdUrl(){
+        if (Constants.JUSTSEND_API_URL.contains(PROD_URL)){
             throw new IllegalStateException("Production link can't be used in tests");
         }
     }

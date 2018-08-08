@@ -20,8 +20,9 @@ public class BlackListServiceImplTest extends BlackListServiceTestDataProvider {
 
     @BeforeClass
     public void init() {
+        Constants.JUSTSEND_API_URL="http://justsend-api.dcos.staging.avantis.pl/api/rest";
         blackListService = new BlackListServiceImpl(APP_KEY);
-        checkIfProdUrl(blackListService);
+        checkIfProdUrl();
     }
 
     @Test

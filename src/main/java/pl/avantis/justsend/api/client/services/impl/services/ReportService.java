@@ -1,6 +1,7 @@
 package pl.avantis.justsend.api.client.services.impl.services;
 
 import pl.avantis.justsend.api.client.model.FileReportStatus;
+import pl.avantis.justsend.api.client.model.FileReportStatusDTO;
 import pl.avantis.justsend.api.client.model.ReportMessageResponse;
 import pl.avantis.justsend.api.client.model.ReportResponse;
 import pl.avantis.justsend.api.client.model.ReportResponseMessage;
@@ -218,4 +219,19 @@ public interface ReportService {
      */
 
     String generateBulkHistoryReport(Long groupId) throws JustsendApiClientException;
+
+    /**
+     * Dodaje do kolejki zadanie wygenerowania raportu hitorii odpowiedzi za dany okres
+     *  @param from Date from (yyyy-MM-dd)
+     * @param to Date to (yyyy-MM-dd)
+     */
+
+    void generateResponseHistory(LocalDate from, LocalDate to);
+
+    /**
+     *Zwraca listę wygenerowanych raportów response
+     * @return reporty respons-ów
+     */
+
+    List<FileReportStatusDTO> getResponseHistory();
 }

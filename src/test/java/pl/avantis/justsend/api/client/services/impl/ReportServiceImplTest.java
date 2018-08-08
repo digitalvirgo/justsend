@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import pl.avantis.justsend.api.client.model.Bulk;
 import pl.avantis.justsend.api.client.model.BulkResponse;
 import pl.avantis.justsend.api.client.model.FileReportStatus;
+import pl.avantis.justsend.api.client.model.FileReportStatusDTO;
 import pl.avantis.justsend.api.client.model.GroupResponse;
 import pl.avantis.justsend.api.client.model.Prefix;
 import pl.avantis.justsend.api.client.model.ReportMessageResponse;
@@ -18,12 +19,15 @@ import pl.avantis.justsend.api.client.model.SubAccount;
 import pl.avantis.justsend.api.client.services.impl.enums.BulkVariant;
 import pl.avantis.justsend.api.client.services.impl.enums.FileReportStatuses;
 import pl.avantis.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
+import pl.avantis.justsend.api.client.test.helpers.Commands;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Random;
 
 import static java.lang.String.format;
 import static java.lang.Thread.sleep;
+import static java.time.LocalDate.now;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static pl.avantis.justsend.api.client.services.impl.TestHelper.APP_KEY;
@@ -58,12 +62,14 @@ public class ReportServiceImplTest {
 
     private String senderSingleBulk = "sen" + new Random().nextInt(100000);
     private BulkResponse bulkResponse;
+    BulkResponse bulkResponseWithUserResponse;
     private Long singleBulkId;
 
     @BeforeClass
     public void setUp() throws JustsendApiClientException {
+        Constants.JUSTSEND_API_URL="http://justsend-api.dcos.staging.avantis.pl/api/rest";
         reportService = new ReportServiceImpl(APP_KEY);
-        checkIfProdUrl(reportService);
+        checkIfProdUrl();
         bulkService = new BulkServiceImpl(APP_KEY);
         accountService = new AccountServiceImpl(APP_KEY);
         messageService = new MessageServiceImpl(APP_KEY);
@@ -302,5 +308,20 @@ public class ReportServiceImplTest {
             FileReportStatus reportStatus = reportService.getReportStatus(getFileNamePart(fileName, FILE_ID));
             fileReportStatus = reportStatus.getFileReportStatus();
         }
+    }
+
+    @Test
+    public void testGenerateResponseHistory() {
+        //when
+        reportService.generateResponseHistory(now().minusDays(1), now().plusDays(1));
+    }
+
+    @Test(dependsOnMethods = "testGenerateResponseHistory")
+    public void testGetResponseHistory() {
+        //when
+        List<FileReportStatusDTO> responseHistory = reportService.getResponseHistory();
+
+        //then
+        assertThat(responseHistory).isNotEmpty();
     }
 }

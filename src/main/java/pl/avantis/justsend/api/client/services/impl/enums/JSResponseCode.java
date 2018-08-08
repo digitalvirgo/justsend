@@ -24,7 +24,12 @@ public enum JSResponseCode {
     NO_NOTIFICATION_INFO_FOUND(103, "Not found notification info"),
     USER_READED_NOTIFICATION_INFO(105, "User readed notification info"),
     WRONG_CREDENTIALS(105, "Wrong credentials"),
-    INVALID_BULK_STATE(107, "Bulk is accepted");
+    INVALID_BULK_STATE(107, "Bulk is accepted"),
+    ILLEGAL_CREATE_PREFIX(109, "Incorrect prefix parameters"),
+    NOT_FOUND_CYCLICAL_PAYMENT(103, "Cyclical payments not found"),
+    NOT_FOUND_USER_CARD(103, "User card not found"),
+    INVALID_NOTIFICATION(103, "Invalid notification"),
+    NOT_FOUND_HISTORICAL_TRANSACTION(103, "Not found historical transaction");
 
     private String errorMessage;
     private Integer errorId;

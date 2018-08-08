@@ -1,5 +1,7 @@
 package pl.avantis.justsend.api.client.test.helpers;
 
+import pl.avantis.justsend.api.client.model.GroupMember;
+
 import java.util.Random;
 import java.util.UUID;
 
@@ -14,6 +16,9 @@ public class DataGenerator {
         return "48514875" + valueOf(generateDigitNumber(3));
     }
 
+    public static GroupMember getRandomPhoneNumberMember() {
+        return new GroupMember("48514875" + valueOf(generateDigitNumber(3)));
+    }
 
     public static String getIncorrectPhoneNumber() {
         return valueOf(random.nextInt(1000000));

@@ -29,8 +29,9 @@ public class PaymentServiceImplTest {
 
     @BeforeClass
     public void setUp() throws JustsendApiClientException {
+        Constants.JUSTSEND_API_URL="http://justsend-api.dcos.staging.avantis.pl/api/rest";
         accountService = new AccountServiceImpl(APP_KEY_ADMINISTRATOR);
-        checkIfProdUrl(accountService);
+        checkIfProdUrl();
         subAccountResponse = accountService.createSubAccount(createSubAccountRequest(points));
         LOGGER.info("subAccountResponse = " + TestHelper.toString(subAccountResponse));
     }

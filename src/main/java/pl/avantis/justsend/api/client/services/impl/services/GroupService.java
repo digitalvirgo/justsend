@@ -104,7 +104,7 @@ public interface GroupService {
      * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
      */
 
-    String addNumbersToGroup(Long groupId, File inputData) throws JustsendApiClientException;
+    String addMsisdnToGroup(Long groupId, File inputData) throws JustsendApiClientException;
 
     /**
      * Aktualizuje grupę

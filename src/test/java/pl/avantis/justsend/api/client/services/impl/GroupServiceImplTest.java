@@ -1,7 +1,6 @@
 package pl.avantis.justsend.api.client.services.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.assertj.core.api.Assertions;
 import org.testng.annotations.BeforeMethod;
@@ -16,7 +15,6 @@ import pl.avantis.justsend.api.client.model.Prefix;
 import pl.avantis.justsend.api.client.model.PrefixReservation;
 import pl.avantis.justsend.api.client.services.impl.enums.PrefixType;
 import pl.avantis.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
-import pl.avantis.justsend.api.client.test.helpers.DataGenerator;
 
 import java.util.Date;
 import java.util.List;
@@ -31,6 +29,7 @@ import static pl.avantis.justsend.api.client.services.impl.TestHelper.APP_KEY_AD
 import static pl.avantis.justsend.api.client.services.impl.TestHelper.checkIfProdUrl;
 import static pl.avantis.justsend.api.client.services.impl.enums.PrefixAccessType.GLOBAL;
 import static pl.avantis.justsend.api.client.test.helpers.DataGenerator.getRandomPhoneNumber;
+import static pl.avantis.justsend.api.client.test.helpers.DataGenerator.getRandomPhoneNumberMember;
 
 public class GroupServiceImplTest {
 
@@ -39,7 +38,6 @@ public class GroupServiceImplTest {
     private PrefixServiceImpl prefixService;
     private Long groupID;
     private static final Random random = new Random();
-    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     public static GroupCreate groupCreate() {
         GroupCreate groupCreate = new GroupCreate();
@@ -54,10 +52,10 @@ public class GroupServiceImplTest {
 
     @BeforeMethod
     public void setUp() throws JustsendApiClientException {
-
+        Constants.JUSTSEND_API_URL="http://justsend-api.dcos.staging.avantis.pl/api/rest";
         groupService = new GroupServiceImpl(APP_KEY);
 
-        checkIfProdUrl(groupService);
+        checkIfProdUrl();
         prefixService = new PrefixServiceImpl(APP_KEY_ADMINISTRATOR);
 
         String group = groupService.createGroup(groupCreate(), new TestHelper().getFile("emptyFile.txt"));
@@ -91,7 +89,7 @@ public class GroupServiceImplTest {
     public void when_SendRequestToCreateGroupWithTwoNumbers_then_createGroupWithTwoNumbers() throws JustsendApiClientException {
         //given
         GroupCreate groupCreate = groupCreate();
-        groupCreate.setMembers(asList(getRandomPhoneNumber(), getRandomPhoneNumber()));
+        groupCreate.setMembers(asList(getRandomPhoneNumberMember(), getRandomPhoneNumberMember()));
 
         //when
         String group = groupService.createGroup(groupCreate, new TestHelper().getFile("emptyFile.txt"));
@@ -155,7 +153,7 @@ public class GroupServiceImplTest {
         //then
         assertThat(addNumberToGroup).isEqualTo("Added: 1 numbers");
         Group group = groupService.retrieveGroup(groupID);
-        assertThat(group.getMembers()).containsExactlyInAnyOrder("Number1", "Number2", "514746372");
+        assertThat(group.getMembers()).containsExactlyInAnyOrder("514746372");
     }
 
     @Test
@@ -177,7 +175,7 @@ public class GroupServiceImplTest {
     @Test
     public void testAddMsisdnToGroup() throws JustsendApiClientException, InterruptedException {
         //when
-        String groupResponses = groupService.addNumbersToGroup(groupID, new TestHelper().getFile("groupMisin.txt"));
+        String groupResponses = groupService.addMsisdnToGroup(groupID, new TestHelper().getFile("groupMisin.txt"));
 
         //then
         Assertions.assertThat(groupResponses).isEqualTo("Successful");

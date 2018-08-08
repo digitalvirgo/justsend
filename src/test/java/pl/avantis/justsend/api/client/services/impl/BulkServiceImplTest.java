@@ -10,6 +10,7 @@ import pl.avantis.justsend.api.client.model.Bulk;
 import pl.avantis.justsend.api.client.model.BulkGroupList;
 import pl.avantis.justsend.api.client.model.BulkResponse;
 import pl.avantis.justsend.api.client.model.GroupCreate;
+import pl.avantis.justsend.api.client.model.GroupMember;
 import pl.avantis.justsend.api.client.model.LanguageMessage;
 import pl.avantis.justsend.api.client.model.MessageStatus;
 import pl.avantis.justsend.api.client.model.SenderResponse;
@@ -37,14 +38,13 @@ public class BulkServiceImplTest {
     private BulkServiceImpl bulkService;
     private GroupService groupService;
 
-    private ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-
     private DataFactory dataFactory = new DataFactory();
 
     @BeforeClass
     public void setUp() {
+        Constants.JUSTSEND_API_URL="http://justsend-api.dcos.staging.avantis.pl/api/rest";
         bulkService = new BulkServiceImpl(APP_KEY);
-        checkIfProdUrl(bulkService);
+        checkIfProdUrl();
         groupService = new GroupServiceImpl(APP_KEY);
     }
 
@@ -75,7 +75,6 @@ public class BulkServiceImplTest {
         assertThat(bulkRecipientsByMessageStatus.get(0)).endsWith(sendBulk.getTo().get(0));
         LOGGER.info("bulkRecipientsByMessageStatus = " + bulkRecipientsByMessageStatus);
     }
-
 
 
     @Test
@@ -143,10 +142,10 @@ public class BulkServiceImplTest {
         LOGGER.info("bulkGroupListResponse = " + TestHelper.toString(bulkGroupListResponse));
     }
 
-    private GroupCreate groupCreate() throws JsonProcessingException {
+    private GroupCreate groupCreate() {
         GroupCreate groupCreate = new GroupCreate();
         groupCreate.setName("name");
-        groupCreate.setMembers(asList("Number1", "Number2"));
+        groupCreate.setMembers(asList(new GroupMember("Number1"), new GroupMember("Number2")));
         return groupCreate;
     }
 }

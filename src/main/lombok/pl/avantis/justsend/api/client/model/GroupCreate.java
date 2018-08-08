@@ -5,14 +5,21 @@
  */
 package pl.avantis.justsend.api.client.model;
 
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.Date;
+import java.util.List;
 
+
+@Data
 @EqualsAndHashCode(callSuper = true)
-public class GroupCreate extends Group {
+public class GroupCreate extends BaseModel {
 
-    @Override
-    public long getGroupId() {
-        return super.getGroupId();
-    }
+    private String name;
+    private List<GroupMember> members;
+    private Date dateFrom;
+    private Date dateTo;
+    private String groupSmsContent;
+
 }

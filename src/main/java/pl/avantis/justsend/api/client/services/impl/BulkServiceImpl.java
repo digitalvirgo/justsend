@@ -161,12 +161,11 @@ public class BulkServiceImpl extends BaseService implements BulkService {
             final String data,
             final String bulkVariant,
             final Boolean personalized,
-            final LanguageMessage language,
             final File inputData) throws JustsendApiClientException {
 
-        String url = createURL("/v2/bulk/send/personalized/{name}/{from}/{data}/{bulkVariant}/{personalized}/{language}",
+        String url = createURL("/v2/bulk/send/personalized/{name}/{from}/{data}/{bulkVariant}/{personalized}",
                 "name", name, "from", from, "data", data, "bulkVariant", bulkVariant,
-                "personalized", personalized.toString(), "language", language.name());
+                "personalized", personalized.toString());
 
         try {
 
@@ -185,11 +184,12 @@ public class BulkServiceImpl extends BaseService implements BulkService {
             final String data,
             final String bulkVariant,
             final Boolean personalized,
+            final LanguageMessage language,
             final File inputData) throws JustsendApiClientException {
 
-        String url = createURL("/v2/bulk/send/personalized/{name}/{from}/{data}/{bulkVariant}/{personalized}",
+        String url = createURL("/v2/bulk/send/personalized/{name}/{from}/{data}/{bulkVariant}/{personalized}/{language}",
                 "name", name, "from", from, "data", data, "bulkVariant", bulkVariant,
-                "personalized", personalized.toString());
+                "personalized", personalized.toString(), "language", language.name());
 
         try {
 

@@ -35,8 +35,9 @@ public class AccountServiceImplTest {
 
     @BeforeClass(alwaysRun = true)
     protected void setUp() throws SecurityException, IOException {
+        Constants.JUSTSEND_API_URL="http://justsend-api.dcos.staging.avantis.pl/api/rest";
         accountService = new AccountServiceImpl(APP_KEY);
-        checkIfProdUrl(accountService);
+        checkIfProdUrl();
         FileInputStream fis = new FileInputStream(AccountServiceImplTest.class.getResource("/log4j.xml").getFile());
         LogManager.getLogManager().readConfiguration(fis);
     }

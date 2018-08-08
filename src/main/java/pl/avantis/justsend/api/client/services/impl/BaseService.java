@@ -3,28 +3,18 @@ package pl.avantis.justsend.api.client.services.impl;
 import org.apache.log4j.Logger;
 import pl.avantis.justsend.api.client.model.JSResponse;
 import pl.avantis.justsend.api.client.services.impl.http.JustsendHttpClient;
-import pl.avantis.justsend.api.client.services.impl.utils.JSONSerializer;
 import pl.avantis.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
-import pl.avantis.justsend.api.client.services.impl.utils.PropertiesContext;
+import pl.avantis.justsend.api.client.services.impl.utils.JSONSerializer;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.Type;
-import java.util.Properties;
 
 import static java.lang.String.format;
-import static java.util.Objects.nonNull;
 import static java.util.Objects.requireNonNull;
-import static pl.avantis.justsend.api.client.services.impl.utils.PropertiesContext.getProperties;
 
 
 public abstract class BaseService {
 
     protected static final Logger LOGGER = Logger.getLogger(BaseService.class);
-
-    private PropertiesContext propertiesContext;
-
-    protected String JUSTSEND_API_URL;
 
     protected JustsendHttpClient justsendHttpClient;
 
@@ -35,13 +25,6 @@ public abstract class BaseService {
     public BaseService(String appKey) {
         requireNonNull(appKey);
         justsendHttpClient = new JustsendHttpClient(appKey);
-        initProperties();
-    }
-
-    public void initProperties() {
-        PropertiesContext.init();
-        JUSTSEND_API_URL = getProperties().getProperty("justsend.api.url");
-
     }
 
     protected void validateResponse(JSResponse jsResponse) throws JustsendApiClientException {
@@ -63,7 +46,7 @@ public abstract class BaseService {
     }
 
     protected String createURL(String methodPath) {
-        return JUSTSEND_API_URL + methodPath;
+        return Constants.JUSTSEND_API_URL + methodPath;
     }
 
     protected String createURL(String methodPath, String... pathVar) throws JustsendApiClientException {
@@ -104,10 +87,5 @@ public abstract class BaseService {
             }
         }
         return url.concat(parameters.toString());
-    }
-
-
-    public String getJUSTSEND_API_URL() {
-        return JUSTSEND_API_URL;
     }
 }

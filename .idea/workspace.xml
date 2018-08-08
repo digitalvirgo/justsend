@@ -1,15 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/ReportServiceImplTest.java" line="128" mnemonic="9" />
+    <bookmark url="file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/ReportServiceImplTest.java" line="134" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f6415fd-738f-4c02-b100-b67667f9ad43" name="Default" comment="">
+    <list default="true" id="6f6415fd-738f-4c02-b100-b67667f9ad43" name="Default" comment="test corrections refactoring PropertiesContext, file input name corrections">
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/Constants.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/BaseBulkDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/BulkDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/BulkSource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/FileReportStatusDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/InfobipVoiceLanguage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/BaseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/BaseService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/BulkServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/BulkServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/GroupServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/GroupServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/http/JustsendHttpClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/http/JustsendHttpClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/PostBackServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/ReportServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/ReportServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/enums/AddressPostBackType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/enums/JSResponseCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/enums/JSResponseCode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/enums/ReportTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/enums/ReportTypes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/services/GroupService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/services/GroupService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/services/PostBackService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/services/ReportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/services/ReportService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/utils/PropertiesContext.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/BaseBulk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/BaseBulk.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/GroupCreate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/GroupCreate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/AccountServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/AccountServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/BlackListServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/BlackListServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/BulkServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/BulkServiceImplTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/GroupServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/GroupServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/MessageServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/MessageServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/PaymentServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/PaymentServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/PostBackServiceImplTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/ReportServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/ReportServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/TestHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/TestHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/TestHelperTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/TestHelperTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/test/helpers/DataGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/test/helpers/DataGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/application.properties" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -72,37 +102,43 @@
     <session id="763219304">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
-          <entry key="project.open.time.1" value="2" />
+          <entry key="project.closed" value="4" />
+          <entry key="project.open.time.1" value="4" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="12" />
+          <entry key="java" value="93" />
+          <entry key="properties" value="2" />
           <entry key="txt" value="3" />
+          <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="12" />
+          <entry key="JAVA" value="93" />
           <entry key="PLAIN_TEXT" value="3" />
+          <entry key="Properties" value="2" />
+          <entry key="XML" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="339" />
-          <entry key="PLAIN_TEXT" value="15" />
+          <entry key="JAVA" value="974" />
+          <entry key="PLAIN_TEXT" value="50" />
+          <entry key="XML" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.spring.boot.mvc.usages" />
       <usages-collector id="statistics.js.language.service.starts" />
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="339" />
-          <entry key="txt" value="15" />
+          <entry key="java" value="974" />
+          <entry key="txt" value="50" />
+          <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.spring.boot.run.usages" />
@@ -113,8 +149,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/GroupServiceImplTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="113" column="39" selection-start-line="113" selection-start-column="39" selection-end-line="113" selection-end-column="39" />
+            <state relative-caret-position="202">
+              <caret line="60" column="30" selection-start-line="60" selection-start-column="30" selection-end-line="60" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -122,11 +158,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/Group.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/Prefix.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="163">
-              <caret line="19" column="25" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
+            <state relative-caret-position="240">
+              <caret line="25" column="24" lean-forward="true" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -134,44 +170,74 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/TestHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="33" column="16" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
+            <state relative-caret-position="157">
+              <caret line="37" column="34" selection-start-line="37" selection-start-column="34" selection-end-line="37" selection-end-column="34" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/resources/groupMisin.txt">
+        <entry file="file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/TestHelperTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret lean-forward="true" selection-end-column="9" />
+            <state relative-caret-position="180">
+              <caret line="14" column="33" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/GroupServiceImpl.java">
+        <entry file="file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/AccountServiceImplTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="142">
+              <caret line="150" column="40" selection-start-line="150" selection-start-column="40" selection-end-line="150" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/MessageServiceImplTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="98">
+              <caret line="20" column="90" selection-start-line="20" selection-start-column="90" selection-end-line="20" selection-end-column="90" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/PaymentServiceImplTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="97">
+              <caret line="30" column="59" selection-start-line="30" selection-start-column="59" selection-end-line="30" selection-end-column="59" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/PrefixServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-202">
+              <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/ReportServiceImplTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="217">
-              <caret line="68" column="64" lean-forward="true" selection-start-line="68" selection-start-column="64" selection-end-line="68" selection-end-column="64" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/BulkServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
-              <caret line="195" column="55" selection-start-line="195" selection-start-column="55" selection-end-line="195" selection-end-column="55" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/http/JustsendHttpClient.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="37">
-              <caret line="98" column="5" selection-start-line="98" selection-start-column="5" selection-end-line="98" selection-end-column="5" />
+              <caret line="322" selection-start-line="322" selection-end-line="322" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -182,18 +248,13 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TestNG Test Class" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>sender844</find>
-      <find>dataFactory</find>
-      <find>4112</find>
-      <find>senderSingleBulk</find>
-      <find>debug</find>
-      <find>APP</find>
       <find>25000</find>
       <find>APP_KEY</find>
       <find>prefix</find>
@@ -218,6 +279,12 @@
       <find>ack</find>
       <find>groupID</find>
       <find>createGroup</find>
+      <find>sendPersonalizedBulk</find>
+      <find>generate/groupMsisds</find>
+      <find>TypeToken</find>
+      <find>from</find>
+      <find>applica</find>
+      <find>JUSTSEND_API_URL</find>
     </findStrings>
     <replaceStrings>
       <replace>JustsendApiClientException</replace>
@@ -235,23 +302,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/pl/justsend/api/client/services/methods/AccountMethods.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/justsend/api/client/services/methods/BlackListMethods.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/justsend/api/client/services/methods/MessageMethods.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/justsend/api/client/http/JustsendHttpClient.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/justsend/api/client/services/GroupService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/justsend/api/client/services/impl/GroupServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/justsend/api/client/services/impl/BulkServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/test/java/pl/justsend/api/client/services/impl/TestHelper.java" />
-        <option value="$PROJECT_DIR$/src/test/java/pl/justsend/api/client/services/impl/GroupServiceImplTest.java" />
-        <option value="$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/Bulk.java" />
-        <option value="$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/BulkBuilder.java" />
-        <option value="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/test/helpers/BulkGroupListBuilder.java" />
-        <option value="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/PrefixServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/test/helpers/Commands.java" />
         <option value="$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/ReportResponseMessage.java" />
         <option value="$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/GroupMember.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/http/utils/PrinterTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/http/utils/JSONSerializer.java" />
         <option value="$PROJECT_DIR$/src/main/resources/log4j.xml" />
@@ -261,31 +314,45 @@
         <option value="$PROJECT_DIR$/src/test/resources/config/config.properties" />
         <option value="$PROJECT_DIR$/src/main/resources/config/config.properties" />
         <option value="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/services/PanelReportService.java" />
-        <option value="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/MessageServiceImplTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/BlackListServiceImplTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/PaymentServiceImplTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/TestHelperTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/test/helpers/BulkBuilder.java" />
         <option value="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/PanelReportServiceImplTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/PanelReportServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/TestHelper.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/utils/ValidationAccoiuntService.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/AccountServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/enums/BulkVariant.java" />
-        <option value="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/BulkServiceImplTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/BaseService.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/utils/PropertiesContext.java" />
         <option value="$PROJECT_DIR$/src/test/resources/sasdsa" />
         <option value="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/PostBackServiceImplTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/test/helpers/DataGenerator.java" />
-        <option value="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/AccountServiceImplTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/ReportServiceImplTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/services/exception/JustsendApiClientException.java" />
         <option value="$PROJECT_DIR$/src/test/resources/groupMisin.txt" />
-        <option value="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/GroupServiceImplTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/GroupServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/BulkServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/http/JustsendHttpClient.java" />
+        <option value="$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/InfobipVoiceLanguage.java" />
+        <option value="$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/BulkSource.java" />
+        <option value="$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/BaseBulkDTO.java" />
+        <option value="$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/BulkDTO.java" />
+        <option value="$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/GroupDTO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/enums/ReportTypes.java" />
+        <option value="$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/BaseBulk.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/enums/JSResponseCode.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/BulkServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/GroupServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/services/ReportService.java" />
+        <option value="$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/FileReportStatusDTO.java" />
+        <option value="$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/GroupCreate.java" />
+        <option value="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/test/helpers/DataGenerator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/ReportServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/Constants.java" />
+        <option value="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/TestHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/BaseService.java" />
+        <option value="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/BlackListServiceImplTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/AccountServiceImplTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/TestHelperTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/BulkServiceImplTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/GroupServiceImplTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/MessageServiceImplTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/PaymentServiceImplTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/ReportServiceImplTest.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -343,6 +410,19 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="AndroidView">
+        <subPane>
+          <expand>
+            <path>
+              <item name="justsend-api-client" type="1abcf292:AndroidViewProjectNode" />
+              <item name="justsend-api-client-test" type="1039202d:NonAndroidModuleNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -367,6 +447,46 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="justsend-api-client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="justsend-api-client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="impl" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="justsend-api-client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="justsend-api-client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="impl" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="justsend-api-client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="justsend-api-client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="impl" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="justsend-api-client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="justsend-api-client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="lombok" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="justsend-api-client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="justsend-api-client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="justsend-api-client" type="b2602c69:ProjectViewProjectNode" />
@@ -409,19 +529,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView">
-        <subPane>
-          <expand>
-            <path>
-              <item name="justsend-api-client" type="1abcf292:AndroidViewProjectNode" />
-              <item name="justsend-api-client-test" type="1039202d:NonAndroidModuleNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -434,7 +541,7 @@
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///home/posiadacz/git/justsend-api-client/src/main/java/pl/justsend/api/client/model/JSResponse.java" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1533627957345" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1533742403193" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="TestNG" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.TestNG" value="" />
     <property name="extract.method.default.visibility" value="private" />
@@ -443,10 +550,11 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="pl.avantis.justsend.api.client.model" />
       <recent name="pl.avantis.justsend.api.client.test.helpers" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
@@ -474,6 +582,7 @@
       <recent name="pl.avantis.justsend.api.client.model" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="pl.avantis.justsend.api.client.model" />
       <recent name="pl.justsend.api.client.model" />
       <recent name="pl.justsend.api.client.model.enums" />
     </key>
@@ -490,7 +599,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="TestNG.GroupServiceImplTest.when_SendRequestToCreateGroupWithTwoNumbersInFile_then_createGroupWithTwoNumbers">
+  <component name="RunManager" selected="TestNG.AccountServiceImplTest.createSubAccountTest">
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
       <Port>5050</Port>
@@ -512,6 +621,29 @@
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="moduleWithDependencies" />
       </option>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AccountServiceImplTest.createSubAccountTest" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="justsend-api-client" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pl.avantis.justsend.api.client.services.impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="pl.avantis.justsend.api.client.services.impl" />
+      <option name="MAIN_CLASS_NAME" value="pl.avantis.justsend.api.client.services.impl.AccountServiceImplTest" />
+      <option name="METHOD_NAME" value="createSubAccountTest" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="PARAMETERS" value="0" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -543,7 +675,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GroupServiceImplTest.testAddMsisdnToGroup" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="GroupServiceImplTest" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <module name="justsend-api-client" />
       <extension name="coverage">
         <pattern>
@@ -553,8 +685,6 @@
       </extension>
       <option name="PACKAGE_NAME" value="pl.avantis.justsend.api.client.services.impl" />
       <option name="MAIN_CLASS_NAME" value="pl.avantis.justsend.api.client.services.impl.GroupServiceImplTest" />
-      <option name="METHOD_NAME" value="testAddMsisdnToGroup" />
-      <option name="TEST_OBJECT" value="METHOD" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="moduleWithDependencies" />
@@ -565,73 +695,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GroupServiceImplTest.when_SendRequestToCreateEmptyGroup_then_createEmptyGroup" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="justsend-api-client" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="pl.avantis.justsend.api.client.services.impl.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="pl.avantis.justsend.api.client.services.impl" />
-      <option name="MAIN_CLASS_NAME" value="pl.avantis.justsend.api.client.services.impl.GroupServiceImplTest" />
-      <option name="METHOD_NAME" value="when_SendRequestToCreateEmptyGroup_then_createEmptyGroup" />
-      <option name="TEST_OBJECT" value="METHOD" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GroupServiceImplTest.when_SendRequestToCreateGroupWithTwoNumbersInFile_then_createGroupWithTwoNumbers" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="justsend-api-client" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="pl.avantis.justsend.api.client.services.impl.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="pl.avantis.justsend.api.client.services.impl" />
-      <option name="MAIN_CLASS_NAME" value="pl.avantis.justsend.api.client.services.impl.GroupServiceImplTest" />
-      <option name="METHOD_NAME" value="when_SendRequestToCreateGroupWithTwoNumbersInFile_then_createGroupWithTwoNumbers" />
-      <option name="TEST_OBJECT" value="METHOD" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GroupServiceImplTest.when_SendRequestToCreateGroupWithTwoNumbers_then_createGroupWithTwoNumbers" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="justsend-api-client" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="pl.avantis.justsend.api.client.services.impl.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="pl.avantis.justsend.api.client.services.impl" />
-      <option name="MAIN_CLASS_NAME" value="pl.avantis.justsend.api.client.services.impl.GroupServiceImplTest" />
-      <option name="METHOD_NAME" value="when_SendRequestToCreateGroupWithTwoNumbers_then_createGroupWithTwoNumbers" />
-      <option name="TEST_OBJECT" value="METHOD" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ReportServiceImplTest.testGetReportStatus" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="ReportServiceImplTest.testGenerateResponseHistory" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <module name="justsend-api-client" />
       <extension name="coverage">
         <pattern>
@@ -641,7 +705,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="pl.avantis.justsend.api.client.services.impl" />
       <option name="MAIN_CLASS_NAME" value="pl.avantis.justsend.api.client.services.impl.ReportServiceImplTest" />
-      <option name="METHOD_NAME" value="testGetReportStatus" />
+      <option name="METHOD_NAME" value="testGenerateResponseHistory" />
       <option name="TEST_OBJECT" value="METHOD" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="TEST_SEARCH_SCOPE">
@@ -684,7 +748,49 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestHelperTest.testCheckIfProdUrl" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="justsend-api-client" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pl.avantis.justsend.api.client.services.impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="pl.avantis.justsend.api.client.services.impl" />
+      <option name="MAIN_CLASS_NAME" value="pl.avantis.justsend.api.client.services.impl.TestHelperTest" />
+      <option name="METHOD_NAME" value="testCheckIfProdUrl" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="pl.avantis.justsend.api.client.services.impl" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="justsend-api-client" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pl.avantis.justsend.api.client.services.impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="pl.avantis.justsend.api.client.services.impl" />
+      <option name="TEST_OBJECT" value="PACKAGE" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="moduleWithDependencies" />
@@ -707,19 +813,19 @@
     <list>
       <item itemvalue="TestNG.C:/Users/dbajno/.IntelliJIdea2018.1/system/not-passing-test.xml" />
       <item itemvalue="TestNG.ReportServiceImplTest,testRetrieveSingleBulkReportByBulkId and 5 more" />
-      <item itemvalue="TestNG.ReportServiceImplTest.testGetReportStatus" />
-      <item itemvalue="TestNG.GroupServiceImplTest.testAddMsisdnToGroup" />
-      <item itemvalue="TestNG.GroupServiceImplTest.when_SendRequestToCreateEmptyGroup_then_createEmptyGroup" />
-      <item itemvalue="TestNG.GroupServiceImplTest.when_SendRequestToCreateGroupWithTwoNumbers_then_createGroupWithTwoNumbers" />
-      <item itemvalue="TestNG.GroupServiceImplTest.when_SendRequestToCreateGroupWithTwoNumbersInFile_then_createGroupWithTwoNumbers" />
+      <item itemvalue="TestNG.GroupServiceImplTest" />
+      <item itemvalue="TestNG.pl.avantis.justsend.api.client.services.impl" />
+      <item itemvalue="TestNG.ReportServiceImplTest.testGenerateResponseHistory" />
+      <item itemvalue="TestNG.TestHelperTest.testCheckIfProdUrl" />
+      <item itemvalue="TestNG.AccountServiceImplTest.createSubAccountTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.GroupServiceImplTest.when_SendRequestToCreateGroupWithTwoNumbersInFile_then_createGroupWithTwoNumbers" />
-        <item itemvalue="TestNG.GroupServiceImplTest.when_SendRequestToCreateGroupWithTwoNumbers_then_createGroupWithTwoNumbers" />
-        <item itemvalue="TestNG.GroupServiceImplTest.when_SendRequestToCreateEmptyGroup_then_createEmptyGroup" />
-        <item itemvalue="TestNG.GroupServiceImplTest.testAddMsisdnToGroup" />
-        <item itemvalue="TestNG.ReportServiceImplTest.testGetReportStatus" />
+        <item itemvalue="TestNG.AccountServiceImplTest.createSubAccountTest" />
+        <item itemvalue="TestNG.pl.avantis.justsend.api.client.services.impl" />
+        <item itemvalue="TestNG.TestHelperTest.testCheckIfProdUrl" />
+        <item itemvalue="TestNG.ReportServiceImplTest.testGenerateResponseHistory" />
+        <item itemvalue="TestNG.GroupServiceImplTest" />
       </list>
     </recent_temporary>
   </component>
@@ -771,14 +877,9 @@
       <workItem from="1533552920411" duration="814000" />
       <workItem from="1533560060616" duration="1063000" />
       <workItem from="1533571548798" duration="1405000" />
-      <workItem from="1533625578423" duration="2240000" />
-    </task>
-    <task id="LOCAL-00011" summary="Account and Panel Report service finished">
-      <created>1530008899850</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1530008899850</updated>
+      <workItem from="1533625578423" duration="3512000" />
+      <workItem from="1533639089485" duration="2162000" />
+      <workItem from="1533735060580" duration="7502000" />
     </task>
     <task id="LOCAL-00012" summary="Account and Panel Report service finished">
       <created>1530009252884</created>
@@ -1116,43 +1217,50 @@
       <option name="project" value="LOCAL" />
       <updated>1532531612164</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="test corrections refactoring PropertiesContext, file input name corrections">
+      <created>1533628195382</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1533628195383</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="GroupServiceImplTest_when_SendRequestToCreateGroupWithTwoNumbersInFile_then_createGroupWithTwoNumbers - 2018.08.06 at 18h 25m 32s.xml">
-      <configuration name="GroupServiceImplTest.when_SendRequestToCreateGroupWithTwoNumbersInFile_then_createGroupWithTwoNumbers" configurationId="TestNG" />
+    <history-entry file="C__Users_dbajno__IntelliJIdea2018_2_system_temp-testng-customsuite_xml_(1) - 2018.08.08 at 16h 43m 24s.xml">
+      <configuration name="C:/Users/dbajno/.IntelliJIdea2018.2/system/temp-testng-customsuite.xml (1)" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="GroupServiceImplTest_when_SendRequestToCreateGroupWithTwoNumbersInFile_then_createGroupWithTwoNumbers - 2018.08.07 at 09h 18m 30s.xml">
-      <configuration name="GroupServiceImplTest.when_SendRequestToCreateGroupWithTwoNumbersInFile_then_createGroupWithTwoNumbers" configurationId="TestNG" />
+    <history-entry file="C__Users_dbajno__IntelliJIdea2018_2_system_temp-testng-customsuite_xml_(1) - 2018.08.08 at 16h 43m 31s.xml">
+      <configuration name="C:/Users/dbajno/.IntelliJIdea2018.2/system/temp-testng-customsuite.xml (1)" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="GroupServiceImplTest_when_SendRequestToCreateGroupWithTwoNumbersInFile_then_createGroupWithTwoNumbers - 2018.08.07 at 09h 23m 01s.xml">
-      <configuration name="GroupServiceImplTest.when_SendRequestToCreateGroupWithTwoNumbersInFile_then_createGroupWithTwoNumbers" configurationId="TestNG" />
+    <history-entry file="pl_avantis_justsend_api_client_services_impl - 2018.08.08 at 16h 54m 03s.xml">
+      <configuration name="pl.avantis.justsend.api.client.services.impl" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="GroupServiceImplTest_when_SendRequestToCreateGroupWithTwoNumbersInFile_then_createGroupWithTwoNumbers - 2018.08.07 at 09h 27m 38s.xml">
-      <configuration name="GroupServiceImplTest.when_SendRequestToCreateGroupWithTwoNumbersInFile_then_createGroupWithTwoNumbers" configurationId="TestNG" />
+    <history-entry file="pl_avantis_justsend_api_client_services_impl - 2018.08.08 at 16h 58m 23s.xml">
+      <configuration name="pl.avantis.justsend.api.client.services.impl" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="GroupServiceImplTest_when_SendRequestToCreateGroupWithTwoNumbersInFile_then_createGroupWithTwoNumbers - 2018.08.07 at 09h 29m 15s.xml">
-      <configuration name="GroupServiceImplTest.when_SendRequestToCreateGroupWithTwoNumbersInFile_then_createGroupWithTwoNumbers" configurationId="TestNG" />
+    <history-entry file="GroupServiceImplTest - 2018.08.08 at 17h 02m 20s.xml">
+      <configuration name="GroupServiceImplTest" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="GroupServiceImplTest_when_SendRequestToCreateGroupWithTwoNumbersInFile_then_createGroupWithTwoNumbers - 2018.08.07 at 09h 30m 40s.xml">
-      <configuration name="GroupServiceImplTest.when_SendRequestToCreateGroupWithTwoNumbersInFile_then_createGroupWithTwoNumbers" configurationId="TestNG" />
+    <history-entry file="ReportServiceImplTest_testGenerateResponseHistory - 2018.08.08 at 17h 08m 58s.xml">
+      <configuration name="ReportServiceImplTest.testGenerateResponseHistory" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="GroupServiceImplTest_when_SendRequestToCreateGroupWithTwoNumbersInFile_then_createGroupWithTwoNumbers - 2018.08.07 at 09h 31m 40s.xml">
-      <configuration name="GroupServiceImplTest.when_SendRequestToCreateGroupWithTwoNumbersInFile_then_createGroupWithTwoNumbers" configurationId="TestNG" />
+    <history-entry file="TestHelperTest_testCheckIfProdUrl - 2018.08.08 at 17h 18m 52s.xml">
+      <configuration name="TestHelperTest.testCheckIfProdUrl" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="GroupServiceImplTest_when_SendRequestToCreateGroupWithTwoNumbersInFile_then_createGroupWithTwoNumbers - 2018.08.07 at 09h 32m 10s.xml">
-      <configuration name="GroupServiceImplTest.when_SendRequestToCreateGroupWithTwoNumbersInFile_then_createGroupWithTwoNumbers" configurationId="TestNG" />
+    <history-entry file="pl_avantis_justsend_api_client_services_impl - 2018.08.08 at 17h 30m 19s.xml">
+      <configuration name="pl.avantis.justsend.api.client.services.impl" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="GroupServiceImplTest_when_SendRequestToCreateGroupWithTwoNumbersInFile_then_createGroupWithTwoNumbers - 2018.08.07 at 09h 33m 23s.xml">
-      <configuration name="GroupServiceImplTest.when_SendRequestToCreateGroupWithTwoNumbersInFile_then_createGroupWithTwoNumbers" configurationId="TestNG" />
+    <history-entry file="pl_avantis_justsend_api_client_services_impl - 2018.08.08 at 17h 32m 41s.xml">
+      <configuration name="pl.avantis.justsend.api.client.services.impl" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="GroupServiceImplTest_when_SendRequestToCreateGroupWithTwoNumbersInFile_then_createGroupWithTwoNumbers - 2018.08.07 at 09h 34m 55s.xml">
-      <configuration name="GroupServiceImplTest.when_SendRequestToCreateGroupWithTwoNumbersInFile_then_createGroupWithTwoNumbers" configurationId="TestNG" />
+    <history-entry file="AccountServiceImplTest_createSubAccountTest - 2018.08.08 at 17h 33m 31s.xml">
+      <configuration name="AccountServiceImplTest.createSubAccountTest" configurationId="TestNG" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="283499000" />
+    <option name="totallyTimeSpent" value="294435000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1165,9 +1273,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21006711" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21543624" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="3" />
@@ -1175,14 +1282,14 @@
       <window_info id="Favorites" order="5" side_tool="true" />
       <window_info id="Image Layers" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.32765958" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4986979" weight="0.45673758" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32765958" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4986979" weight="0.4539007" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32965517" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50130206" side_tool="true" weight="0.40551725" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32907802" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="8" visible="true" weight="0.32765958" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.32689655" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.32765958" />
       <window_info anchor="bottom" id="Spring" order="11" />
@@ -1192,7 +1299,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Maven Projects" order="4" weight="0.17057292" />
+      <window_info anchor="right" id="Maven Projects" order="4" visible="true" weight="0.1704698" />
       <window_info anchor="right" id="Material Palette" order="5" />
       <window_info anchor="right" id="Database" order="6" />
       <window_info anchor="right" id="Capture Analysis" order="7" />
@@ -1237,6 +1344,16 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -1286,7 +1403,8 @@
     <MESSAGE value="change create group" />
     <MESSAGE value="remote PanelReportService wwwReport" />
     <MESSAGE value="test corrections refactoring PropertiesContext" />
-    <option name="LAST_COMMIT_MESSAGE" value="test corrections refactoring PropertiesContext" />
+    <MESSAGE value="test corrections refactoring PropertiesContext, file input name corrections" />
+    <option name="LAST_COMMIT_MESSAGE" value="test corrections refactoring PropertiesContext, file input name corrections" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1299,15 +1417,23 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/BlackListServiceImplTest.java</url>
-          <line>43</line>
+          <line>44</line>
           <properties />
           <option name="timeStamp" value="34" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/ReportServiceImplTest.java</url>
-          <line>250</line>
+          <line>256</line>
           <properties />
           <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/ReportServiceImpl.java</url>
+          <line>303</line>
+          <properties class="pl.avantis.justsend.api.client.services.impl.ReportServiceImpl" method="generateResponseHistory">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="47" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -1362,210 +1488,131 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/SingleBulkReport.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/http/JustsendHttpClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        <state relative-caret-position="1035">
+          <caret line="100" column="26" selection-start-line="100" selection-start-column="26" selection-end-line="100" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/ReportResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-30">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/test/helpers/BulkBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="47" column="23" selection-start-line="47" selection-start-column="23" selection-end-line="47" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/BaseBulk.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="19" column="25" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/ReportResponseMessage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/beans/ThreadGroupContext.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="41" column="12" selection-start-line="41" selection-start-column="12" selection-end-line="41" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/services/PaymentService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="41" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/services/GroupService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="57" selection-start-line="57" selection-end-line="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/utils/ValidationAccoiuntService.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/BlackListServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="12" column="81" selection-start-line="12" selection-start-column="81" selection-end-line="12" selection-end-column="81" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/Prefix.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="24" column="26" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/PanelReportServiceImpl.java" />
-    <entry file="file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/PanelReportServiceImplTest.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/enums/BulkVariant.java">
+    <entry file="file://$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/LanguageMessage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
-          <caret line="3" column="47" selection-start-line="3" selection-start-column="47" selection-end-line="3" selection-end-column="47" />
+          <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/MessageServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="47" column="35" selection-start-line="47" selection-start-column="35" selection-end-line="47" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/enums/AccountType.java">
+    <entry file="file://$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/InfobipVoiceLanguage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/SubAccount.java">
+    <entry file="file://$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/BaseModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+        <state relative-caret-position="45">
+          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/utils/DateUtils.java">
+    <entry file="file://$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/Bulk.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        <state relative-caret-position="105">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/utils/FloatFormatter.java">
+    <entry file="file://$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/GroupUpdate.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        <state relative-caret-position="45">
+          <caret line="7" column="35" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/utils/JSONSerializer.java">
+    <entry file="file://$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/AVBase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
+        <state relative-caret-position="105">
           <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/utils/FileHelper.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/BaseService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/BaseBulkDTO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="42" column="33" selection-start-line="42" selection-start-column="33" selection-end-line="42" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/AccountServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="54" column="33" selection-start-line="54" selection-start-column="33" selection-end-line="54" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/emptyFile.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/utils/Printer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/utils/PropertiesContext.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="53" selection-start-line="10" selection-start-column="53" selection-end-line="10" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/resources/sasdsa" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/lang/Math.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="642" column="25" selection-start-line="642" selection-start-column="25" selection-end-line="642" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/util/Random.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="385" column="15" selection-start-line="385" selection-start-column="15" selection-end-line="385" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/ReportServiceImplTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3690">
-          <caret line="246" column="49" selection-start-line="246" selection-start-column="49" selection-end-line="246" selection-end-column="49" />
+        <state relative-caret-position="195">
+          <caret line="22" column="28" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/ReportServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/BulkSource.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/BulkResponse.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2040">
-          <caret line="154" column="13" selection-start-line="154" selection-start-column="13" selection-end-line="155" />
+        <state relative-caret-position="165">
+          <caret line="17" column="33" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="33" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/FileReportStatus.java">
+    <entry file="file://$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/BulkDTO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        <state relative-caret-position="86">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/test/helpers/DataGenerator.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/PostBackServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
+        <state relative-caret-position="150">
+          <caret line="15" column="20" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/GroupDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="215">
+          <caret line="22" column="1" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/BaseBulk.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="33" column="35" selection-start-line="33" selection-start-column="35" selection-end-line="33" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/Group.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/enums/JSResponseCode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="27" column="62" selection-start-line="27" selection-start-column="62" selection-end-line="27" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/BulkServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="177" column="5" lean-forward="true" selection-start-line="177" selection-start-column="5" selection-end-line="177" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/services/PostBackService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="7" column="7" lean-forward="true" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -1576,10 +1623,83 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/AccountServiceImplTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/enums/AddressPostBackType.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="144" column="5" lean-forward="true" selection-start-line="144" selection-start-column="5" selection-end-line="144" selection-end-column="5" />
+        <state relative-caret-position="45">
+          <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/GroupServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="161" column="5" lean-forward="true" selection-start-line="161" selection-start-column="5" selection-end-line="161" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/enums/FileReportStatuses.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/enums/ReportTypes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/services/ReportService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="222" column="7" lean-forward="true" selection-start-line="222" selection-start-column="7" selection-end-line="222" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/GroupMember.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/GroupCreate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="19" column="23" lean-forward="true" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/test/helpers/DataGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="19" column="23" lean-forward="true" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
+          <folding>
+            <element signature="e#312#313#0" expanded="true" />
+            <element signature="e#379#380#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/test/helpers/BulkBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="30" column="30" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/FileReportStatusDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="21" column="13" lean-forward="true" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1590,10 +1710,64 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="25" lean-forward="true" selection-start-line="1" selection-start-column="25" selection-end-line="1" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/util/Properties.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="121" column="6" selection-start-line="121" selection-start-column="6" selection-end-line="121" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/utils/PropertiesContext.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="12" column="22" lean-forward="true" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/ReportServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="41">
+          <caret line="21" column="46" lean-forward="true" selection-start-line="21" selection-start-column="46" selection-end-line="21" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1162#1163#0" expanded="true" />
+            <element signature="e#1191#1192#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/BaseService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="32" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/BaseServiceTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/BlackListServiceImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="24" column="19" lean-forward="true" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -1604,89 +1778,96 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/BlackListServiceImplTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/BulkServiceImplTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="87" column="51" selection-start-line="87" selection-start-column="51" selection-end-line="87" selection-end-column="51" />
+        <state relative-caret-position="216">
+          <caret line="44" column="90" selection-start-line="44" selection-start-column="90" selection-end-line="44" selection-end-column="90" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+    <entry file="file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/MessageSerivceTestDataProvider.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="25" selection-start-line="1" selection-start-column="25" selection-end-line="1" selection-end-column="25" />
+        <state relative-caret-position="60">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/services/exception/JustsendApiClientException.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/MessageServiceImplTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="29" column="35" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
+        <state relative-caret-position="98">
+          <caret line="20" column="90" selection-start-line="20" selection-start-column="90" selection-end-line="20" selection-end-column="90" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/resources/emptyFile.txt">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/PrefixServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-202">
+          <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/TestHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="33" column="16" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
+        <state relative-caret-position="157">
+          <caret line="37" column="34" selection-start-line="37" selection-start-column="34" selection-end-line="37" selection-end-column="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/resources/groupMisin.txt">
+    <entry file="file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/TestHelperTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret lean-forward="true" selection-end-column="9" />
+        <state relative-caret-position="180">
+          <caret line="14" column="33" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/Group.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/AccountServiceImplTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="19" column="25" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
+        <state relative-caret-position="142">
+          <caret line="150" column="40" selection-start-line="150" selection-start-column="40" selection-end-line="150" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/ReportServiceImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="322" selection-start-line="322" selection-end-line="322" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/PaymentServiceImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="97">
+          <caret line="30" column="59" selection-start-line="30" selection-start-column="59" selection-end-line="30" selection-end-column="59" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/pl/avantis/justsend/api/client/services/impl/GroupServiceImplTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="113" column="39" selection-start-line="113" selection-start-column="39" selection-end-line="113" selection-end-column="39" />
+        <state relative-caret-position="202">
+          <caret line="60" column="30" selection-start-line="60" selection-start-column="30" selection-end-line="60" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/BulkServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/lombok/pl/avantis/justsend/api/client/model/Prefix.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="195" column="55" selection-start-line="195" selection-start-column="55" selection-end-line="195" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/GroupServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="68" column="64" lean-forward="true" selection-start-line="68" selection-start-column="64" selection-end-line="68" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pl/avantis/justsend/api/client/services/impl/http/JustsendHttpClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="37">
-          <caret line="98" column="5" selection-start-line="98" selection-start-column="5" selection-end-line="98" selection-end-column="5" />
+        <state relative-caret-position="240">
+          <caret line="25" column="24" lean-forward="true" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
         </state>
       </provider>
     </entry>

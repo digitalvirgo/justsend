@@ -18,8 +18,9 @@ public class MessageServiceImplTest extends MessageSerivceTestDataProvider {
 
     @BeforeClass
     public void init() {
+        Constants.JUSTSEND_API_URL="http://justsend-api.dcos.staging.avantis.pl/api/rest";
         messageService = new MessageServiceImpl(APP_KEY);
-        checkIfProdUrl(messageService);
+        checkIfProdUrl();
     }
 
     /* sendMessage - post */

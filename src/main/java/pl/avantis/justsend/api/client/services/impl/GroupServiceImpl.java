@@ -162,7 +162,7 @@ public class GroupServiceImpl extends BaseService implements GroupService {
     }
 
     @Override
-    public String addNumbersToGroup(final Long groupId, final File inputData) throws JustsendApiClientException {
+    public String addMsisdnToGroup(final Long groupId, final File inputData) throws JustsendApiClientException {
         String url = createURL("/v2/group/addMsisdns/{groupId}", "groupId", valueOf(groupId));
 
         try {
@@ -173,6 +173,7 @@ public class GroupServiceImpl extends BaseService implements GroupService {
             throw new JustsendApiClientException("connection failed: " + e.getMessage());
         }
     }
+
 
     @Override
     public GroupDTO updateGroup(final GroupDTO groupDTO) throws JustsendApiClientException {
