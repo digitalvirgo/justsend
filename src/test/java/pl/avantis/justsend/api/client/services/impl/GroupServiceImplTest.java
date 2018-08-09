@@ -186,19 +186,6 @@ public class GroupServiceImplTest {
     }
 
     @Test
-    public void testUpdateGroup1() throws JustsendApiClientException {
-        //given
-        String number = "514673908";
-
-        //when
-        GroupDTO updateGroupRequest = updateGroup(groupID, number);
-        GroupDTO updateGroupResponse = groupService.updateGroup(updateGroupRequest);
-
-        //then
-        Assertions.assertThat(updateGroupResponse.getMembers().get(2).getMsisdn()).isEqualTo(number);
-    }
-
-    @Test
     public void retrieveGroupTest() throws JustsendApiClientException {
         //when
         List<GroupResponse> groupResponses = groupService.retrieveGroups();

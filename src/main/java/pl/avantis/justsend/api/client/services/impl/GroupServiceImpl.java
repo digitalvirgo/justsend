@@ -173,20 +173,4 @@ public class GroupServiceImpl extends BaseService implements GroupService {
             throw new JustsendApiClientException("connection failed: " + e.getMessage());
         }
     }
-
-
-    @Override
-    public GroupDTO updateGroup(final GroupDTO groupDTO) throws JustsendApiClientException {
-        String url = createURL("/v2/group/updateGroup");
-
-        try {
-            JSResponse jsResponse = justsendHttpClient.doPost(url, groupDTO);
-            return processResponse(jsResponse, GroupDTO.class);
-
-        } catch (IOException e) {
-            throw new JustsendApiClientException("connection failed: " + e.getMessage());
-        }
-    }
-
-
 }

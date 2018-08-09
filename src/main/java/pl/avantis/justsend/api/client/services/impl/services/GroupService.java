@@ -105,14 +105,4 @@ public interface GroupService {
      */
 
     String addMsisdnToGroup(Long groupId, File inputData) throws JustsendApiClientException;
-
-    /**
-     * Aktualizuje grupę
-     *
-     * @param groupDTO
-     * @return
-     * @throws JustsendApiClientException błąd aplikacji lub niepoprawne zapytanie
-     */
-
-    GroupDTO updateGroup(GroupDTO groupDTO) throws JustsendApiClientException;
 }
