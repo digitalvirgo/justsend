@@ -45,6 +45,10 @@ public abstract class BaseService {
         }
     }
 
+    protected String createURL1(String url, String methodPath) {
+        return url + methodPath;
+    }
+
     protected String createURL(String methodPath) {
         return Constants.JUSTSEND_API_URL + methodPath;
     }

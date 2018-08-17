@@ -21,7 +21,6 @@ import pl.avantis.justsend.api.client.services.impl.enums.FileReportStatuses;
 import pl.avantis.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
 import pl.avantis.justsend.api.client.test.helpers.Commands;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Random;
 
@@ -40,8 +39,6 @@ import static pl.avantis.justsend.api.client.services.impl.enums.BulkVariant.TES
 import static pl.avantis.justsend.api.client.services.impl.enums.FileNamePartEnum.FILE_ID;
 import static pl.avantis.justsend.api.client.services.impl.enums.FileReportStatuses.GENERATING;
 import static pl.avantis.justsend.api.client.test.helpers.BulkBuilder.bulkWithDefaultFieldsSet;
-import static pl.avantis.justsend.api.client.test.helpers.Commands.GET_RESPONSE;
-import static pl.avantis.justsend.api.client.test.helpers.Commands.GET_USER_DELIVERY_ACK;
 import static pl.avantis.justsend.api.client.test.helpers.DataGenerator.getRandomPhoneNumber;
 
 
@@ -67,7 +64,7 @@ public class ReportServiceImplTest {
 
     @BeforeClass
     public void setUp() throws JustsendApiClientException {
-        Constants.JUSTSEND_API_URL="http://justsend-api.dcos.staging.avantis.pl/api/rest";
+        Constants.JUSTSEND_API_URL = "http://justsend-api.dcos.staging.avantis.pl/api/rest";
         reportService = new ReportServiceImpl(APP_KEY);
         checkIfProdUrl();
         bulkService = new BulkServiceImpl(APP_KEY);
@@ -112,7 +109,7 @@ public class ReportServiceImplTest {
         Bulk sendBulk = bulkWithDefaultFieldsSet()
                 .withTo(asList(getRandomPhoneNumber()))
                 .withBulkVariant(TEST)
-                .withMessage(format(" %s   %s:%s   Damian", GET_USER_DELIVERY_ACK, GET_RESPONSE, prefix.getName()))
+                .withMessage(format("%s:%s;   Damian", Commands.Response, prefix.getName()))
                 .build();
 
         BulkResponse bulkResponse = bulkService.sendBulk(sendBulk);
@@ -169,7 +166,7 @@ public class ReportServiceImplTest {
         Bulk sendBulk = bulkWithDefaultFieldsSet()
                 .withTo(asList(toNumber))
                 .withBulkVariant(TEST)
-                .withMessage(format(" %s   %s:%s   Damian", GET_USER_DELIVERY_ACK, GET_RESPONSE, prefix))
+                .withMessage(format("%s:%s;   Damian", Commands.Response, prefix))
                 .build();
         BulkResponse bulkResponse = bulkService.sendBulk(sendBulk);
 

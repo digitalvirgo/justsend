@@ -6,7 +6,7 @@
 
     <groupId>pl.avantis.justsend</groupId>
     <artifactId>justsend-api-client</artifactId>
-    <version>1.2.5-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -16,30 +16,6 @@
         <java.doc.encoding>UTF-8</java.doc.encoding>
         <java.doc.show.methods>public</java.doc.show.methods>
     </properties>
-
-    <distributionManagement>
-        <repository>
-            <id>dv-nexus-release</id>
-            <name>DVP Releases</name>
-            <url>${dvp.release.url}</url>
-            <uniqueVersion>true</uniqueVersion>
-        </repository>
-        <!--MAVEN CENTRAL REPOSITORY-->
-        <!--if you are sure that you want to release new version to Maven Central repository, then uncomment-->
-        <!--<repository>-->
-        <!--<id>central</id>-->
-        <!--<name>Central Repository</name>-->
-        <!--<url>https://repo.maven.apache.org/maven2</url>-->
-        <!--<uniqueVersion>true</uniqueVersion>-->
-        <!--</repository>-->
-        <!--deploying site -->
-        <snapshotRepository>
-            <id>dv-nexus-snapshots</id>
-            <name>DVP Snaphots/Staging</name>
-            <url>${dvp.snapshot.url}</url>
-            <uniqueVersion>false</uniqueVersion>
-        </snapshotRepository>
-    </distributionManagement>
 
     <build>
         <plugins>

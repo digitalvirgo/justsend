@@ -11,15 +11,19 @@ import pl.avantis.justsend.api.client.model.BulkGroupList;
 import pl.avantis.justsend.api.client.model.BulkResponse;
 import pl.avantis.justsend.api.client.model.GroupCreate;
 import pl.avantis.justsend.api.client.model.GroupMember;
+import pl.avantis.justsend.api.client.model.GroupResponse;
 import pl.avantis.justsend.api.client.model.LanguageMessage;
 import pl.avantis.justsend.api.client.model.MessageStatus;
 import pl.avantis.justsend.api.client.model.SenderResponse;
+import pl.avantis.justsend.api.client.pojo.PostBackFileDTO;
+import pl.avantis.justsend.api.client.pojo.PostBackRecipientDTO;
 import pl.avantis.justsend.api.client.services.impl.services.GroupService;
 import pl.avantis.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
 import pl.avantis.justsend.api.client.test.helpers.Commands;
 
 import java.util.List;
 
+import static java.lang.String.format;
 import static java.lang.Thread.sleep;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,9 +31,12 @@ import static pl.avantis.justsend.api.client.services.impl.TestHelper.APP_KEY;
 import static pl.avantis.justsend.api.client.services.impl.TestHelper.GROUP_ID;
 import static pl.avantis.justsend.api.client.services.impl.TestHelper.checkIfProdUrl;
 import static pl.avantis.justsend.api.client.services.impl.enums.BulkStatus.CANCELED;
+import static pl.avantis.justsend.api.client.services.impl.enums.BulkVariant.ECO;
+import static pl.avantis.justsend.api.client.services.impl.enums.BulkVariant.ECO_RESP;
 import static pl.avantis.justsend.api.client.services.impl.enums.BulkVariant.TEST;
 import static pl.avantis.justsend.api.client.test.helpers.BulkBuilder.bulkWithDefaultFieldsSet;
 import static pl.avantis.justsend.api.client.test.helpers.BulkGroupListBuilder.bulkGroupListWithDefaultListSet;
+import static pl.avantis.justsend.api.client.test.helpers.Constants.MOCK_API_URL;
 
 public class BulkServiceImplTest {
 
@@ -37,13 +44,16 @@ public class BulkServiceImplTest {
 
     private BulkServiceImpl bulkService;
     private GroupService groupService;
+    private PostBackServiceImpl postBackService;
 
     private DataFactory dataFactory = new DataFactory();
 
     @BeforeClass
     public void setUp() {
-        Constants.JUSTSEND_API_URL="http://justsend-api.dcos.staging.avantis.pl/api/rest";
+        Constants.JUSTSEND_API_URL = "http://justsend-api.dcos.staging.avantis.pl/api/rest";
         bulkService = new BulkServiceImpl(APP_KEY);
+        postBackService = new PostBackServiceImpl(MOCK_API_URL);
+
         checkIfProdUrl();
         groupService = new GroupServiceImpl(APP_KEY);
     }
@@ -82,16 +92,54 @@ public class BulkServiceImplTest {
         //given
         Bulk sendBulk = bulkWithDefaultFieldsSet()
                 .withTo(asList("514875" + dataFactory.getNumberText(3)))
-                .withBulkVariant(TEST)
-                .withMessage(Commands.GET_USER_DELIVERY_ACK + " Damian").build();
+                .withBulkVariant(ECO)
+                .withMessage(format("%s:%s; Damian", Commands.Response)).build();
         BulkResponse bulkResponse = bulkService.sendBulk(sendBulk);
 
         sleep(70000); // time needed to proceed message
         //when
         List<String> bulkRecipients = bulkService.retrieveBulkRecipientsByMessageStatus(MessageStatus.DELIVERED, bulkResponse.getId());
 
+
         //then
         assertThat(bulkRecipients).contains("48" + sendBulk.getTo().get(0));
+    }
+
+    @Test
+    public void when_SendBulkWithTestGETResponse_then_bulkRecipientWillBeAddedToGroup() throws JustsendApiClientException, InterruptedException {
+        //given
+        Bulk sendBulk = bulkWithDefaultFieldsSet()
+                .withTo(asList("514875" + dataFactory.getNumberText(3)))
+                .withBulkVariant(ECO_RESP)
+                .withMessage(format("%s:%s; Damian", Commands.Response, "PREFIXTEST")).build();
+        BulkResponse bulkResponse = bulkService.sendBulk(sendBulk);
+
+        sleep(70000); // time needed to proceed message
+        //when
+        List<GroupResponse> groupResponses = groupService.retrieveGroups();
+
+        //then
+        GroupResponse groupResponse = groupResponses.get(groupResponses.size() - 1);
+        assertThat(groupResponse.getMembers()).contains("48" + sendBulk.getTo().get(0));
+    }
+
+    @Test
+    public void whenTestBulkPostBack() throws JustsendApiClientException, InterruptedException {
+        //given
+        Bulk sendBulk = bulkWithDefaultFieldsSet()
+                .withTo(asList("514875" + dataFactory.getNumberText(3)))
+                .withBulkVariant(ECO)
+                .withMessage("Damian").build();
+        BulkResponse bulkResponse = bulkService.sendBulk(sendBulk);
+
+        sleep(80000); // time needed to proceed message
+
+        //when
+        PostBackFileDTO postBackFile = postBackService.getPostBackFile(bulkResponse.getId());
+
+        //then
+        assertThat(postBackFile).isNotNull();
+        assertThat(postBackFile.getId()).isEqualTo(bulkResponse.getId());
     }
 
     @Test
