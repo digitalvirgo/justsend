@@ -86,6 +86,13 @@ public class BulkServiceImplTest {
         LOGGER.info("bulkRecipientsByMessageStatus = " + bulkRecipientsByMessageStatus);
     }
 
+    @Test
+    public void testBulkFlow1() throws JustsendApiClientException {
+        LOGGER.info("=========   send Bulk  ===========");
+        Bulk sendBulk = bulkWithDefaultFieldsSet().withGroupId(41L).build();
+        BulkResponse sendBulkResponse = bulkService.sendBulk(sendBulk);
+        LOGGER.info("bulkResponse = " + TestHelper.toString(sendBulkResponse));
+    }
 
     @Test
     public void when_SendBulkWithTestGET_USER_ACK_then_bulkRecipientWillHaveStateDELIVERED() throws JustsendApiClientException, InterruptedException {
@@ -93,7 +100,7 @@ public class BulkServiceImplTest {
         Bulk sendBulk = bulkWithDefaultFieldsSet()
                 .withTo(asList("514875" + dataFactory.getNumberText(3)))
                 .withBulkVariant(ECO)
-                .withMessage(format("%s:%s; Damian", Commands.Response)).build();
+                .withMessage(format("%s:%s; Damian", Commands.Response, "dsadas")).build();
         BulkResponse bulkResponse = bulkService.sendBulk(sendBulk);
 
         sleep(70000); // time needed to proceed message
