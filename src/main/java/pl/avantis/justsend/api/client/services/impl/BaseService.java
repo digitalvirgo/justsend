@@ -1,6 +1,7 @@
 package pl.avantis.justsend.api.client.services.impl;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.avantis.justsend.api.client.model.JSResponse;
 import pl.avantis.justsend.api.client.services.impl.http.JustsendHttpClient;
 import pl.avantis.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
@@ -14,7 +15,7 @@ import static java.util.Objects.requireNonNull;
 
 public abstract class BaseService {
 
-    protected static final Logger LOGGER = Logger.getLogger(BaseService.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(BaseService.class);
 
     protected JustsendHttpClient justsendHttpClient;
 

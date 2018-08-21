@@ -1,9 +1,9 @@
 package pl.avantis.justsend.api.client.services.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.log4j.Logger;
 import org.fluttercode.datafactory.impl.DataFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pl.avantis.justsend.api.client.model.Bulk;
@@ -16,7 +16,6 @@ import pl.avantis.justsend.api.client.model.LanguageMessage;
 import pl.avantis.justsend.api.client.model.MessageStatus;
 import pl.avantis.justsend.api.client.model.SenderResponse;
 import pl.avantis.justsend.api.client.pojo.PostBackFileDTO;
-import pl.avantis.justsend.api.client.pojo.PostBackRecipientDTO;
 import pl.avantis.justsend.api.client.services.impl.services.GroupService;
 import pl.avantis.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
 import pl.avantis.justsend.api.client.test.helpers.Commands;
@@ -33,14 +32,13 @@ import static pl.avantis.justsend.api.client.services.impl.TestHelper.checkIfPro
 import static pl.avantis.justsend.api.client.services.impl.enums.BulkStatus.CANCELED;
 import static pl.avantis.justsend.api.client.services.impl.enums.BulkVariant.ECO;
 import static pl.avantis.justsend.api.client.services.impl.enums.BulkVariant.ECO_RESP;
-import static pl.avantis.justsend.api.client.services.impl.enums.BulkVariant.TEST;
 import static pl.avantis.justsend.api.client.test.helpers.BulkBuilder.bulkWithDefaultFieldsSet;
 import static pl.avantis.justsend.api.client.test.helpers.BulkGroupListBuilder.bulkGroupListWithDefaultListSet;
 import static pl.avantis.justsend.api.client.test.helpers.Constants.MOCK_API_URL;
 
 public class BulkServiceImplTest {
 
-    private static Logger LOGGER = Logger.getLogger(BulkServiceImplTest.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(BulkServiceImplTest.class);
 
     private BulkServiceImpl bulkService;
     private GroupService groupService;

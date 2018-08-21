@@ -5,10 +5,10 @@ import pl.avantis.justsend.api.client.model.Account;
 import pl.avantis.justsend.api.client.model.JSResponse;
 import pl.avantis.justsend.api.client.model.SubAccount;
 import pl.avantis.justsend.api.client.model.SubAccountRaw;
-import pl.avantis.justsend.api.client.services.impl.utils.JSONSerializer;
 import pl.avantis.justsend.api.client.services.impl.services.AccountService;
 import pl.avantis.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
 import pl.avantis.justsend.api.client.services.impl.services.methods.AccountMethods;
+import pl.avantis.justsend.api.client.services.impl.utils.JSONSerializer;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;

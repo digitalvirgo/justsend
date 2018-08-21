@@ -1,7 +1,8 @@
 package pl.avantis.justsend.api.client.services.impl;
 
-import org.apache.log4j.Logger;
 import org.assertj.core.api.Assertions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -10,7 +11,6 @@ import pl.avantis.justsend.api.client.model.SubAccount;
 import pl.avantis.justsend.api.client.model.SubAccountRaw;
 import pl.avantis.justsend.api.client.services.impl.enums.UserStatus;
 import pl.avantis.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
-import pl.avantis.justsend.api.client.test.helpers.DataGenerator;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -20,7 +20,6 @@ import java.util.UUID;
 import java.util.logging.LogManager;
 
 import static java.lang.String.format;
-import static java.lang.Thread.sleep;
 import static org.assertj.core.api.Assertions.assertThat;
 import static pl.avantis.justsend.api.client.services.impl.TestHelper.APP_KEY;
 import static pl.avantis.justsend.api.client.services.impl.TestHelper.checkIfProdUrl;
@@ -31,15 +30,13 @@ import static pl.avantis.justsend.api.client.test.helpers.DataGenerator.getRando
 public class AccountServiceImplTest {
 
     private AccountServiceImpl accountService;
-    private Logger LOGGER = Logger.getLogger(AccountServiceImplTest.class);
+    private Logger LOGGER = LoggerFactory.getLogger(AccountServiceImplTest.class);
 
     @BeforeClass(alwaysRun = true)
     protected void setUp() throws SecurityException, IOException {
         Constants.JUSTSEND_API_URL="http://justsend-api.dcos.staging.avantis.pl/api/rest";
         accountService = new AccountServiceImpl(APP_KEY);
         checkIfProdUrl();
-        FileInputStream fis = new FileInputStream(AccountServiceImplTest.class.getResource("/log4j.xml").getFile());
-        LogManager.getLogManager().readConfiguration(fis);
     }
 
     //Not work

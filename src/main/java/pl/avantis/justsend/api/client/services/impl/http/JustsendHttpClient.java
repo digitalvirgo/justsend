@@ -13,12 +13,13 @@ import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.avantis.justsend.api.client.model.JSResponse;
-import pl.avantis.justsend.api.client.services.impl.utils.JSONSerializer;
 import pl.avantis.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
+import pl.avantis.justsend.api.client.services.impl.utils.JSONSerializer;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -33,7 +34,7 @@ import static pl.avantis.justsend.api.client.services.impl.utils.Printer.getNice
 
 public class JustsendHttpClient {
 
-    private static final Logger logger = Logger.getLogger(JustsendHttpClient.class);
+    private static final Logger logger = LoggerFactory.getLogger(JustsendHttpClient.class);
 
     private final String USER_AGENT = "JustSendApiClient/1.0";
     private final String CONTENT_TYPE = "application/json";
@@ -219,7 +220,7 @@ public class JustsendHttpClient {
         String result = rd.lines().collect(Collectors.joining());
 
         logger.info(format("Response StatusCode = %s.", response.getStatusLine().getStatusCode()));
-        logger.info(format("Response content = %s.", getNiceFormat(result)));
+        logger.debug(format("Response content = %s.", getNiceFormat(result)));
 
         if (response.getStatusLine().getStatusCode() == 200) {
 
