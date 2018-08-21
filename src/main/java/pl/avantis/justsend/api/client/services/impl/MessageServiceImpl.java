@@ -4,10 +4,10 @@ import pl.avantis.justsend.api.client.model.JSResponse;
 import pl.avantis.justsend.api.client.model.Message;
 import pl.avantis.justsend.api.client.model.VoiceMessage;
 import pl.avantis.justsend.api.client.services.impl.enums.BulkVariant;
-import pl.avantis.justsend.api.client.services.impl.utils.JSONSerializer;
 import pl.avantis.justsend.api.client.services.impl.services.MessageService;
 import pl.avantis.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
 import pl.avantis.justsend.api.client.services.impl.services.methods.MessageMethods;
+import pl.avantis.justsend.api.client.services.impl.utils.JSONSerializer;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;

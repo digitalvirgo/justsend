@@ -2,8 +2,6 @@ package pl.avantis.justsend.api.client.services.impl;
 
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
-
 public class TestHelperTest {
 
     @Test(expectedExceptions = {IllegalStateException.class})

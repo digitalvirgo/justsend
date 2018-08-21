@@ -1,15 +1,12 @@
 package pl.avantis.justsend.api.client.services.impl;
 
 import pl.avantis.justsend.api.client.model.JSResponse;
-import pl.avantis.justsend.api.client.model.Prefix;
 import pl.avantis.justsend.api.client.pojo.PostBackFileDTO;
 import pl.avantis.justsend.api.client.pojo.PostBackRecipientDTO;
 import pl.avantis.justsend.api.client.pojo.PostBackResponseDTO;
 import pl.avantis.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
 
 import java.io.IOException;
-
-import static java.lang.String.valueOf;
 
 public class PostBackServiceImpl extends BaseService {
 

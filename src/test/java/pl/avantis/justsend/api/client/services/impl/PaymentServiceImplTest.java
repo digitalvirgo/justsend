@@ -2,7 +2,8 @@ package pl.avantis.justsend.api.client.services.impl;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pl.avantis.justsend.api.client.model.SubAccount;
@@ -20,7 +21,7 @@ import static pl.avantis.justsend.api.client.services.impl.TestHelper.checkIfPro
 
 public class PaymentServiceImplTest {
 
-    private static final Logger LOGGER = Logger.getLogger(PaymentServiceImplTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PaymentServiceImplTest.class);
 
     private PaymentService paymentService;
     private AccountServiceImpl accountService;

@@ -2,10 +2,10 @@ package pl.avantis.justsend.api.client.services.impl;
 
 import com.google.gson.reflect.TypeToken;
 import pl.avantis.justsend.api.client.model.JSResponse;
-import pl.avantis.justsend.api.client.services.impl.utils.JSONSerializer;
 import pl.avantis.justsend.api.client.services.impl.services.BlackListService;
 import pl.avantis.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
 import pl.avantis.justsend.api.client.services.impl.services.methods.BlackListMethods;
+import pl.avantis.justsend.api.client.services.impl.utils.JSONSerializer;
 
 import java.io.IOException;
 import java.util.List;

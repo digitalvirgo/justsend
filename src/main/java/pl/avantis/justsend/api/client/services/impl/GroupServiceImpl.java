@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.reflect.TypeToken;
 import pl.avantis.justsend.api.client.model.Group;
 import pl.avantis.justsend.api.client.model.GroupCreate;
-import pl.avantis.justsend.api.client.model.GroupDTO;
 import pl.avantis.justsend.api.client.model.GroupResponse;
 import pl.avantis.justsend.api.client.model.GroupUpdate;
 import pl.avantis.justsend.api.client.model.JSResponse;

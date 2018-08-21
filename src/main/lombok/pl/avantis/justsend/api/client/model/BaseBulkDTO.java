@@ -9,7 +9,6 @@ import lombok.Data;
 import pl.avantis.justsend.api.client.services.impl.enums.BulkStatus;
 import pl.avantis.justsend.api.client.services.impl.enums.BulkVariant;
 
-import java.beans.Transient;
 import java.util.Date;
 
 /**

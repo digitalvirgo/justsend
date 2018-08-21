@@ -1,8 +1,9 @@
 package pl.avantis.justsend.api.client.services.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.apache.log4j.Logger;
 import org.assertj.core.api.Assertions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pl.avantis.justsend.api.client.model.Group;
@@ -28,12 +29,11 @@ import static pl.avantis.justsend.api.client.services.impl.TestHelper.APP_KEY;
 import static pl.avantis.justsend.api.client.services.impl.TestHelper.APP_KEY_ADMINISTRATOR;
 import static pl.avantis.justsend.api.client.services.impl.TestHelper.checkIfProdUrl;
 import static pl.avantis.justsend.api.client.services.impl.enums.PrefixAccessType.GLOBAL;
-import static pl.avantis.justsend.api.client.test.helpers.DataGenerator.getRandomPhoneNumber;
 import static pl.avantis.justsend.api.client.test.helpers.DataGenerator.getRandomPhoneNumberMember;
 
 public class GroupServiceImplTest {
 
-    private static Logger LOGGER = Logger.getLogger(GroupServiceImplTest.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(GroupServiceImplTest.class);
     private GroupServiceImpl groupService;
     private PrefixServiceImpl prefixService;
     private Long groupID;

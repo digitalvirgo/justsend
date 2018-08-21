@@ -2,7 +2,6 @@ package pl.avantis.justsend.api.client.services.impl.services;
 
 import pl.avantis.justsend.api.client.model.Group;
 import pl.avantis.justsend.api.client.model.GroupCreate;
-import pl.avantis.justsend.api.client.model.GroupDTO;
 import pl.avantis.justsend.api.client.model.GroupResponse;
 import pl.avantis.justsend.api.client.model.GroupUpdate;
 import pl.avantis.justsend.api.client.model.Prefix;

@@ -1,7 +1,8 @@
 package pl.avantis.justsend.api.client.services.impl;
 
-import org.apache.log4j.Logger;
 import org.fluttercode.datafactory.impl.DataFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pl.avantis.justsend.api.client.model.Bulk;
@@ -46,7 +47,7 @@ import static pl.avantis.justsend.api.client.test.helpers.DataGenerator.getRando
 
 public class ReportServiceImplTest {
 
-    private static final Logger LOGGER = Logger.getLogger(PaymentServiceImplTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PaymentServiceImplTest.class);
 
     private DataFactory dataFactory;
 

@@ -2,7 +2,6 @@ package pl.avantis.justsend.api.client.services.impl;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.fluttercode.datafactory.impl.DataFactory;
 import pl.avantis.justsend.api.client.services.impl.enums.FileNamePartEnum;
 
 import java.io.File;
