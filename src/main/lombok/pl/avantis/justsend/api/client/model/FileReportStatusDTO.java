@@ -1,8 +1,8 @@
 package pl.avantis.justsend.api.client.model;
 
 import lombok.Data;
-import pl.avantis.justsend.api.client.services.impl.enums.FileReportStatuses;
-import pl.avantis.justsend.api.client.services.impl.enums.ReportTypes;
+import pl.digitalvirgo.justsend.api.client.services.impl.enums.FileReportStatuses;
+import pl.digitalvirgo.justsend.api.client.services.impl.enums.ReportTypes;
 
 import java.util.Date;
 

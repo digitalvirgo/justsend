@@ -1,7 +1,7 @@
 package pl.avantis.justsend.api.client.model;
 
 import lombok.Data;
-import pl.avantis.justsend.api.client.services.impl.enums.JSResponseCode;
+import pl.digitalvirgo.justsend.api.client.services.impl.enums.JSResponseCode;
 
 @Data
 public class JSResponse {

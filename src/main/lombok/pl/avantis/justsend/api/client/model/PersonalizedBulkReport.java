@@ -5,8 +5,8 @@ package pl.avantis.justsend.api.client.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import pl.avantis.justsend.api.client.services.impl.enums.MessageValidationStatus;
-import pl.avantis.justsend.api.client.services.impl.enums.MsisdnValidationStatus;
+import pl.digitalvirgo.justsend.api.client.services.impl.enums.MessageValidationStatus;
+import pl.digitalvirgo.justsend.api.client.services.impl.enums.MsisdnValidationStatus;
 
 @Data
 @EqualsAndHashCode(callSuper = true)

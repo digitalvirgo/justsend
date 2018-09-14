@@ -1,8 +1,8 @@
 package pl.avantis.justsend.api.client.model;
 
 import lombok.Data;
-import pl.avantis.justsend.api.client.services.impl.enums.AccountType;
-import pl.avantis.justsend.api.client.services.impl.enums.UserStatus;
+import pl.digitalvirgo.justsend.api.client.services.impl.enums.AccountType;
+import pl.digitalvirgo.justsend.api.client.services.impl.enums.UserStatus;
 
 @Data
 public class SubAccount {
