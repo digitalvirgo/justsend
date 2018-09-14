@@ -1,6 +1,6 @@
 package pl.avantis.justsend.api.client.model;
 
-import pl.avantis.justsend.api.client.services.impl.utils.FloatFormatter;
+import pl.digitalvirgo.justsend.api.client.services.impl.utils.FloatFormatter;
 
 public class SingleBulkReport extends AVBase<Long> {
 

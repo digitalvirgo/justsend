@@ -4,10 +4,36 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>pl.avantis.justsend</groupId>
+    <groupId>pl.digitalvirgo.justsend</groupId>
     <artifactId>justsend-api-client</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.1</version>
     <packaging>jar</packaging>
+
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>Biblioteka do łączenia się z REST api aplikacji JustSend.</description>
+    <url>https://justsend.pl/</url>
+
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Damian Bajno</name>
+            <email>damian.bajno@digitalvirgo.pl</email>
+            <organization>DigitalVirgo</organization>
+            <organizationUrl>https://www.digitalvirgo.pl/</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://git@github.com:digitalvirgo/justsend.git</connection>
+        <url>https://github.com/digitalvirgo/justsend</url>
+    </scm>
+
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -86,6 +112,36 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.8</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>false</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.7.1</version>
             </plugin>
         </plugins>
     </build>
@@ -187,18 +243,14 @@
     </dependencies>
 
     <distributionManagement>
-        <repository>
-            <id>dv-nexus-release</id>
-            <name>DVP Releases</name>
-            <url>${dvp.release.url}</url>
-            <uniqueVersion>true</uniqueVersion>
-        </repository>
         <snapshotRepository>
-            <id>dv-nexus-snapshots</id>
-            <name>DVP Snaphots/Staging</name>
-            <url>${dvp.snapshot.url}</url>
-            <uniqueVersion>false</uniqueVersion>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
     </distributionManagement>
 
 </project>
