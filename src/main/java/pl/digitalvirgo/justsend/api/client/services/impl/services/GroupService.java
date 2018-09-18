@@ -1,11 +1,11 @@
 package pl.digitalvirgo.justsend.api.client.services.impl.services;
 
-import pl.avantis.justsend.api.client.model.Group;
-import pl.avantis.justsend.api.client.model.GroupCreate;
-import pl.avantis.justsend.api.client.model.GroupResponse;
-import pl.avantis.justsend.api.client.model.GroupUpdate;
-import pl.avantis.justsend.api.client.model.Prefix;
-import pl.avantis.justsend.api.client.model.PrefixReservation;
+import pl.digitalvirgo.justsend.api.client.model.Group;
+import pl.digitalvirgo.justsend.api.client.model.GroupCreate;
+import pl.digitalvirgo.justsend.api.client.model.GroupResponse;
+import pl.digitalvirgo.justsend.api.client.model.GroupUpdate;
+import pl.digitalvirgo.justsend.api.client.model.Prefix;
+import pl.digitalvirgo.justsend.api.client.model.PrefixReservation;
 import pl.digitalvirgo.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
 
 import java.io.File;

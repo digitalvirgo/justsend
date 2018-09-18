@@ -1,6 +1,6 @@
 package pl.digitalvirgo.justsend.api.client.services.impl.services;
 
-import pl.avantis.justsend.api.client.model.UserPurseResponse;
+import pl.digitalvirgo.justsend.api.client.model.UserPurseResponse;
 import pl.digitalvirgo.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
 
 public interface PaymentService {

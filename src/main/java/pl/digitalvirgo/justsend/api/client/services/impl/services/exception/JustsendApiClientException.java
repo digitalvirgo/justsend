@@ -1,6 +1,6 @@
 package pl.digitalvirgo.justsend.api.client.services.impl.services.exception;
 
-import pl.avantis.justsend.api.client.model.JSResponse;
+import pl.digitalvirgo.justsend.api.client.model.JSResponse;
 
 public class JustsendApiClientException extends RuntimeException {
 

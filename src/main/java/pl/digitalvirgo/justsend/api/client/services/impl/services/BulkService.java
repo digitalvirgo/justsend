@@ -1,11 +1,11 @@
 package pl.digitalvirgo.justsend.api.client.services.impl.services;
 
-import pl.avantis.justsend.api.client.model.Bulk;
-import pl.avantis.justsend.api.client.model.BulkGroupList;
-import pl.avantis.justsend.api.client.model.BulkResponse;
-import pl.avantis.justsend.api.client.model.LanguageMessage;
-import pl.avantis.justsend.api.client.model.MessageStatus;
-import pl.avantis.justsend.api.client.model.SenderResponse;
+import pl.digitalvirgo.justsend.api.client.model.Bulk;
+import pl.digitalvirgo.justsend.api.client.model.BulkGroupList;
+import pl.digitalvirgo.justsend.api.client.model.BulkResponse;
+import pl.digitalvirgo.justsend.api.client.model.LanguageMessage;
+import pl.digitalvirgo.justsend.api.client.model.MessageStatus;
+import pl.digitalvirgo.justsend.api.client.model.SenderResponse;
 import pl.digitalvirgo.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
 
 import java.io.File;

@@ -2,7 +2,7 @@ package pl.digitalvirgo.justsend.api.client.services.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pl.avantis.justsend.api.client.model.JSResponse;
+import pl.digitalvirgo.justsend.api.client.model.JSResponse;
 import pl.digitalvirgo.justsend.api.client.services.impl.http.JustsendHttpClient;
 import pl.digitalvirgo.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
 import pl.digitalvirgo.justsend.api.client.services.impl.utils.JSONSerializer;

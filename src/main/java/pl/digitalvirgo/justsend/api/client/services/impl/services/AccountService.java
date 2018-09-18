@@ -1,8 +1,8 @@
 package pl.digitalvirgo.justsend.api.client.services.impl.services;
 
-import pl.avantis.justsend.api.client.model.Account;
-import pl.avantis.justsend.api.client.model.SubAccount;
-import pl.avantis.justsend.api.client.model.SubAccountRaw;
+import pl.digitalvirgo.justsend.api.client.model.Account;
+import pl.digitalvirgo.justsend.api.client.model.SubAccount;
+import pl.digitalvirgo.justsend.api.client.model.SubAccountRaw;
 import pl.digitalvirgo.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
 
 import java.util.List;

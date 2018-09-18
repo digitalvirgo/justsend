@@ -1,12 +1,12 @@
 package pl.digitalvirgo.justsend.api.client.services.impl.services;
 
-import pl.avantis.justsend.api.client.model.FileReportStatus;
-import pl.avantis.justsend.api.client.model.FileReportStatusDTO;
-import pl.avantis.justsend.api.client.model.ReportMessageResponse;
-import pl.avantis.justsend.api.client.model.ReportResponse;
-import pl.avantis.justsend.api.client.model.ReportResponseMessage;
-import pl.avantis.justsend.api.client.model.ReportSubAccountResponse;
-import pl.avantis.justsend.api.client.model.SingleBulkReport;
+import pl.digitalvirgo.justsend.api.client.model.FileReportStatus;
+import pl.digitalvirgo.justsend.api.client.model.FileReportStatusDTO;
+import pl.digitalvirgo.justsend.api.client.model.ReportMessageResponse;
+import pl.digitalvirgo.justsend.api.client.model.ReportResponse;
+import pl.digitalvirgo.justsend.api.client.model.ReportResponseMessage;
+import pl.digitalvirgo.justsend.api.client.model.ReportSubAccountResponse;
+import pl.digitalvirgo.justsend.api.client.model.SingleBulkReport;
 import pl.digitalvirgo.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
 
 import java.time.LocalDate;

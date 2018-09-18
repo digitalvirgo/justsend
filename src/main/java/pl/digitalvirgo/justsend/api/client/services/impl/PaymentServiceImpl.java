@@ -1,7 +1,7 @@
 package pl.digitalvirgo.justsend.api.client.services.impl;
 
-import pl.avantis.justsend.api.client.model.JSResponse;
-import pl.avantis.justsend.api.client.model.UserPurseResponse;
+import pl.digitalvirgo.justsend.api.client.model.JSResponse;
+import pl.digitalvirgo.justsend.api.client.model.UserPurseResponse;
 import pl.digitalvirgo.justsend.api.client.services.impl.services.PaymentService;
 import pl.digitalvirgo.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
 

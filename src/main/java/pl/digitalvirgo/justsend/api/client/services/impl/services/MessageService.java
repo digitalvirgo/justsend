@@ -1,7 +1,7 @@
 package pl.digitalvirgo.justsend.api.client.services.impl.services;
 
-import pl.avantis.justsend.api.client.model.Message;
-import pl.avantis.justsend.api.client.model.VoiceMessage;
+import pl.digitalvirgo.justsend.api.client.model.Message;
+import pl.digitalvirgo.justsend.api.client.model.VoiceMessage;
 import pl.digitalvirgo.justsend.api.client.services.impl.enums.BulkVariant;
 import pl.digitalvirgo.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
 

@@ -1,8 +1,8 @@
 package pl.digitalvirgo.justsend.api.client.services.impl.services;
 
-import pl.avantis.justsend.api.client.model.PanelReportResponseMessage;
-import pl.avantis.justsend.api.client.model.ReportResponse;
-import pl.avantis.justsend.api.client.model.SingleBulkReport;
+import pl.digitalvirgo.justsend.api.client.model.PanelReportResponseMessage;
+import pl.digitalvirgo.justsend.api.client.model.ReportResponse;
+import pl.digitalvirgo.justsend.api.client.model.SingleBulkReport;
 import pl.digitalvirgo.justsend.api.client.services.impl.enums.OrderEnum;
 import pl.digitalvirgo.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
 
