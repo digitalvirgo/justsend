@@ -1,6 +1,5 @@
 package pl.digitalvirgo.justsend.api.client.services.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.fluttercode.datafactory.impl.DataFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,8 +8,6 @@ import org.testng.annotations.Test;
 import pl.digitalvirgo.justsend.api.client.model.Bulk;
 import pl.digitalvirgo.justsend.api.client.model.BulkGroupList;
 import pl.digitalvirgo.justsend.api.client.model.BulkResponse;
-import pl.digitalvirgo.justsend.api.client.model.GroupCreate;
-import pl.digitalvirgo.justsend.api.client.model.GroupMember;
 import pl.digitalvirgo.justsend.api.client.model.GroupResponse;
 import pl.digitalvirgo.justsend.api.client.model.LanguageMessage;
 import pl.digitalvirgo.justsend.api.client.model.MessageStatus;
@@ -28,13 +25,15 @@ import static java.lang.String.format;
 import static java.lang.Thread.sleep;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static pl.digitalvirgo.justsend.api.client.test.helpers.TestHelper.getGroupID;
 import static pl.digitalvirgo.justsend.api.client.services.impl.enums.BulkStatus.CANCELED;
 import static pl.digitalvirgo.justsend.api.client.services.impl.enums.BulkVariant.ECO;
 import static pl.digitalvirgo.justsend.api.client.services.impl.enums.BulkVariant.ECO_RESP;
-import static pl.digitalvirgo.justsend.api.client.test.helpers.BulkBuilder.bulkWithDefaultFieldsSet;
-import static pl.digitalvirgo.justsend.api.client.test.helpers.BulkGroupListBuilder.bulkGroupListWithDefaultListSet;
 import static pl.digitalvirgo.justsend.api.client.test.helpers.TestConstants.MOCK_API_URL;
+import static pl.digitalvirgo.justsend.api.client.test.helpers.TestHelper.compare;
+import static pl.digitalvirgo.justsend.api.client.test.helpers.TestHelper.getGroupID;
+import static pl.digitalvirgo.justsend.api.client.test.helpers.builder.BulkBuilder.bulkWithDefaultFieldsSet;
+import static pl.digitalvirgo.justsend.api.client.test.helpers.builder.BulkGroupListBuilder.bulkGroupListWithDefaultListSet;
+import static pl.digitalvirgo.justsend.api.client.test.helpers.builder.GroupCreateBuilder.aGroupCreateWithDefaults;
 
 public class BulkServiceImplTest  extends BaseServiceHelper {
 
@@ -57,7 +56,7 @@ public class BulkServiceImplTest  extends BaseServiceHelper {
         TestHelper.checkIfProdUrl();
 
         groupService = new GroupServiceImpl(TestHelper.APP_KEY);
-        String group = groupService.createGroup(groupCreate());
+        String group = groupService.createGroup(aGroupCreateWithDefaults().build());
         groupID = getGroupID(group);
     }
 
@@ -68,38 +67,26 @@ public class BulkServiceImplTest  extends BaseServiceHelper {
 
         BulkResponse sendBulkResponse = bulkService.sendBulk(sendBulk);
 
-        assertThat(sendBulkResponse.getName()).startsWith(sendBulk.getName());
-        assertThat(sendBulkResponse.getMessage()).isEqualTo(sendBulk.getMessage());
-        assertThat(sendBulkResponse.getBulkVariant()).isEqualTo(sendBulk.getBulkVariant());
-        assertThat(sendBulkResponse.getFrom()).isEqualTo(sendBulk.getFrom());
-        LOGGER.info("bulkResponse = " + TestHelper.toString(sendBulkResponse));
+        compare(sendBulk, sendBulkResponse);
 
 
         LOGGER.info("=========   cancel Bulk By Id ===========");
         BulkResponse cancelBulkResponse = bulkService.cancelBulkById(sendBulkResponse.getId());
+
         assertThat(cancelBulkResponse.getId()).isEqualTo(sendBulkResponse.getId());
         assertThat(cancelBulkResponse.getBulkStatus()).isEqualTo(CANCELED);
-        LOGGER.info("cancelBulkResponse = " + TestHelper.toString(cancelBulkResponse));
 
 
         LOGGER.info("=========   retrieve Bulk By Id ===========");
         BulkResponse retrieveBulkByIdResponse = bulkService.retrieveBulkById(sendBulkResponse.getId());
-        assertThat(retrieveBulkByIdResponse.getId()).isEqualTo(sendBulkResponse.getId());
-        LOGGER.info("retrieveBulkByIdResponse = " + TestHelper.toString(retrieveBulkByIdResponse));
+
+        compare(sendBulk, retrieveBulkByIdResponse);
 
         LOGGER.info("=========   retrieve bulk recipient by message status  ===========");
         List<String> bulkRecipientsByMessageStatus = bulkService.retrieveBulkRecipientsByMessageStatus(MessageStatus.NOT_SENT, sendBulkResponse.getId());
-        assertThat(bulkRecipientsByMessageStatus.size()).isEqualTo(1);
-        assertThat(bulkRecipientsByMessageStatus.get(0)).endsWith(sendBulk.getTo().get(0));
-        LOGGER.info("bulkRecipientsByMessageStatus = " + bulkRecipientsByMessageStatus);
-    }
 
-    @Test
-    public void testBulkFlow1() throws JustsendApiClientException {
-        LOGGER.info("=========   send Bulk  ===========");
-        Bulk sendBulk = bulkWithDefaultFieldsSet().withGroupId(groupID).build();
-        BulkResponse sendBulkResponse = bulkService.sendBulk(sendBulk);
-        LOGGER.info("bulkResponse = " + TestHelper.toString(sendBulkResponse));
+        assertThat(bulkRecipientsByMessageStatus.size()).isEqualTo(3);
+        assertThat(bulkRecipientsByMessageStatus.get(0)).endsWith(sendBulk.getTo().get(0));
     }
 
     @Test
@@ -147,7 +134,7 @@ public class BulkServiceImplTest  extends BaseServiceHelper {
                 .withMessage("Damian").build();
         BulkResponse bulkResponse = bulkService.sendBulk(sendBulk);
 
-        sleep(80000); // time needed to proceed message
+        sleep(120000); // time needed to proceed message
 
         //when
         PostBackFileDTO postBackFile = postBackService.getPostBackFile(bulkResponse.getId());
@@ -159,11 +146,11 @@ public class BulkServiceImplTest  extends BaseServiceHelper {
 
     @Test
     public void testSendBulkWithoutConfirmation() throws JustsendApiClientException {
-        LOGGER.info("=========   send Bulk Without Confirmation  ===========");
-        Bulk sendBulk = bulkWithDefaultFieldsSet().withGroupId(groupID).build();
-        BulkResponse sendBulkWithoutConfirmationResponse = bulkService.sendBulkWithoutConfirmation(sendBulk);
-        assertThat(sendBulkWithoutConfirmationResponse.getName()).startsWith(sendBulk.getName());
-        LOGGER.info("sendBulkWithoutConfirmation = " + sendBulkWithoutConfirmationResponse);
+        Bulk request = bulkWithDefaultFieldsSet().withGroupId(groupID).build();
+
+        BulkResponse response = bulkService.sendBulkWithoutConfirmation(request);
+
+        TestHelper.compare(request, response);
     }
 
     @Test
@@ -175,22 +162,33 @@ public class BulkServiceImplTest  extends BaseServiceHelper {
         LOGGER.info("personalizedBulk = " + personalizedBulk);
     }
 
-    @Test
+    @Test(enabled = false)
     public void testSendPersonalizedBulkManyNumbers() throws JustsendApiClientException {
+        String name = "testPersonalizedBulkv1ść";
+        String from = "DamZian";
         Long personalizedBulk = bulkService.sendPersonalizedBulk(
-                "testPersonalizedBulkv1", "damian", "2017-09-12T12:23:34+02:00", "ECO",
-                false, LanguageMessage.POLISH, new TestHelper().getFile("10kDBTest.txt"));
+                name, from, "2017-09-12T12:23:34+02:00", "ECO",
+                true, LanguageMessage.POLISH, new TestHelper().getFile("10kDBTest.txt"));
         assertThat(personalizedBulk).isGreaterThan(0L);
-        LOGGER.info("personalizedBulk = " + personalizedBulk);
+
+        BulkResponse response = bulkService.retrieveBulkById(personalizedBulk);
+
+        assertThat(response.getName()).startsWith(name);
+        assertThat(response.getMessage()).isEqualTo("Wiadomość tekstowa");
+        assertThat(response.getBulkVariant()).isEqualTo(ECO);
+        assertThat(response.getFrom()).isEqualTo(from);
     }
 
     @Test
-    public void testSendPersonalizedBulkWithoutLanguage() throws JustsendApiClientException {
+    public void testSendPersonalizedBulkWithoutLanguage() throws JustsendApiClientException, InterruptedException {
+        String name = "testPersonalizedBulkv1ść";
+        String from = "DamZian";
         Long personalizedBulk = bulkService.sendPersonalizedBulk(
-                "testPersonalizedBulk", "damian", "2017-09-12T12:23:34+02:00", "ECO",
+                name, from, "2017-09-12T12:23:34+02:00", "ECO",
                 true, new TestHelper().getFile("personalizedMessage.txt"));
         assertThat(personalizedBulk).isGreaterThan(0L);
-        LOGGER.info("personalizedBulk = " + personalizedBulk);
+
+        sleep(60000);
     }
 
     @Test
@@ -202,9 +200,9 @@ public class BulkServiceImplTest  extends BaseServiceHelper {
     }
 
     @Test
-    public void testSendBulkGroupListFlow() throws JustsendApiClientException, JsonProcessingException {
+    public void testSendBulkGroupListFlow() throws JustsendApiClientException {
         LOGGER.info("=========   create group ===========");
-        String group = groupService.createGroup(groupCreate());
+        String group = groupService.createGroup(aGroupCreateWithDefaults().build());
         Long groupID = getGroupID(group);
 
         LOGGER.info("=========   send Bulk Group List ===========");
@@ -212,12 +210,5 @@ public class BulkServiceImplTest  extends BaseServiceHelper {
         BulkResponse bulkGroupListResponse = bulkService.sendBulk(bulkGroupList);
         assertThat(bulkGroupListResponse.getGroupIds()).containsExactly(groupID);
         LOGGER.info("bulkGroupListResponse = " + TestHelper.toString(bulkGroupListResponse));
-    }
-
-    private GroupCreate groupCreate() {
-        GroupCreate groupCreate = new GroupCreate();
-        groupCreate.setName("name");
-        groupCreate.setMembers(asList(new GroupMember("514678987"), new GroupMember("514678988")));
-        return groupCreate;
     }
 }

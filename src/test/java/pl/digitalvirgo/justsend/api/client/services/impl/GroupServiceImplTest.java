@@ -20,14 +20,14 @@ import pl.digitalvirgo.justsend.api.client.test.helpers.TestHelper;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 import static java.lang.Thread.sleep;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static pl.digitalvirgo.justsend.api.client.test.helpers.TestHelper.getGroupID;
 import static pl.digitalvirgo.justsend.api.client.services.impl.enums.PrefixAccessType.GLOBAL;
 import static pl.digitalvirgo.justsend.api.client.test.helpers.DataGenerator.getRandomPhoneNumberMember;
+import static pl.digitalvirgo.justsend.api.client.test.helpers.TestHelper.getGroupID;
+import static pl.digitalvirgo.justsend.api.client.test.helpers.builder.GroupCreateBuilder.aGroupCreateWithDefaults;
 
 public class GroupServiceImplTest extends BaseServiceHelper {
 
@@ -35,13 +35,6 @@ public class GroupServiceImplTest extends BaseServiceHelper {
     private GroupServiceImpl groupService;
     private PrefixServiceImpl prefixService;
     private Long groupID;
-    private static final Random random = new Random();
-
-    public static GroupCreate groupCreate() {
-        GroupCreate groupCreate = new GroupCreate();
-        groupCreate.setName("name" + random.nextInt(1000));
-        return groupCreate;
-    }
 
     @BeforeMethod
     public void setUp() throws JustsendApiClientException {
@@ -51,7 +44,7 @@ public class GroupServiceImplTest extends BaseServiceHelper {
         TestHelper.checkIfProdUrl();
         prefixService = new PrefixServiceImpl(TestHelper.APP_KEY_ADMINISTRATOR);
 
-        String group = groupService.createGroup(groupCreate(), new TestHelper().getFile("emptyFile.txt"));
+        String group = groupService.createGroup(aGroupCreateWithDefaults().build(), new TestHelper().getFile("emptyFile.txt"));
         assertThat(group).startsWith("Created group id: ");
 
         groupID = getGroupID(group);
@@ -69,7 +62,7 @@ public class GroupServiceImplTest extends BaseServiceHelper {
     @Test
     public void when_SendRequestToCreateEmptyGroup_then_createEmptyGroup() throws JustsendApiClientException {
         //when
-        String group = groupService.createGroup(groupCreate(), new TestHelper().getFile("emptyFile.txt"));
+        String group = groupService.createGroup(aGroupCreateWithDefaults().withMembers(null).build(), new TestHelper().getFile("emptyFile.txt"));
         assertThat(group).startsWith("Created group id: ");
 
         //then
@@ -81,7 +74,7 @@ public class GroupServiceImplTest extends BaseServiceHelper {
     @Test
     public void when_SendRequestToCreateGroupWithTwoNumbers_then_createGroupWithTwoNumbers() throws JustsendApiClientException {
         //given
-        GroupCreate groupCreate = groupCreate();
+        GroupCreate groupCreate = aGroupCreateWithDefaults().build();
         groupCreate.setMembers(asList(getRandomPhoneNumberMember(), getRandomPhoneNumberMember()));
 
         //when
@@ -97,10 +90,10 @@ public class GroupServiceImplTest extends BaseServiceHelper {
     @Test
     public void when_SendRequestToCreateGroupWithTwoNumbersInFile_then_createGroupWithTwoNumbers() throws JustsendApiClientException, InterruptedException {
         //when
-        String group = groupService.createGroup(groupCreate(), new TestHelper().getFile("groupMisin.txt"));
+        String group = groupService.createGroup(aGroupCreateWithDefaults().withMembers(null).build(), new TestHelper().getFile("groupMisin.txt"));
         assertThat(group).startsWith("Created group id: ");
 
-        sleep(60000);
+        sleep(80000);
         //then
         Long groupID = getGroupID(group);
         Group groupRetrieve = groupService.retrieveGroup(groupID);
@@ -112,7 +105,7 @@ public class GroupServiceImplTest extends BaseServiceHelper {
     @Test
     public void testCreateGroupWithoutFile() throws JustsendApiClientException {
         //when
-        String group = groupService.createGroup(groupCreate());
+        String group = groupService.createGroup(aGroupCreateWithDefaults().build());
 
         //then
         assertThat(group).startsWith("Created group id: ");
@@ -146,7 +139,7 @@ public class GroupServiceImplTest extends BaseServiceHelper {
         //then
         assertThat(addNumberToGroup).isEqualTo("Added: 1 numbers");
         Group group = groupService.retrieveGroup(groupID);
-        assertThat(group.getMembers()).containsExactlyInAnyOrder("514746372");
+        assertThat(group.getMembers()).containsExactlyInAnyOrder("514746372", "514678987","514678988");
     }
 
     @Test
@@ -175,7 +168,7 @@ public class GroupServiceImplTest extends BaseServiceHelper {
 
         sleep(70000); // time to process file
         Group group = groupService.retrieveGroup(groupID);
-        assertThat(group.getMembers()).containsExactlyInAnyOrder("48514132134");
+        assertThat(group.getMembers()).containsExactlyInAnyOrder("48514132134", "514678987","514678988");
     }
 
     @Test
@@ -242,7 +235,7 @@ public class GroupServiceImplTest extends BaseServiceHelper {
     private GroupUpdate removeNumbersFromGroup(long groupId) {
         GroupUpdate groupUpdate = new GroupUpdate();
         groupUpdate.setGroupId(groupId);
-        groupUpdate.setMembers(asList("Number1", "Number2"));
+        groupUpdate.setMembers(asList("514678988", "514678987"));
         return groupUpdate;
     }
 }

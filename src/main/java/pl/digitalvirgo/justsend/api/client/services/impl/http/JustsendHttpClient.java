@@ -28,6 +28,8 @@ import java.io.InputStreamReader;
 import java.util.stream.Collectors;
 
 import static java.lang.String.format;
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.apache.http.entity.ContentType.APPLICATION_JSON;
 import static org.apache.http.util.TextUtils.isBlank;
 import static pl.digitalvirgo.justsend.api.client.services.impl.utils.JSONSerializer.serialize;
 import static pl.digitalvirgo.justsend.api.client.services.impl.utils.Printer.getNiceFormat;
@@ -38,6 +40,7 @@ public class JustsendHttpClient {
 
     private final String USER_AGENT = "JustSendApiClient/1.0";
     private final String CONTENT_TYPE = "application/json";
+    private final String ACCEPT_LANGUAGE = "pl-PL,pl;q=0.9,en-US;q=0.8,en;q=0.7";
     private final String APP_KEY_HEADER_NAME = "App-Key";
     private String appKey;
 
@@ -88,7 +91,7 @@ public class JustsendHttpClient {
         addHeaderFields(request);
 
         if (data != null) {
-            StringEntity params = new StringEntity(data);
+            StringEntity params = new StringEntity(data, UTF_8);
             request.setEntity(params);
         }
 
@@ -116,7 +119,7 @@ public class JustsendHttpClient {
             FileBody fileBody = new FileBody(file);
             builder.addPart(fileInputName, fileBody);
             if (!isBlank(text)) {
-                builder.addTextBody(textInputName, text);
+                builder.addTextBody(textInputName, text, APPLICATION_JSON);
             }
 
             HttpEntity entity = builder.build();
@@ -156,7 +159,7 @@ public class JustsendHttpClient {
         HttpPut request = new HttpPut(url);
         addHeaderFields(request);
 
-        StringEntity params = new StringEntity(data);
+        StringEntity params = new StringEntity(data, UTF_8);
         request.setEntity(params);
 
         logger.info("Sending POST request to JUSTSEND_API_URL:\n " + url + "\n with content: " + data);

@@ -1,4 +1,4 @@
-package pl.digitalvirgo.justsend.api.client.test.helpers;
+package pl.digitalvirgo.justsend.api.client.test.helpers.builder;
 
 import pl.digitalvirgo.justsend.api.client.model.BulkGroupList;
 import pl.digitalvirgo.justsend.api.client.model.LanguageMessage;

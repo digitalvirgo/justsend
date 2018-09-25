@@ -31,11 +31,9 @@ import static java.lang.Thread.sleep;
 import static java.time.LocalDate.now;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static pl.digitalvirgo.justsend.api.client.services.impl.GroupServiceImplTest.groupCreate;
 import static pl.digitalvirgo.justsend.api.client.services.impl.enums.BulkVariant.TEST;
 import static pl.digitalvirgo.justsend.api.client.services.impl.enums.FileNamePartEnum.FILE_ID;
 import static pl.digitalvirgo.justsend.api.client.services.impl.enums.FileReportStatuses.GENERATING;
-import static pl.digitalvirgo.justsend.api.client.test.helpers.BulkBuilder.bulkWithDefaultFieldsSet;
 import static pl.digitalvirgo.justsend.api.client.test.helpers.DataGenerator.getRandomPhoneNumber;
 import static pl.digitalvirgo.justsend.api.client.test.helpers.TestHelper.APP_KEY;
 import static pl.digitalvirgo.justsend.api.client.test.helpers.TestHelper.APP_KEY_FOR_PREFIX_PREFIX_TEST;
@@ -43,6 +41,8 @@ import static pl.digitalvirgo.justsend.api.client.test.helpers.TestHelper.checkI
 import static pl.digitalvirgo.justsend.api.client.test.helpers.TestHelper.daysBeforeNowLD;
 import static pl.digitalvirgo.justsend.api.client.test.helpers.TestHelper.getFileNamePart;
 import static pl.digitalvirgo.justsend.api.client.test.helpers.TestHelper.getGroupID;
+import static pl.digitalvirgo.justsend.api.client.test.helpers.builder.BulkBuilder.bulkWithDefaultFieldsSet;
+import static pl.digitalvirgo.justsend.api.client.test.helpers.builder.GroupCreateBuilder.aGroupCreateWithDefaults;
 
 
 //before running test check if just-mock-service runs in test env :)
@@ -80,7 +80,7 @@ public class ReportServiceImplTest extends BaseServiceHelper {
         dataFactory = new DataFactory();
 
         groupService = new GroupServiceImpl(APP_KEY);
-        String group = groupService.createGroup(groupCreate());
+        String group = groupService.createGroup(aGroupCreateWithDefaults().build());
         groupID = getGroupID(group);
 
         bulkResponse = bulkService.sendBulk(bulkWithDefaultFieldsSet().withGroupId(groupID).build());

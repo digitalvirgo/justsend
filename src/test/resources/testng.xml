@@ -14,7 +14,6 @@
     <test name="Unit test ">
         <classes>
             <class name="pl.digitalvirgo.justsend.api.client.services.impl.BaseServiceTest"/>
-            <class name="pl.digitalvirgo.justsend.api.client.test.helpers.TestHelperTest"/>
         </classes>
     </test>
 </suite>

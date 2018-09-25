@@ -9,16 +9,16 @@ public class MessageSerivceTestDataProvider extends BaseServiceHelper {
     @DataProvider()
     protected static Object[][] sendMessageTestDataProvider() {
         return new Object[][]{
-                {"48505948385", "TEST", "Justsend lib api test", BulkVariant.ECO},
-                {"48505948385", "TEST", "Justsend lib api test", BulkVariant.PRO_RESP},
-                {"505948385", "TEST", "Justsend lib api test", BulkVariant.ECO},
+                {"48505948385", "TEST", "Justsend lib apiść test", BulkVariant.ECO},
+                {"48505948385", "TEST", "Justsend lib apiść test", BulkVariant.PRO_RESP},
+                {"505948385", "TEST", "Justsend lib apiść test", BulkVariant.ECO},
         };
     }
 
     @DataProvider()
     protected static Object[][] sendMessageIncorrectMSISDNDataProvider() {
         return new Object[][]{
-                {"48505948385123", "TEST", "Justsend lib api test", BulkVariant.ECO},
+                {"48505948385123", "TEST", "Justsend libść api test", BulkVariant.ECO},
         };
     }
 

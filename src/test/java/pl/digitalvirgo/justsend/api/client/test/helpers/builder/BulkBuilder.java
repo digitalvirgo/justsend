@@ -1,4 +1,4 @@
-package pl.digitalvirgo.justsend.api.client.test.helpers;
+package pl.digitalvirgo.justsend.api.client.test.helpers.builder;
 
 import pl.digitalvirgo.justsend.api.client.model.Bulk;
 import pl.digitalvirgo.justsend.api.client.model.LanguageMessage;
@@ -31,9 +31,9 @@ public final class BulkBuilder {
     public static BulkBuilder bulkWithDefaultFieldsSet() {
         BulkBuilder bulkBuilder = new BulkBuilder();
         bulkBuilder.withName("Naść" + random.nextInt(10000));
-        bulkBuilder.withMessage("Api jar testśćŻ ");
+        bulkBuilder.withMessage("Api jar testśćŻ/:? ");
         bulkBuilder.withBulkVariant(ECO);
-        bulkBuilder.withFrom("Bu" + random.nextInt(1000));
+        bulkBuilder.withFrom("BuZ" + random.nextInt(1000));
         bulkBuilder.withTo(asList("514746368"));
         bulkBuilder.withLanguage(LanguageMessage.POLISH);
         bulkBuilder.withSendDate("2018-06-20T16:54:67-00:00");
