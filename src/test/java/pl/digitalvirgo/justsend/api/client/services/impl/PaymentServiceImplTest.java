@@ -6,18 +6,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import pl.digitalvirgo.justsend.api.client.services.impl.services.PaymentService;
-import pl.digitalvirgo.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
 import pl.digitalvirgo.justsend.api.client.model.SubAccount;
 import pl.digitalvirgo.justsend.api.client.model.SubAccountRaw;
 import pl.digitalvirgo.justsend.api.client.model.UserPurseResponse;
+import pl.digitalvirgo.justsend.api.client.services.impl.services.PaymentService;
+import pl.digitalvirgo.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
+import pl.digitalvirgo.justsend.api.client.test.helpers.BaseServiceHelper;
+import pl.digitalvirgo.justsend.api.client.test.helpers.TestHelper;
 
 import java.util.UUID;
 
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PaymentServiceImplTest {
+public class PaymentServiceImplTest  extends BaseServiceHelper {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PaymentServiceImplTest.class);
 
@@ -28,7 +30,7 @@ public class PaymentServiceImplTest {
 
     @BeforeClass
     public void setUp() throws JustsendApiClientException {
-        Constants.JUSTSEND_API_URL="http://justsend-api.dcos.staging.avantis.pl/api/rest";
+        init();
         accountService = new AccountServiceImpl(TestHelper.APP_KEY_ADMINISTRATOR);
         TestHelper.checkIfProdUrl();
         subAccountResponse = accountService.createSubAccount(createSubAccountRequest(points));

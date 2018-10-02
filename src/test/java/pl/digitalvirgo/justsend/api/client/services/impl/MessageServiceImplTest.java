@@ -7,17 +7,17 @@ import pl.digitalvirgo.justsend.api.client.model.Message;
 import pl.digitalvirgo.justsend.api.client.model.VoiceMessage;
 import pl.digitalvirgo.justsend.api.client.services.impl.enums.BulkVariant;
 import pl.digitalvirgo.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
+import pl.digitalvirgo.justsend.api.client.test.helpers.TestHelper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MessageServiceImplTest extends MessageSerivceTestDataProvider {
+public class MessageServiceImplTest extends MessageSerivceTestDataProvider  {
 
     protected MessageServiceImpl messageService;
 
     @BeforeClass
-    public void init() {
-//        Constants.JUSTSEND_API_URL="https://justsend-api-sandbox.staging.digitalvirgo.pl/api/rest";
-        Constants.JUSTSEND_API_URL="http://justsend-api.dcos.staging.avantis.pl/api/rest";
+    public void beforeClass() {
+        init();
         messageService = new MessageServiceImpl(TestHelper.APP_KEY);
         TestHelper.checkIfProdUrl();
     }

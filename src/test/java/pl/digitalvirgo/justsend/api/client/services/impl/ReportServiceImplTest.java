@@ -20,6 +20,7 @@ import pl.digitalvirgo.justsend.api.client.model.SubAccount;
 import pl.digitalvirgo.justsend.api.client.services.impl.enums.BulkVariant;
 import pl.digitalvirgo.justsend.api.client.services.impl.enums.FileReportStatuses;
 import pl.digitalvirgo.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
+import pl.digitalvirgo.justsend.api.client.test.helpers.BaseServiceHelper;
 import pl.digitalvirgo.justsend.api.client.test.helpers.Commands;
 
 import java.util.List;
@@ -30,22 +31,23 @@ import static java.lang.Thread.sleep;
 import static java.time.LocalDate.now;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static pl.digitalvirgo.justsend.api.client.services.impl.TestHelper.APP_KEY;
-import static pl.digitalvirgo.justsend.api.client.services.impl.TestHelper.APP_KEY_FOR_PREFIX_PREFIX_TEST;
-import static pl.digitalvirgo.justsend.api.client.services.impl.TestHelper.GROUP_ID;
-import static pl.digitalvirgo.justsend.api.client.services.impl.TestHelper.checkIfProdUrl;
-import static pl.digitalvirgo.justsend.api.client.services.impl.TestHelper.daysBeforeNowLD;
-import static pl.digitalvirgo.justsend.api.client.services.impl.TestHelper.getFileNamePart;
+import static pl.digitalvirgo.justsend.api.client.services.impl.GroupServiceImplTest.groupCreate;
 import static pl.digitalvirgo.justsend.api.client.services.impl.enums.BulkVariant.TEST;
 import static pl.digitalvirgo.justsend.api.client.services.impl.enums.FileNamePartEnum.FILE_ID;
 import static pl.digitalvirgo.justsend.api.client.services.impl.enums.FileReportStatuses.GENERATING;
 import static pl.digitalvirgo.justsend.api.client.test.helpers.BulkBuilder.bulkWithDefaultFieldsSet;
 import static pl.digitalvirgo.justsend.api.client.test.helpers.DataGenerator.getRandomPhoneNumber;
+import static pl.digitalvirgo.justsend.api.client.test.helpers.TestHelper.APP_KEY;
+import static pl.digitalvirgo.justsend.api.client.test.helpers.TestHelper.APP_KEY_FOR_PREFIX_PREFIX_TEST;
+import static pl.digitalvirgo.justsend.api.client.test.helpers.TestHelper.checkIfProdUrl;
+import static pl.digitalvirgo.justsend.api.client.test.helpers.TestHelper.daysBeforeNowLD;
+import static pl.digitalvirgo.justsend.api.client.test.helpers.TestHelper.getFileNamePart;
+import static pl.digitalvirgo.justsend.api.client.test.helpers.TestHelper.getGroupID;
 
 
 //before running test check if just-mock-service runs in test env :)
 
-public class ReportServiceImplTest {
+public class ReportServiceImplTest extends BaseServiceHelper {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PaymentServiceImplTest.class);
 
@@ -60,8 +62,8 @@ public class ReportServiceImplTest {
 
     private String senderSingleBulk = "sen" + new Random().nextInt(100000);
     private BulkResponse bulkResponse;
-    BulkResponse bulkResponseWithUserResponse;
     private Long singleBulkId;
+    private Long groupID;
 
     @BeforeClass
     public void setUp() throws JustsendApiClientException {
@@ -77,10 +79,15 @@ public class ReportServiceImplTest {
 
         dataFactory = new DataFactory();
 
-        bulkResponse = bulkService.sendBulk(bulkWithDefaultFieldsSet().withGroupId(GROUP_ID).build());
+        groupService = new GroupServiceImpl(APP_KEY);
+        String group = groupService.createGroup(groupCreate());
+        groupID = getGroupID(group);
+
+        bulkResponse = bulkService.sendBulk(bulkWithDefaultFieldsSet().withGroupId(groupID).build());
         bulkService.cancelBulkById(bulkResponse.getId());
 
         singleBulkId = messageService.sendMessage("48505948311", senderSingleBulk, "Justsend lib api test", BulkVariant.ECO);
+
     }
 
     @Test
@@ -146,7 +153,7 @@ public class ReportServiceImplTest {
         SubAccount subAccount = subAccounts.get(0);
 
         BulkServiceImpl bulkServiceSubAccount = new BulkServiceImpl(subAccount.getAppKey());
-        BulkResponse bulkResponse = bulkServiceSubAccount.sendBulk(bulkWithDefaultFieldsSet().withGroupId(GROUP_ID).build());
+        BulkResponse bulkResponse = bulkServiceSubAccount.sendBulk(bulkWithDefaultFieldsSet().withGroupId(groupID).build());
         bulkServiceSubAccount.cancelBulkById(bulkResponse.getId());
 
         //when

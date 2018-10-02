@@ -1,0 +1,20 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Smoke Test" parallel="false" verbose="2">
+    <test name="Functional tests">
+        <classes>
+            <class name="pl.digitalvirgo.justsend.api.client.services.impl.AccountServiceImplTest"/>
+            <class name="pl.digitalvirgo.justsend.api.client.services.impl.BlackListServiceImplTest"/>
+            <class name="pl.digitalvirgo.justsend.api.client.services.impl.BulkServiceImplTest"/>
+            <class name="pl.digitalvirgo.justsend.api.client.services.impl.GroupServiceImplTest"/>
+            <class name="pl.digitalvirgo.justsend.api.client.services.impl.MessageServiceImplTest"/>
+            <class name="pl.digitalvirgo.justsend.api.client.services.impl.PaymentServiceImplTest"/>
+            <class name="pl.digitalvirgo.justsend.api.client.services.impl.ReportServiceImplTest"/>
+        </classes>
+    </test>
+    <test name="Unit test ">
+        <classes>
+            <class name="pl.digitalvirgo.justsend.api.client.services.impl.BaseServiceTest"/>
+            <class name="pl.digitalvirgo.justsend.api.client.test.helpers.TestHelperTest"/>
+        </classes>
+    </test>
+</suite>

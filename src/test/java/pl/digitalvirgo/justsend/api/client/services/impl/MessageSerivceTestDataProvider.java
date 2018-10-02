@@ -2,8 +2,9 @@ package pl.digitalvirgo.justsend.api.client.services.impl;
 
 import org.testng.annotations.DataProvider;
 import pl.digitalvirgo.justsend.api.client.services.impl.enums.BulkVariant;
+import pl.digitalvirgo.justsend.api.client.test.helpers.BaseServiceHelper;
 
-public class MessageSerivceTestDataProvider {
+public class MessageSerivceTestDataProvider extends BaseServiceHelper {
 
     @DataProvider()
     protected static Object[][] sendMessageTestDataProvider() {

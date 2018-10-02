@@ -1,13 +1,10 @@
 package pl.digitalvirgo.justsend.api.client.services.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.assertj.core.api.Assertions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pl.digitalvirgo.justsend.api.client.services.impl.enums.PrefixType;
-import pl.digitalvirgo.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
 import pl.digitalvirgo.justsend.api.client.model.Group;
 import pl.digitalvirgo.justsend.api.client.model.GroupCreate;
 import pl.digitalvirgo.justsend.api.client.model.GroupDTO;
@@ -16,19 +13,23 @@ import pl.digitalvirgo.justsend.api.client.model.GroupResponse;
 import pl.digitalvirgo.justsend.api.client.model.GroupUpdate;
 import pl.digitalvirgo.justsend.api.client.model.Prefix;
 import pl.digitalvirgo.justsend.api.client.model.PrefixReservation;
+import pl.digitalvirgo.justsend.api.client.services.impl.enums.PrefixType;
+import pl.digitalvirgo.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
+import pl.digitalvirgo.justsend.api.client.test.helpers.BaseServiceHelper;
+import pl.digitalvirgo.justsend.api.client.test.helpers.TestHelper;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-import static java.lang.Long.valueOf;
 import static java.lang.Thread.sleep;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static pl.digitalvirgo.justsend.api.client.test.helpers.TestHelper.getGroupID;
 import static pl.digitalvirgo.justsend.api.client.services.impl.enums.PrefixAccessType.GLOBAL;
 import static pl.digitalvirgo.justsend.api.client.test.helpers.DataGenerator.getRandomPhoneNumberMember;
 
-public class GroupServiceImplTest {
+public class GroupServiceImplTest extends BaseServiceHelper {
 
     private static Logger LOGGER = LoggerFactory.getLogger(GroupServiceImplTest.class);
     private GroupServiceImpl groupService;
@@ -42,15 +43,9 @@ public class GroupServiceImplTest {
         return groupCreate;
     }
 
-    public static Long getGroupID(String group) {
-        String groupId = group.split(":")[1].trim().replace(",", "");
-        return valueOf(groupId);
-    }
-
     @BeforeMethod
     public void setUp() throws JustsendApiClientException {
-        Constants.JUSTSEND_API_URL="http://justsend-api.dcos.staging.avantis.pl/api/rest";
-//        Constants.JUSTSEND_API_URL="https://justsend-api-sandbox.staging.digitalvirgo.pl/api/rest";
+        init();
         groupService = new GroupServiceImpl(TestHelper.APP_KEY);
 
         TestHelper.checkIfProdUrl();
@@ -78,7 +73,7 @@ public class GroupServiceImplTest {
         assertThat(group).startsWith("Created group id: ");
 
         //then
-        Long groupID = GroupServiceImplTest.getGroupID(group);
+        Long groupID = getGroupID(group);
         Group groupRetrieve = groupService.retrieveGroup(groupID);
         assertThat(groupRetrieve.getMembers()).isEmpty();
     }
@@ -94,7 +89,7 @@ public class GroupServiceImplTest {
         assertThat(group).startsWith("Created group id: ");
 
         //then
-        Long groupID = GroupServiceImplTest.getGroupID(group);
+        Long groupID = getGroupID(group);
         Group groupRetrieve = groupService.retrieveGroup(groupID);
         assertThat(groupRetrieve.getMembers()).hasSize(2);
     }
@@ -107,7 +102,7 @@ public class GroupServiceImplTest {
 
         sleep(60000);
         //then
-        Long groupID = GroupServiceImplTest.getGroupID(group);
+        Long groupID = getGroupID(group);
         Group groupRetrieve = groupService.retrieveGroup(groupID);
         assertThat(groupRetrieve.getMembers()).hasSize(1);
         assertThat(groupRetrieve.getMembers()).contains("48514132134");
@@ -115,7 +110,7 @@ public class GroupServiceImplTest {
 
 
     @Test
-    public void testCreateGroupWithoutFile() throws JustsendApiClientException, JsonProcessingException {
+    public void testCreateGroupWithoutFile() throws JustsendApiClientException {
         //when
         String group = groupService.createGroup(groupCreate());
 

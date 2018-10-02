@@ -6,8 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import pl.digitalvirgo.justsend.api.client.services.impl.services.GroupService;
-import pl.digitalvirgo.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
 import pl.digitalvirgo.justsend.api.client.model.Bulk;
 import pl.digitalvirgo.justsend.api.client.model.BulkGroupList;
 import pl.digitalvirgo.justsend.api.client.model.BulkResponse;
@@ -18,7 +16,11 @@ import pl.digitalvirgo.justsend.api.client.model.LanguageMessage;
 import pl.digitalvirgo.justsend.api.client.model.MessageStatus;
 import pl.digitalvirgo.justsend.api.client.model.SenderResponse;
 import pl.digitalvirgo.justsend.api.client.pojo.PostBackFileDTO;
+import pl.digitalvirgo.justsend.api.client.services.impl.services.GroupService;
+import pl.digitalvirgo.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
+import pl.digitalvirgo.justsend.api.client.test.helpers.BaseServiceHelper;
 import pl.digitalvirgo.justsend.api.client.test.helpers.Commands;
+import pl.digitalvirgo.justsend.api.client.test.helpers.TestHelper;
 
 import java.util.List;
 
@@ -26,13 +28,15 @@ import static java.lang.String.format;
 import static java.lang.Thread.sleep;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static pl.digitalvirgo.justsend.api.client.test.helpers.TestHelper.getGroupID;
 import static pl.digitalvirgo.justsend.api.client.services.impl.enums.BulkStatus.CANCELED;
 import static pl.digitalvirgo.justsend.api.client.services.impl.enums.BulkVariant.ECO;
 import static pl.digitalvirgo.justsend.api.client.services.impl.enums.BulkVariant.ECO_RESP;
 import static pl.digitalvirgo.justsend.api.client.test.helpers.BulkBuilder.bulkWithDefaultFieldsSet;
 import static pl.digitalvirgo.justsend.api.client.test.helpers.BulkGroupListBuilder.bulkGroupListWithDefaultListSet;
+import static pl.digitalvirgo.justsend.api.client.test.helpers.TestConstants.MOCK_API_URL;
 
-public class BulkServiceImplTest {
+public class BulkServiceImplTest  extends BaseServiceHelper {
 
     private static Logger LOGGER = LoggerFactory.getLogger(BulkServiceImplTest.class);
 
@@ -42,23 +46,32 @@ public class BulkServiceImplTest {
 
     private DataFactory dataFactory = new DataFactory();
 
+    private Long groupID;
+
     @BeforeClass
     public void setUp() {
-        Constants.JUSTSEND_API_URL="https://justsend-api-sandbox.staging.digitalvirgo.pl/api/rest";
-//        Constants.JUSTSEND_API_URL = "http://justsend-api.dcos.staging.avantis.pl/api/rest";
+        init();
         bulkService = new BulkServiceImpl(TestHelper.APP_KEY);
-        postBackService = new PostBackServiceImpl(pl.digitalvirgo.justsend.api.client.test.helpers.Constants.MOCK_API_URL);
+        postBackService = new PostBackServiceImpl(MOCK_API_URL);
 
         TestHelper.checkIfProdUrl();
+
         groupService = new GroupServiceImpl(TestHelper.APP_KEY);
+        String group = groupService.createGroup(groupCreate());
+        groupID = getGroupID(group);
     }
 
     @Test
     public void testBulkFlow() throws JustsendApiClientException {
         LOGGER.info("=========   send Bulk  ===========");
-        Bulk sendBulk = bulkWithDefaultFieldsSet().withGroupId(TestHelper.GROUP_ID).build();
+        Bulk sendBulk = bulkWithDefaultFieldsSet().withGroupId(groupID).build();
+
         BulkResponse sendBulkResponse = bulkService.sendBulk(sendBulk);
+
         assertThat(sendBulkResponse.getName()).startsWith(sendBulk.getName());
+        assertThat(sendBulkResponse.getMessage()).isEqualTo(sendBulk.getMessage());
+        assertThat(sendBulkResponse.getBulkVariant()).isEqualTo(sendBulk.getBulkVariant());
+        assertThat(sendBulkResponse.getFrom()).isEqualTo(sendBulk.getFrom());
         LOGGER.info("bulkResponse = " + TestHelper.toString(sendBulkResponse));
 
 
@@ -84,7 +97,7 @@ public class BulkServiceImplTest {
     @Test
     public void testBulkFlow1() throws JustsendApiClientException {
         LOGGER.info("=========   send Bulk  ===========");
-        Bulk sendBulk = bulkWithDefaultFieldsSet().withGroupId(41L).build();
+        Bulk sendBulk = bulkWithDefaultFieldsSet().withGroupId(groupID).build();
         BulkResponse sendBulkResponse = bulkService.sendBulk(sendBulk);
         LOGGER.info("bulkResponse = " + TestHelper.toString(sendBulkResponse));
     }
@@ -147,7 +160,7 @@ public class BulkServiceImplTest {
     @Test
     public void testSendBulkWithoutConfirmation() throws JustsendApiClientException {
         LOGGER.info("=========   send Bulk Without Confirmation  ===========");
-        Bulk sendBulk = bulkWithDefaultFieldsSet().withGroupId(TestHelper.GROUP_ID).build();
+        Bulk sendBulk = bulkWithDefaultFieldsSet().withGroupId(groupID).build();
         BulkResponse sendBulkWithoutConfirmationResponse = bulkService.sendBulkWithoutConfirmation(sendBulk);
         assertThat(sendBulkWithoutConfirmationResponse.getName()).startsWith(sendBulk.getName());
         LOGGER.info("sendBulkWithoutConfirmation = " + sendBulkWithoutConfirmationResponse);
@@ -192,7 +205,7 @@ public class BulkServiceImplTest {
     public void testSendBulkGroupListFlow() throws JustsendApiClientException, JsonProcessingException {
         LOGGER.info("=========   create group ===========");
         String group = groupService.createGroup(groupCreate());
-        Long groupID = GroupServiceImplTest.getGroupID(group);
+        Long groupID = getGroupID(group);
 
         LOGGER.info("=========   send Bulk Group List ===========");
         BulkGroupList bulkGroupList = bulkGroupListWithDefaultListSet().withGroupIds(asList(groupID)).build();
@@ -204,7 +217,7 @@ public class BulkServiceImplTest {
     private GroupCreate groupCreate() {
         GroupCreate groupCreate = new GroupCreate();
         groupCreate.setName("name");
-        groupCreate.setMembers(asList(new GroupMember("Number1"), new GroupMember("Number2")));
+        groupCreate.setMembers(asList(new GroupMember("514678987"), new GroupMember("514678988")));
         return groupCreate;
     }
 }

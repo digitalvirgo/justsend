@@ -11,8 +11,9 @@ import pl.digitalvirgo.justsend.api.client.model.SubAccount;
 import pl.digitalvirgo.justsend.api.client.model.SubAccountRaw;
 import pl.digitalvirgo.justsend.api.client.services.impl.enums.UserStatus;
 import pl.digitalvirgo.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
+import pl.digitalvirgo.justsend.api.client.test.helpers.BaseServiceHelper;
+import pl.digitalvirgo.justsend.api.client.test.helpers.TestHelper;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -23,14 +24,14 @@ import static pl.digitalvirgo.justsend.api.client.services.impl.enums.AccountTyp
 import static pl.digitalvirgo.justsend.api.client.test.helpers.DataGenerator.generateDigitNumber;
 import static pl.digitalvirgo.justsend.api.client.test.helpers.DataGenerator.getRandomEmail;
 
-public class AccountServiceImplTest {
+public class AccountServiceImplTest extends BaseServiceHelper {
 
     private AccountServiceImpl accountService;
     private Logger LOGGER = LoggerFactory.getLogger(AccountServiceImplTest.class);
 
-    @BeforeClass(alwaysRun = true)
-    protected void setUp() throws SecurityException, IOException {
-        Constants.JUSTSEND_API_URL="http://justsend-api.dcos.staging.avantis.pl/api/rest";
+    @BeforeClass
+    protected void setUp() throws SecurityException {
+        init();
         accountService = new AccountServiceImpl(TestHelper.APP_KEY);
         TestHelper.checkIfProdUrl();
     }

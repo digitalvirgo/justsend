@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pl.digitalvirgo.justsend.api.client.services.impl.services.exception.JustsendApiClientException;
+import pl.digitalvirgo.justsend.api.client.test.helpers.TestHelper;
 
 import java.util.List;
 
@@ -17,8 +18,8 @@ public class BlackListServiceImplTest extends BlackListServiceTestDataProvider {
     private BlackListServiceImpl blackListService;
 
     @BeforeClass
-    public void init() {
-        Constants.JUSTSEND_API_URL="http://justsend-api.dcos.staging.avantis.pl/api/rest";
+    public void beforeClass() {
+        init();
         blackListService = new BlackListServiceImpl(TestHelper.APP_KEY);
         TestHelper.checkIfProdUrl();
     }

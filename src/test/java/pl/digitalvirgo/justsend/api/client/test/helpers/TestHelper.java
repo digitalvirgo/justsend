@@ -1,11 +1,14 @@
-package pl.digitalvirgo.justsend.api.client.services.impl;
+package pl.digitalvirgo.justsend.api.client.test.helpers;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import pl.digitalvirgo.justsend.api.client.services.impl.Constants;
 import pl.digitalvirgo.justsend.api.client.services.impl.enums.FileNamePartEnum;
 
 import java.io.File;
 import java.time.LocalDate;
+
+import static java.lang.Long.valueOf;
 
 public class TestHelper {
 
@@ -38,5 +41,10 @@ public class TestHelper {
         if (Constants.JUSTSEND_API_URL.contains(PROD_URL)){
             throw new IllegalStateException("Production link can't be used in tests");
         }
+    }
+
+    public static Long getGroupID(String group) {
+        String groupId = group.split(":")[1].trim().replace(",", "");
+        return valueOf(groupId);
     }
 }

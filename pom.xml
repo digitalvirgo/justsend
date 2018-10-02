@@ -253,4 +253,19 @@
         </repository>
     </distributionManagement>
 
+    <!--<distributionManagement>-->
+        <!--<repository>-->
+            <!--<id>dv-nexus-release</id>-->
+            <!--<name>DVP Releases</name>-->
+            <!--<url>${dvp.release.url}</url>-->
+            <!--<uniqueVersion>true</uniqueVersion>-->
+        <!--</repository>-->
+        <!--<snapshotRepository>-->
+            <!--<id>dv-nexus-snapshots</id>-->
+            <!--<name>DVP Snaphots/Staging</name>-->
+            <!--<url>${dvp.snapshot.url}</url>-->
+            <!--<uniqueVersion>false</uniqueVersion>-->
+        <!--</snapshotRepository>-->
+    <!--</distributionManagement>-->
+
 </project>

@@ -1,11 +1,12 @@
 package pl.digitalvirgo.justsend.api.client.services.impl;
 
 import org.testng.annotations.DataProvider;
+import pl.digitalvirgo.justsend.api.client.test.helpers.BaseServiceHelper;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class BlackListServiceTestDataProvider {
+public class BlackListServiceTestDataProvider extends BaseServiceHelper {
 
     protected static final String ADD_MSISDN_RESPONSE_REGEX = "Added: [0-9]* numbers";
     protected static final String REMOVE_MSISDN_RESPONSE_REGEX = "Removed: [0-9]* numbers";
